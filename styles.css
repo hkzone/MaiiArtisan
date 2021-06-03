@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap');
+.container-fluid{
+    padding: 0;
+    margin: 0;
+}
+.navbar{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.row{
+    margin: 0;
+}
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 3.5rem;
+    letter-spacing: 0.3rem;
+}
+
+h3{
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: #c59f4e;
+    margin: 0 auto -1% ;
+}
+p{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1rem;
+    padding:2% 5%;
+
+}
+
+.responsive-img{
+    width: 100%;
+     height: 100%;
+     object-fit: contain;
+    object-position: top;  
+  }
+  .right-panel{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-right: 5%;   
+    padding-left: 40%;
+
+}
+ #story{
+    /* background-image: url(../backery/images/pexels-polina-tankilevitch-4110098.jpg) ;
+    background-size: cover;
+    background-position: center;
+    margin: 0; /* to remove the default white margin of body */
+        /* padding: 0; /* to remove the default white margin of body */
+        /* overflow: hidden; */ 
+        padding-top: 2%;
+ }
+ .story-txt{
+     margin: 5% 5%;
+ }
+ #products{
+    padding-top: 1%;
+ }
+ .product-txt{
+ 
+ }
+ .overlay { 
+     margin-top: 5%;
+    position:absolute;
+    z-index:12;
+    /* top:50%;
+    left:0; */
+    /* width:100%;
+    text-align:center; */
+  }
+  /* Declare heights because of positioning of img element */
+
+.carousel-control-next,
+.carousel-indicators,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+.carousel .item {
+    /* height: 400px;
+    background-color:#555; */
+  }
+  .carousel img {
+    /* position: absolute; */
+    /* top: 0;
+    left: 0; */
+    min-height: 400px;
+  }
+#shop{
+    padding-top: 1%;
+    
+}
+.shop-txt{
+    margin: 5% 6%;
+}
+.card-columns{
+    margin: 15px 20px;
+    column-count: 5
+    /* display: inline-block; */
+}
+
+
+
+.container {
+    max-width: 960px;
+}
+#contact{
+  
+    min-height: 50vh;
+    text-align: center;
+    padding: 1% 5% 5%;
+    background-color:  #e7ebec;
+ }
+ .social-txt{
+    margin: 6% 0;
+ }
+ form{
+     padding:  0 10%;
+    
+ }
+ .submit-form{
+     margin-top: 4%;
+ }
+ .form-row{
+    text-align: left;
+ }
+ .testemonials-txt{
+    margin: 3% 4% 2%;
+ }
+ #testemonials{
+    min-height: 50vh;
+    text-align: center;
+    padding: 5% 5%;
+ }
+ .carousel-testemonials{
+     padding: 2rem 5rem;
+     
+ }
+ .carouselInnerClass{
+    align-items: center;
+    min-height: 300px;
+ }
+
+ /* Footer */
+ #footer{
+     text-align: center;
+     background-color: #e7ebec;
+     margin: 0;
+ }
+.socials {
+    color: #000;  
+    margin: 0 0.6rem;
+    font-size: 0.7rem;
+  }
+  @media (max-width: 768px) {
+      #title{
+          
+      }
+    .right-panel{
+
+    }
+    .title-txt{
+
+    }
+    #products{
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+    .overlay { 
+        position: relative;
+        margin-bottom: -2.5%;
+    }
+
+    .card-columns{
+        column-count: 2}
+    
+}
