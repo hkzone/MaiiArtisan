@@ -30,15 +30,15 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
     line_items: cart.items.map((el) => ({
       name: el.name,
-      description: `Color: "${el.color ? el.color : 'original'}"  Flavor: "${
-        el.flavor ? el.flavor : 'original'
-      }"  /n Option: "${el.option ? el.option : 'n/a'}"  Message: "${
-        el.message ? el.message : 'n/a'
-      }"`,
+      description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
+        el.flavor ? ` Flavor: ${el.flavor}, ` : ''
+      }${el.option ? ` Option: ${el.option}, ` : ''} ${
+        el.message ? `Message: ${el.message}, ` : ''
+      }`,
       //TODO: remove comments once hosted
-      // images: [
-      //   `${req.protocol}://${req.get('host')}/images/products/${el.imageCover}`,
-      // ],
+      images: [
+        `${req.protocol}://${req.get('host')}/images/products/${el.imageCover}`,
+      ],
       amount: el.price * 100,
       currency: process.env.LOCALE_CURRENCY,
       quantity: el.qty,
@@ -73,12 +73,19 @@ const createBookingCheckout = async (session) => {
   });
 
   console.log('session line items', line_items);
-  stripe.checkout.sessions.listLineItems(session.id);
-  const tour = session.client_reference_id;
+  // stripe.checkout.sessions.listLineItems(session.id);
+  // const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
-  const price = session.amount_total / 100;
+  const totalAmount = session.amount_total / 100;
 
-  await Booking.create({ tour, user, price });
+  const orderItems = line_items.data.map((el) => ({
+    product: el.id,
+    qty: el.quantity,
+  }));
+
+  console.log('orderItems=', orderItems);
+
+  await Booking.create({ user, orderItems, totalAmount });
 };
 
 exports.webhookCheckout = (req, res, next) => {

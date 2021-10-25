@@ -9,19 +9,19 @@ const bookingSchema = new mongoose.Schema({
 
   orderItems: [
     {
-      name: { type: String, required: true },
-      qty: { type: String, required: true },
-      weight: { type: String, required: true },
-      size: { type: String, required: true },
-      customColor: { type: String, default: '' },
-      customFlavor: { type: String, default: '' },
-      customMessage: { type: String, default: '' },
-      customRequest: { type: String, default: '' },
       product: {
         type: mongoose.Schema.ObjectId,
         ref: 'Product',
         required: [true, 'Order must belong to a Product!'],
       },
+      qty: { type: Number, required: true },
+      //TODO:"add weight and size to line items"
+      weight: { type: String, required: false },
+      size: { type: String, required: false },
+      customColor: { type: String, default: '' },
+      customFlavor: { type: String, default: '' },
+      customMessage: { type: String, default: '' },
+      customRequest: { type: String, default: '' },
     },
   ],
   shippingAddress: {
