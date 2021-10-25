@@ -38,6 +38,12 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
               el.imageCover
             }`,
           ],
+          metadata: {
+            id: el.id,
+            customColor: el.color,
+            customFlavor: el.flavor,
+            customMessage: el.message,
+          },
         },
         unit_amount: el.price * 100,
         currency: process.env.LOCALE_CURRENCY,
@@ -75,7 +81,7 @@ const createBookingCheckout = async (session) => {
 
   console.log('session line items', line_items);
   console.log('session line items data', line_items.data);
-  console.log('session line items data price', line_items.data[0].price);
+
   // stripe.checkout.sessions.listLineItems(session.id);
   // const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
