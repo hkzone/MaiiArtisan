@@ -68,7 +68,11 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
 const createBookingCheckout = async (session) => {
-  console.log('session=', session.line_items);
+  const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
+    expand: ['line_items'],
+  });
+
+  console.log('session line items', line_items);
   stripe.checkout.sessions.listLineItems(session.id);
   const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
@@ -90,7 +94,7 @@ exports.webhookCheckout = (req, res, next) => {
   } catch (err) {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
-
+  // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed')
     createBookingCheckout(event.data.object);
 
