@@ -58258,7 +58258,7 @@ var checkoutCart = /*#__PURE__*/function () {
 
           case 3:
             session = _context.sent;
-            console.log(session); // 2) Create checkout form + chanre credit card
+            console.log(session); // 2) Create checkout form + charge credit card
 
             _context.next = 7;
             return stripe.redirectToCheckout({

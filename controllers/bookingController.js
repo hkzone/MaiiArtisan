@@ -11,12 +11,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // if (Security.isValidNonce(req.body.nonce, req)) {
   const cart = req.session.cart ? req.session.cart : null;
 
-  console.log(
-    `${req.protocol}://${req.get('host')}/images/products/${
-      cart.items[0].imageCover
-    }`
-  );
-
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -29,7 +23,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     client_reference_id: req.params.Id,
 
     line_items: cart.items.map((el) => ({
-      name: el.name,
+      product: el.id,
       description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
         el.flavor ? ` Flavor: ${el.flavor}, ` : ''
       }${el.option ? ` Option: ${el.option}, ` : ''} ${
@@ -81,6 +75,7 @@ const createBookingCheckout = async (session) => {
   const orderItems = line_items.data.map((el) => ({
     product: el.id,
     qty: el.quantity,
+    customColor: JSON.parse(JSON.stringify(el.description)).color,
   }));
 
   console.log('orderItems=', orderItems);
