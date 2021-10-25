@@ -23,18 +23,25 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     client_reference_id: req.params.Id,
 
     line_items: cart.items.map((el) => ({
-      name: el.name,
-      description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
-        el.flavor ? ` Flavor: ${el.flavor}, ` : ''
-      }${el.option ? ` Option: ${el.option}, ` : ''} ${
-        el.message ? `Message: ${el.message}, ` : ''
-      }`,
-      //TODO: remove comments once hosted
-      images: [
-        `${req.protocol}://${req.get('host')}/images/products/${el.imageCover}`,
-      ],
-      amount: el.price * 100,
-      currency: process.env.LOCALE_CURRENCY,
+      price_data: {
+        product: el.id,
+        product_data: {
+          name: el.name,
+          description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
+            el.flavor ? ` Flavor: ${el.flavor}, ` : ''
+          }${el.option ? ` Option: ${el.option}, ` : ''} ${
+            el.message ? `Message: ${el.message}, ` : ''
+          }`,
+          //TODO: remove comments once hosted
+          images: [
+            `${req.protocol}://${req.get('host')}/images/products/${
+              el.imageCover
+            }`,
+          ],
+        },
+        unit_amount: el.price * 100,
+        currency: process.env.LOCALE_CURRENCY,
+      },
       quantity: el.qty,
     })),
   });
@@ -72,10 +79,10 @@ const createBookingCheckout = async (session) => {
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
 
-  const orderItems = line_items.data.map((el) => ({
-    product: el.name,
+  const orderItems = line_items.price_data.map((el) => ({
+    product: el.product,
     qty: el.quantity,
-    customColor: JSON.parse(JSON.stringify(el.description)).color,
+    // customColor: JSON.parse(JSON.stringify(el.description)).color,
   }));
 
   console.log('orderItems=', orderItems);
