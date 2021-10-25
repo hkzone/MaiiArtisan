@@ -76,7 +76,7 @@ exports.getLoginForm = (req, res) => {
   //   "script-src 'self' cdn.jsdelivr.net  blob: data: gap:"
   // );
 
-  res.status(200).render('login', { title: 'Login' });
+  res.status(200).render('login', { title: 'Login', user: res.user });
 };
 exports.getSignupForm = (req, res) => {
   // res.setHeader(
@@ -88,7 +88,12 @@ exports.getSignupForm = (req, res) => {
   const district = User.schema.path('address.dcDistrict').enumValues;
   res
     .status(200)
-    .render('signup', { title: 'Signup', region: region, district: district });
+    .render('signup', {
+      title: 'Signup',
+      region: region,
+      district: district,
+      user: res.user,
+    });
 };
 
 exports.getAccount = (req, res) => {
