@@ -1,5 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-// const Tour = require('../models/tourModel');
+const Product = require('../models/productModel');
 const User = require('../models/userModel');
 const Booking = require('../models/bookingModel');
 const catchAsync = require('../utils/catchAsync');
@@ -23,7 +23,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     client_reference_id: req.params.Id,
 
     line_items: cart.items.map((el) => ({
-      product: el.id,
+      name: el.name,
       description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
         el.flavor ? ` Flavor: ${el.flavor}, ` : ''
       }${el.option ? ` Option: ${el.option}, ` : ''} ${
@@ -73,7 +73,7 @@ const createBookingCheckout = async (session) => {
   const totalAmount = session.amount_total / 100;
 
   const orderItems = line_items.data.map((el) => ({
-    product: el.id,
+    product: el.name,
     qty: el.quantity,
     customColor: JSON.parse(JSON.stringify(el.description)).color,
   }));
