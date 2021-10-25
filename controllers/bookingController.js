@@ -24,7 +24,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     mode: 'payment',
     line_items: cart.items.map((el) => ({
       price_data: {
-        product: el.id,
+        // product: el.id,
         product_data: {
           name: el.name,
           description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
@@ -74,12 +74,14 @@ const createBookingCheckout = async (session) => {
   });
 
   console.log('session line items', line_items);
+  console.log('session line items data', line_items.data);
+  console.log('session line items data price', line_items.data[0].price);
   // stripe.checkout.sessions.listLineItems(session.id);
   // const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
 
-  const orderItems = line_items.data.price_data.map((el) => ({
+  const orderItems = line_items.data.price.map((el) => ({
     product: el.product,
     qty: el.quantity,
     // customColor: JSON.parse(JSON.stringify(el.description)).color,
