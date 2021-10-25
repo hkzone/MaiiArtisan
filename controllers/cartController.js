@@ -11,6 +11,7 @@ exports.getCart = (req, res) => {
     pageTitle: 'Cart',
     cart: cart,
     nonce: Security.md5(req.sessionID + req.headers['user-agent']),
+    user: res.user,
   });
 };
 
