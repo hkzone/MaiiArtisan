@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
 const stripe = Stripe(
-  'sk_test_51J69McLJWUFHJnVSVAjEhgzcU4I6gTkdMIVsBFtN93t2MZRu3UGAu5yhJHzBitTN8LKtMaeW4RNGvMfXTMXSmeiz00hYWthhhi'
+  'pk_test_51J69McLJWUFHJnVSrgJ6QIdRoxJTLxAE5YSAUztis2OCSRNWrqqWyp6BuLYPnTpq3Wn0xyHhxEO8NLakiGkk0mSA00yKoWcotW'
 );
 
 export const checkoutCart = async (nonce) => {
