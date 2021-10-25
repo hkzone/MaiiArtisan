@@ -40,7 +40,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
             }`,
           ],
           metadata: {
-            id: el.id,
+            id: el._id,
             customColor: el.color,
             customFlavor: el.flavor,
             customMessage: el.message,
@@ -77,11 +77,11 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
 const createBookingCheckout = async (session) => {
   const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
-    expand: ['line_items'],
+    expand: ['line_items.data.price.product'],
   });
   console.log('session ', session);
   console.log('session line items', line_items);
-  console.log('session line items data', line_items.data);
+  console.log('session line items data', line_items.data[0].price);
 
   // stripe.checkout.sessions.listLineItems(session.id);
   // const tour = session.client_reference_id;
