@@ -79,7 +79,7 @@ const createBookingCheckout = async (session) => {
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
 
-  const orderItems = line_items.price_data.map((el) => ({
+  const orderItems = line_items.data.price_data.map((el) => ({
     product: el.product,
     qty: el.quantity,
     // customColor: JSON.parse(JSON.stringify(el.description)).color,
