@@ -1,9 +1,9 @@
-<%- include("_header") -%>
+<%- include("./_header") -%>
 <main class="main main-signin text-center">
   <div class="form-signin">
     <svg><use xlink:href="images/icons.svg#icon-users"></use></svg>
     <h2 class="h3 mb-3 font-weight-normal">Log into your account</h2>
-    <form class="form form-signin form--login ">
+    <form class="form form-signin form--login">
       <div class="form__group">
         <label class="sr-only" for="email">Email address</label>
         <input
@@ -11,7 +11,8 @@
           id="email"
           type="email"
           placeholder="you@example.com"
-          required="required"autofocus=""
+          required="required"
+          autofocus=""
         />
       </div>
       <div class="form__group ma-bt-md">
@@ -32,4 +33,4 @@
   </div>
 </main>
 
-<%- include("_footer") -%>
+<%- include("./_footer") -%>

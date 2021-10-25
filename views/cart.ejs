@@ -1,4 +1,4 @@
-<%- include("_header") -%> <% if(cart && cart.items.length > 0) { %>
+<%- include("./_header") -%> <% if(cart && cart.items.length > 0) { %>
 <main class="main">
   <div class="container-fluid">
     <form action="/cart/update" method="post" class='cart__update'>
@@ -62,6 +62,6 @@
     <p class="alert alert-info">Sorry, no products in your cart.</p>
   </div>
 </main>
-<% } %> <%- include("_footer") -%>
+<% } %> <%- include("./_footer") -%>
 
 
