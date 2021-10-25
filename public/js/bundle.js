@@ -12579,19 +12579,7 @@ Url.prototype.resolveObject = function(relative) {
   return result;
 };
 
-Url.prototype.parseHost = function() {
-  var host = this.host;
-  var port = portPattern.exec(host);
-  if (port) {
-    port = port[0];
-    if (port !== ':') {
-      this.port = port.substr(1);
-    }
-    host = host.substr(0, host.length - port.length);
-  }
-  if (host) this.hostname = host;
-};
-
+Url.prototype.pa
 },{"punycode":"../../node_modules/punycode/punycode.js","./util":"../../node_modules/url/util.js","querystring":"../../node_modules/querystring-es3/index.js"}],"../../node_modules/@pixi/constants/lib/constants.es.js":[function(require,module,exports) {
 "use strict";
 
@@ -58249,7 +58237,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var stripe = Stripe('pk_test_51J69PcJjB2rZY6d0DbnZe3LokXeH3FGQSL4CsWA3yxekT6AdIw6qEmH5zBPnzGqGSf7JOtdntV82trKdwm2K6t2i00mUXf8NTS');
+var stripe = Stripe('pk_test_51J69McLJWUFHJnVSrgJ6QIdRoxJTLxAE5YSAUztis2OCSRNWrqqWyp6BuLYPnTpq3Wn0xyHhxEO8NLakiGkk0mSA00yKoWcotW');
 
 var checkoutCart = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(nonce) {
@@ -58851,7 +58839,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49299" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55998" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
