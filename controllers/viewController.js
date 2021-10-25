@@ -23,7 +23,7 @@ exports.getIndex = catchAsync(async (req, res, next) => {
   //3) Render that template using data from step 1
   //3) Render  template
 
-  res.status(200).render('index', { products: products });
+  res.status(200).render('index', { products: products, user: res.user });
 });
 
 // exports.getOverview = catchAsync(async (req, res, next) => {
