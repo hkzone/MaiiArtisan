@@ -79,13 +79,9 @@ const createBookingCheckout = async (session) => {
   const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items'],
   });
-
-  console.log(session)
-
+  console.log('session ', session);
   console.log('session line items', line_items);
   console.log('session line items data', line_items.data);
-
-  const createBookingCheckout = async (session) => {
 
   // stripe.checkout.sessions.listLineItems(session.id);
   // const tour = session.client_reference_id;
