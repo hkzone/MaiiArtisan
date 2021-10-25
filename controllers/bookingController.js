@@ -40,7 +40,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
             }`,
           ],
           metadata: {
-            id: el._id,
+            id: el._id.toString(),
             customColor: el.color,
             customFlavor: el.flavor,
             customMessage: el.message,
