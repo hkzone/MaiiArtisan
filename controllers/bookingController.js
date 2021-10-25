@@ -21,7 +21,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.params.Id,
-
+    mode: 'payment',
     line_items: cart.items.map((el) => ({
       price_data: {
         product: el.id,
