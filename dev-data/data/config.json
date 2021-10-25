@@ -1,0 +1,8 @@
+[
+    {
+        "customColors": ["yellow","red","blue","green","black"],
+        "customFlavor":["Vanilla w/French Cream&Raspberry Filling", "Strawberry chiffon shortcake","Vanilla Cake w/Lemon and Rasp Fill", "Blue Velvet","Vanilla w/ Lemon Mouse", "Dark Choc Cake w/ Hazelnut", "Choc cake w/ Fudgey Choc"],
+        "specialRequestOptions": ["Egg free","Diary free", "No suggar"],
+        "customMessageLength": 25
+    }
+]

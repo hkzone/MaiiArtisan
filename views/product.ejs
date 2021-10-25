@@ -1,0 +1,151 @@
+<%- include("_header") -%>
+<main class="main product__main product__content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <!-------------- LEFT PANEL -------------->
+      <div class="col-md-5 col-sm-6 product__left-panel">
+        <div class="product__column">
+          <img id=product__featured src="/images/products/<%=product.imageCover%>">
+
+          <div id="product__slide-wrapper">
+            <img id="product__slideLeft" class="product__arrow" src="/images/arrow-left.png">
+
+            <div id="product__slider">
+              <img class="product__thumbnail product__active" src="/images/products/<%=product.imageCover%>">
+              <% product.images.forEach((el, i)=>{ %>
+              <img class="product__thumbnail" src="/images/products/<%=el%>">
+              <%}) %>
+            </div>
+
+            <img id="product__slideRight" class="product__arrow" src="/images/arrow-right.png">
+          </div>
+        </div>
+      </div>
+      <!-------------- RIGHT PANEL -------------->
+      <div class="col-md-7 product__right-panel row-eq-height rounded-right">
+        <section id="product__form-section">
+          <div class="product__column">
+            <h1><%=product.name%></h1>
+            <hr>
+            <h3>$89.99</h3>
+            <p><%=product.description%></p>
+            <form class="form product__form" action="/cart" method="post">
+              <div class="row">
+                <!-------------- WEIGHT -------------->
+                <div class="col-md-6 mb-3">
+                  <label for="weight">Choose weight</label>
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="weight">
+                        <span>-</span>
+                      </button>
+                    </span>
+                    <input type="text" name="weight" class="form-control input-number" data-increaseBy=<%=product.weight[0]%> value=<%=product.weight[0]%> min=<%=product.weight[0]%> max=<%=product.weight[product.weight.length-1]%> readonly>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="weight">
+                        <span>+</span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- ------------QUANTITY -------------->
+                <div class="col-md-6 mb-3">
+                  <label for="qty">Quantity</label>
+
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="qty">
+                        <span>-</span>
+                      </button>
+                    </span>
+                    <input type="text" name="qty" class="form-control input-number" data-increaseby="1" value="1" min="1" max="10" readonly>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="qty">
+                        <span>+</span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-------------- CUSTOM COLOR -------------->
+                <div class="col-md-6 mb-3">
+                  <label for="color">Custom color</label>
+                  <select class="custom-select d-block w-100" name="color">
+                    <option value="">Choose...</option>
+                    <% color.forEach(el=>{ %>
+                    <option><%=el%></option>
+                    <%})%>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid color.
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <!-------------- CUSTOM FLAVOR -------------->
+                  <label for="flavor">Flavor</label>
+                  <select class="custom-select d-block w-100" name="flavor">
+                    <option value="">Choose...</option>
+                    <% flavor.forEach(el=>{ %>
+                    <option><%=el%></option>
+                    <%})%>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid flavor.
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-------------- DATE -------------->
+                <div class="col-md-6 mb-3">
+                  <label for="date">Choose your date </label>
+                  <input type="date" name="date" id="date" class="form-control" required>
+                  <span class="validity"></span>
+                </div>
+                <!-------------- OPTIONS -------------->
+                <div class="col-md-6 mb-3">
+                  <label for="color">Special options</label>
+                  <select class="custom-select d-block w-100" name="option">
+                    <option value="">Choose...</option>
+                    <% options.forEach(el=>{ %>
+                    <option><%=el%></option>
+                    <%})%>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid color.
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!--------------  Inscription Text ------------ -->
+                <div class="col-md-12 mb-3">
+                  <label for="message">Inscription Text:</label>
+                  <input type="text" class="form-control" name="message" placeholder="maximum <%=maxLength%> characters" maxlength=<%=maxLength%>>
+                  <div class="invalid-feedback">
+                    Zip code required.
+                  </div>
+                </div>
+
+                <!--------------  SET ID and NONCE. ADD TO CART -------------->
+                <div class="row" id="signup__button-section">
+                  <input type="hidden" name="product_id" value="<%= product._id %>">
+                  <input type="hidden" name="nonce" value="<%= nonce %>">
+                  <div class="form-group row">
+                    <div class="col-md-12 mb-3">
+                      <input type="hidden" name="product_id" value="<%= product._id %>">
+                      <input type="hidden" name="nonce" value="<%= nonce %>">
+                      <button type="submit" class="btn btn-light pr__button" name="button">Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include("_footer") -%>
