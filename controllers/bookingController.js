@@ -10,6 +10,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the
   // if (Security.isValidNonce(req.body.nonce, req)) {
   const cart = req.session.cart ? req.session.cart : null;
+  console.log('cart during checkout session=', cart);
 
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
@@ -79,8 +80,12 @@ const createBookingCheckout = async (session) => {
     expand: ['line_items'],
   });
 
+  console.log(session)
+
   console.log('session line items', line_items);
   console.log('session line items data', line_items.data);
+
+  const createBookingCheckout = async (session) => {
 
   // stripe.checkout.sessions.listLineItems(session.id);
   // const tour = session.client_reference_id;
