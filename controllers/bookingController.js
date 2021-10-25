@@ -68,7 +68,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
 const createBookingCheckout = async (session) => {
-  console.log('session=', session);
+  console.log('session=', session.line_items);
+  stripe.checkout.sessions.listLineItems(session.id);
   const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const price = session.amount_total / 100;
