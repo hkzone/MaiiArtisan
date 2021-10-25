@@ -66,6 +66,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
     color: config.customColors,
     flavor: config.customFlavor,
     options: config.specialRequestOptions,
+    user: res.user,
   });
 });
 
