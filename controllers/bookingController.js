@@ -87,11 +87,12 @@ const createBookingCheckout = async (session) => {
   // const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
-
-  const orderItems = line_items.data.price.map((el) => ({
-    product: el.product,
+  const orderItems = line_items.data.map((el) => ({
+    product: el.price.product.metadata.id,
     qty: el.quantity,
-    // customColor: JSON.parse(JSON.stringify(el.description)).color,
+    customColor: el.price.product.metadata.customColor,
+    customFlavor: el.price.product.metadata.customFlavor,
+    customMessage: el.price.product.metadata.customMessage,
   }));
 
   console.log('orderItems=', orderItems);
