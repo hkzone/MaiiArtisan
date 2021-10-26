@@ -46,7 +46,7 @@ const bookingSchema = new mongoose.Schema({
 });
 
 bookingSchema.pre(/^find/, function (next) {
-  this.populate('user').populate({
+  this.populate('orderItems.product').populate({
     path: 'product',
     select: 'name',
   });

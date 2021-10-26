@@ -10,7 +10,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the
   // if (Security.isValidNonce(req.body.nonce, req)) {
   const cart = req.session.cart ? req.session.cart : null;
-  console.log('cart during checkout session=', cart);
 
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
@@ -76,26 +75,23 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
 const createBookingCheckout = async (session) => {
-  const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
+  const { lineItems } = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
   });
-  console.log('session ', session);
-  console.log('session line items', line_items);
-  console.log('session line items data', line_items.data[0].price);
+
+  //  console.log('session line items data', line_items.data[0].price);
 
   // stripe.checkout.sessions.listLineItems(session.id);
-  // const tour = session.client_reference_id;
+
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
-  const orderItems = line_items.data.map((el) => ({
+  const orderItems = lineItems.data.map((el) => ({
     product: el.price.product.metadata.id,
     qty: el.quantity,
     customColor: el.price.product.metadata.customColor,
     customFlavor: el.price.product.metadata.customFlavor,
     customMessage: el.price.product.metadata.customMessage,
   }));
-
-  console.log('orderItems=', orderItems);
 
   await Booking.create({ user, orderItems, totalAmount });
 };

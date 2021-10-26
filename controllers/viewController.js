@@ -86,14 +86,12 @@ exports.getSignupForm = (req, res) => {
   // console.log(User.schema.path('address.region').enumValues);
   const region = User.schema.path('address.region').enumValues;
   const district = User.schema.path('address.dcDistrict').enumValues;
-  res
-    .status(200)
-    .render('signup', {
-      title: 'Signup',
-      region: region,
-      district: district,
-      user: res.user,
-    });
+  res.status(200).render('signup', {
+    title: 'Signup',
+    region: region,
+    district: district,
+    user: res.user,
+  });
 };
 
 exports.getAccount = (req, res) => {
@@ -102,15 +100,16 @@ exports.getAccount = (req, res) => {
 
 exports.getMyProducts = catchAsync(async (req, res, next) => {
   // 1) Find all bookings
-  const bookings = await Booking.find({ user: req.user.id });
+  const orders = await Booking.find({ user: req.user.id });
+  console.log(orders);
 
   // 2) Find products with the returned IDs
-  const productIDs = bookings.map((el) => el.product);
-  const products = await Product.find({ _id: { $in: productIDs } });
+  //const productIDs = orders.map((el) => el.product);
+  //const products = await Product.find({ _id: { $in: productIDs } });
 
   res.status(200).render('myOrders', {
     title: 'My Orders',
-    products,
+    orders,
   });
 });
 
