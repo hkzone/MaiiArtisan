@@ -700,4 +700,17 @@ td .qty {
   z-index: 10;
 }
 
+.panel-group a{
+  color: var(--dark)
+}
 
+tr td{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.editProductBtn:hover{
+  cursor: pointer;
+}
+.form-check input{display: block!important;
+margin-left: 1.25rem;}

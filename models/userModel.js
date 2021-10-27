@@ -24,7 +24,7 @@ const enDistricts = [
   'Wong Tai Sin District',
 ];
 
-userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please tell us your name'],
@@ -36,7 +36,10 @@ userSchema = new mongoose.Schema({
     lowerCase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
-  phoneNumber:{type:Number, required: [true, 'Please provide your mobile number'],},
+  phoneNumber: {
+    type: Number,
+    required: [true, 'Please provide your mobile number'],
+  },
   address: [
     {
       region: {

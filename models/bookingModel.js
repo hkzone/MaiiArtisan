@@ -39,7 +39,11 @@ const bookingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  paid: {
+  isPaid: {
+    type: Boolean,
+    default: false,
+  },
+  isDelivered: {
     type: Boolean,
     default: false,
   },

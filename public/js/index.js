@@ -9,6 +9,7 @@ import * as PIXI from 'pixi.js';
 import { install } from '@pixi/unsafe-eval';
 import { render3dImage } from './3dimage.js';
 import { checkoutCart } from './stripe.js';
+import { updateProduct } from './admin.js';
 
 // Colaplse navBar after use
 // const navLinks = document.querySelectorAll('.nav-item');
@@ -32,7 +33,10 @@ const btnQuantity = document.querySelector('.btn-number');
 
 const cartUpdateForm = document.querySelector('.cart__update');
 const chekoutBtn = document.querySelector('.chekoutBtn');
-
+const productsTable = document.querySelector('.productsTable');
+const btnProductUpdateSubmit = document.querySelector(
+  '#btnProductUpdateSubmit'
+);
 if (image3d) {
   // Apply the patch to PIXI
   install(PIXI);
@@ -271,4 +275,44 @@ if (chekoutBtn)
     e.target.textContent = 'Processing...';
     // const { tourId } = e.target.dataset;
     checkoutCart($('.nonce').attr('value'));
+  });
+
+//Edit Product
+if (productsTable)
+  productsTable.addEventListener('click', (e) => {
+    const editProductBtn = e.target.classList.contains('editProductBtn');
+    if (!editProductBtn) {
+      return;
+    }
+    const product = JSON.parse(e.target.dataset.field);
+    const keys = Object.keys(product).map((key) => key);
+
+    keys.forEach((key) => {
+      if ($(`input[name='${key}']`).is(':checkbox')) {
+        $(`input[name='${key}']`).attr('checked', product[key]);
+      } else $(`input[name='${key}']`).val(product[key]);
+    });
+
+    $('#editProductModal').modal('show');
+    // const { tourId } = e.target.dataset;
+  });
+
+//Update Product
+if (btnProductUpdateSubmit)
+  btnProductUpdateSubmit.addEventListener('click', (e) => {
+    e.target.textContent = 'Processing...';
+    let updatedProduct = {};
+    $('input')
+      .not(':input[type=button], :input[type=submit], :input[type=reset]')
+      .each(function () {
+        console.log($(this).val());
+        const keyValue = $(this).attr('name');
+        let value;
+        if ($(this).is(':checkbox')) {
+          value = $(this).is(':checked');
+        } else value = $(this).val();
+        updatedProduct = { ...updatedProduct, ...{ [keyValue]: value } };
+      });
+
+    updateProduct(updatedProduct);
   });

@@ -9,26 +9,41 @@ const productSchema = new mongoose.Schema(
       required: [true, 'A product name is required'],
       unique: true,
       trim: true,
-      maxLength: [40, 'A product name must have less or equal then 40 characters'],
-      minLength: [8, 'A product name must have more or equal then 10 characters'],
+      maxLength: [
+        40,
+        'A product name must have less or equal then 40 characters',
+      ],
+      minLength: [
+        8,
+        'A product name must have more or equal then 10 characters',
+      ],
       //validate: [validator.isAlpha, 'A product name must only contain characters'],
     },
     slug: String,
-    ingredients: [{
-      type: String,
-      required: [true, 'A product must have ingredients'],
-    }],
-    weight: [{
-      type: Number,
-      required: [true, 'A product must have weight'],
-    }],
-    size: [{ 
-      sizeValue: Number,
-      sizeUnit: String,
-    }],
+    ingredients: [
+      {
+        type: String,
+        required: [true, 'A product must have ingredients'],
+      },
+    ],
+    weight: [
+      {
+        type: Number,
+        required: [true, 'A product must have weight'],
+      },
+    ],
+    size: [
+      {
+        sizeValue: Number,
+        sizeUnit: String,
+      },
+    ],
     orderByWeight: {
       type: Boolean,
-      required: [true, 'A product must have a order by weight property specified'],
+      required: [
+        true,
+        'A product must have a order by weight property specified',
+      ],
       default: false,
     },
     customColors: {
@@ -93,7 +108,6 @@ const productSchema = new mongoose.Schema(
       default: Date.now(),
       select: false,
     },
-    
   },
   {
     toJSON: { virtuals: true },

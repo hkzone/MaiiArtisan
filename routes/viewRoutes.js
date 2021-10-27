@@ -36,4 +36,15 @@ router.get(
   viewController.getMyProducts
 );
 
+router.get(
+  '/products',
+
+  //TODO: COMMENT OUT  AFTER DEPLOYMENT
+  // bookingController.createBookingCheckout,
+
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewController.getProducts
+);
+
 module.exports = router;

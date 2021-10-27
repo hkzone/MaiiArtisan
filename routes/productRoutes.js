@@ -22,8 +22,6 @@ const router = express.Router();
 //     productController.getMonthlyPlan
 //   );
 
-
-
 router
   .route('/')
   .get(productController.getAllProducts)

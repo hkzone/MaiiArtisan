@@ -1,54 +1,51 @@
+<%- include("./_header") -%>
+<section id="title" class="title">
 
 
+  <div class="container-fluid">
 
-      <%- include("./_header") -%>
-      <section id="title" class="title">
-   
+    <!-- Title -->
 
-        <div class="container-fluid">
- 
-      <!-- Title -->
- 
-        <div class="row d-flex title-div position-relative">
-          <div class="col-md-12left-panel image3d">
-            <!-- <img class="responsive-img" src="images/pexels-karolina-grabowska-4198021.jpg" alt="Nice cake"> -->
-    
-          </div>
-          <div class="col-12 right-panel align-self-center">
-            <div class="title-txt">
-              <h3 class="">Our masterpiece of</h3>
-            <h1 class="">DELIGHT</h1>
-            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernature!</p>
-            <button type="button" class="btn btn-dark btn-lg discover-button">Discover</button>
-            <button type="button" class="btn btn-outline-dark btn-lg shop-button">Shop now</button> 
-            </div>
-            
-            </div>
-    
-          </div>
-        </div>
-            
+    <div class="row d-flex title-div position-relative">
+      <div class="col-md-12left-panel image3d">
+        <!-- <img class="responsive-img" src="images/pexels-karolina-grabowska-4198021.jpg" alt="Nice cake"> -->
+
       </div>
-    </div>
-  </section>
+      <div class="col-12 right-panel align-self-center">
+        <div class="title-txt">
+          <h3 class="">Our masterpiece of</h3>
+          <h1 class="">DELIGHT</h1>
+          <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernature!</p>
+          <button type="button" class="btn btn-dark btn-lg discover-button">Discover</button>
+          <button type="button" class="btn btn-outline-dark btn-lg shop-button">Shop now</button>
+        </div>
 
-  <!-- Our story-->
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Our story-->
 <section class="" id="story">
-  
+
   <div class="row">
     <div class="col-12 my-auto">
-      <img class="responsive-img"  src="images/story1.jpg" alt="black chocolate">
+      <img class="responsive-img" src="images/story1.jpg" alt="black chocolate">
       <div class="story-txt">
         <h3>Family owned</h3>
         <h1>OUR STORY</h1>
-        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernatur ab delectus hic perferendis, laudantium adipisci, quia, veritatis molestiae nihil repellat aliquid odio aperiam?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernature!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernature!</p>
+        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernatur ab delectus hic perferendis, laudantium adipisci, quia, veritatis molestiae nihil repellat aliquid odio
+          aperiam?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernature!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum
+          laborum aspernature!</p>
       </div>
-      
-    <img class="responsive-img" src="images/story2.jpg" alt="black chocolate">
+
+      <img class="responsive-img" src="images/story2.jpg" alt="black chocolate">
     </div>
-    
+
   </div>
-  
+
 </section>
 <!-- Products photos-->
 <section id="products">
@@ -59,7 +56,7 @@
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernatur ab delectus hic perferendis, laudantium adipisci, quia, veritatis molestiae nihil repellat aliquid odio aperiam?</p>
     </div>
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-      
+
       <div class="carousel-inner">
         <div class="carousel-item active" data-interval="10000">
           <img src="images/pexels-cats-coming-2928378.jpg" class="d-block w-100" alt="...">
@@ -67,7 +64,7 @@
         <div class="carousel-item" data-interval="2000">
           <img src="images/pexels-archie-binamira-10278111.jpg" class="d-block w-100" alt="...">
         </div>
-        
+
 
       </div>
       <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
@@ -90,37 +87,37 @@
   </div>
   <div class="card-columns">
     <% products.forEach((elem,index)=>{ %>
-      <% if (index===7) { %>
-        <div class="card bg-danger text-white text-center p-3">
-          <blockquote class="blockquote mb-0 ">
-            <p>Mai is just amazing I can't stop ordering from her</p>
-            <footer class="blockquote-footer text-white">
-              <small>
-                Someone famous in <cite title="Source Title">Lohas Park</cite>
-              </small>
-            </footer>
-          </blockquote>
-        </div>
-        <%}%>
+    <% if (index===7) { %>
+    <div class="card bg-danger text-white text-center p-3">
+      <blockquote class="blockquote mb-0 ">
+        <p>Mai is just amazing I can't stop ordering from her</p>
+        <footer class="blockquote-footer text-white">
+          <small>
+            Someone famous in <cite title="Source Title">Lohas Park</cite>
+          </small>
+        </footer>
+      </blockquote>
+    </div>
+    <%}%>
     <div class="card">
       <img src="images/products/<%=elem.imageCover%>" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><%=elem.name%></h5>
-        <p class="card-text"><%=elem.summary%></p>
-        <a href="/product/<%=elem.slug%>"><button type="button" class="btn btn-dark btn-block discover-button">Order</button></a>
-        
-      </div>
-    </div>
-    <% }) %>
+    <div class="card-body">
+      <h5 class="card-title"><%=elem.name%></h5>
+      <p class="card-text"><%=elem.summary%></p>
+      <a href="/product/<%=elem.slug%>"><button type="button" class="btn btn-dark btn-block discover-button">Order</button></a>
 
-  
-  
+    </div>
+  </div>
+  <% }) %>
+
+
+
   <div class="card">
     <img src="images/products/many.jpeg" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Other cakes</h5>
       <p class="card-text">TLorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-      <button type="button" class="btn btn-outline-dark btn-lg shop-button">See more</button> 
+      <button type="button" class="btn btn-outline-dark btn-lg shop-button">See more</button>
     </div>
   </div>
   </div>
@@ -134,7 +131,7 @@
       <h1>We are social</h1>
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae nam repellendus vel inventore voluptatum laborum aspernatur ab delectus hic perferendis, laudantium adipisci, quia, veritatis molestiae nihil repellat aliquid odio aperiam?</p>
     </div>
-    
+
     <form class="needs-validation" novalidate>
       <div class="form-row">
         <div class="col-md-6 mb-3">
@@ -166,20 +163,20 @@
           <div class="invalid-tooltip">
             Please provide a valid url.
           </div>
-        </div>     
+        </div>
       </div>
       <div class="form-row">
         <div class="col-12">
           <label for="exampleFormControlTextarea1">Message</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
         </div>
-        
-           
+
+
       </div>
       <button class="btn btn-dark submit-form" type="submit">Submit form</button>
     </form>
   </div>
-  
+
 </section>
 
 <!-- Testemonials-->
@@ -188,44 +185,44 @@
     <h3>you said about us</h3>
     <h1>Testemonials</h1>
   </div>
-  
-  
-      
-  
-    
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
 
-  
-      <div class="carousel-inner carouselInnerClass d-flex">
-        <div class="carousel-item active carousel-testemonials">
-        
-          <span>This place is awesome, try it out. <br>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum officia ipsum et repellendus itaque, quas dolorum veritatis minima molestiae, nesciunt est inventore in reprehenderit? Exercitationem illum nostrum quae doloribus ullam?</span>
-        </div>
-      
-        <div class="carousel-item carousel-testemonials">
-          <span>Best birthday cake ever, thank you so much</span>
-        </div>
-        <div class="carousel-item carousel-testemonials">
-          <span>Amazing and at this price it's a steal!</span>
-        </div>
+
+
+
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+
+
+    <div class="carousel-inner carouselInnerClass d-flex">
+      <div class="carousel-item active carousel-testemonials">
+
+        <span>This place is awesome, try it out. <br>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum officia ipsum et repellendus itaque, quas dolorum veritatis minima molestiae, nesciunt est inventore in reprehenderit?
+          Exercitationem illum nostrum quae doloribus ullam?</span>
       </div>
 
+      <div class="carousel-item carousel-testemonials">
+        <span>Best birthday cake ever, thank you so much</span>
+      </div>
+      <div class="carousel-item carousel-testemonials">
+        <span>Amazing and at this price it's a steal!</span>
+      </div>
+    </div>
 
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
 </section>
 <%- include("./_footer") -%>
-

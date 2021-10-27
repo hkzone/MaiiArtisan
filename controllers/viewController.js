@@ -113,6 +113,16 @@ exports.getMyProducts = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getProducts = catchAsync(async (req, res, next) => {
+  // 1) Find all bookings
+  const allProducts = await Product.find({});
+
+  res.status(200).render('products', {
+    title: 'products',
+    allProducts: allProducts,
+  });
+});
+
 // exports.updateUserData = catchAsync(async (req, res, next) => {
 //   const updatedUser = await User.findByIdAndUpdate(
 //     req.user.id,
