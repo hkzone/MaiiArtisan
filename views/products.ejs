@@ -4,8 +4,8 @@
 <%  const iconPath = `images/icons.svg#icon-${icon}` %>
 <%  const html =` <li class=${active ? 'list-group-item side-nav--active' : 'list-group-item'}> <a href=${link}><svg><use xlink:href=${iconPath}></use></svg>${text}</a></li>` %>
 <%  return html } %>
-<%let keys=Object.keys(allProducts[0].toJSON())%> 
-<% //const keys={ name:{ visible:true, boolean:false, texarea:false },ingredients:{ visible:true, boolean:false, texarea:false },weight:{ visible:true, boolean:false, texarea:false },price:{ number:true,visible:true, boolean:false, texarea:false},summary:{ visible:true, boolean:false, texarea:false },description:{ visible:true, boolean:false, texarea:true},imageCover:{ visible:true, boolean:false, texarea:false, isImage:true },images:{ visible:true, boolean:false, texarea:false, isImage:true }, orderByWeight:{ visible:true, boolean:true, texarea:false },customColors:{ visible:true, boolean:true, texarea:false },customFlavors:{ visible:true, boolean:true, texarea:false } ,   isFeatured:{ visible:true, boolean:true, texarea:false },_id:{ visible:false, boolean:false, texarea:false }}  %> 
+<%//let keys=Object.keys(allProducts[0].toJSON())%> 
+<% const productSchema={ _id:{ visible:false, boolean:false, textarea:false },name:{ visible:true, boolean:false, textarea:false },ingredients:{ visible:true, boolean:false, textarea:false },weight:{ visible:true, boolean:false, textarea:false },price:{ number:true,visible:true, boolean:false, textarea:false},summary:{ visible:true, boolean:false, textarea:true },description:{ visible:true, boolean:false, textarea:true},imageCover:{ visible:true, boolean:false, textarea:false, isImage:true },images:{ visible:true, boolean:false, textarea:false, isImage:false }, orderByWeight:{ visible:true, boolean:true, textarea:false },customColors:{ visible:true, boolean:true, textarea:false },customFlavors:{ visible:true, boolean:true, textarea:false } ,   isFeatured:{ visible:true, boolean:true, textarea:false }}  %> 
 
 
 <main class="main">
@@ -138,7 +138,7 @@
 
 		      	<!-- Modal Header -->
 		      	<div class="modal-header">
-			        <h4 class="modal-title">Edit Employee</h4>
+			        <h4 class="modal-title">Edit Product</h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		      	</div>
 
@@ -146,16 +146,38 @@
 		      	<div class="modal-body">
 		        	<form action="" id="edit-form" >
                         <div class='form-row '>
-                  
-                        <% keys.forEach((key)=> { %>
                         
-				        <div class="<%= allProducts[0][key]===true||allProducts[0][key]===false?'form-check d-flex align-items-center justify-content-center':'form-group'%> col-md-4 col-sm-12">
-						    <label class="<%= allProducts[0][key]===true||allProducts[0][key]===false?'form-check-label':''%>" for="<%= key %>"><%= key %></label>
-						    <input class="<%= allProducts[0][key]===true||allProducts[0][key]===false?'':'form-control'%>" type="<%= allProducts[0][key]===true||allProducts[0][key]===false?'checkbox':'text' %>" name="<%= key %>">
-					  	</div>
+                            <% Object.entries(productSchema).map(([key, value], idx) =>  { %>
+                                <% if (value['boolean']===true) { %> 
+                                    <div class="form-check d-flex align-items-center justify-content-center col-md-4 col-sm-12">
+                                        <label class="form-check-label" for="<%= key %>"><%= key %></label>
+                                        <input class="" type="<%= value['visible']===false?'hidden':'checkbox' %>" name="<%= key %>">
+                                    </div>
+                                <% } else if (value['textarea']===true) { %> 
+                                    <div class="form-group col-md-4 col-sm-12">
+                                        <label class="form-label" for="<%= key %>"><%= key %></label>
+                                        <textarea class="form-control txtArea"  name="<%= key %>"></textarea>
+                                    </div>
+                                <% } else if (value['isImage']===true) { %> 
+                                    <div class="form-group custom-file col-md-4 col-sm-12">
+                                        <img src="" alt="" width="60" class="img-fluid rounded shadow-sm <%= key %> "/>
+                                      
+                                        
+                                        <input class="" id ="photo-<%= key %>" type="file" accept="image/*" name="<%= key %>"/>
+                                        <!-- <label class="" for="<%= key %>">Choose new photo</label> -->
+                                       
+                                    
+                                    </div>
+
+                                     <% } else { %> 
+                                            <div class="form-group col-md-4 col-sm-12">
+                                                <label class="form-label"  type=" for="<%= key %>"><%= key %></label>
+                                                <input class="form-control" type="text" <%= value['visible']===false?'readonly':''%> name="<%= key %>">
+                                            </div>
+                                    <% }  %> 
 					  	
 					  	
-                         <% }); %>
+                            <% }); %>
                          
                           </div>
 					  	<button type="button" class="btn btn-primary" id="btnProductUpdateSubmit">Update</button>

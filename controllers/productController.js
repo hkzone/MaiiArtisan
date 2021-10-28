@@ -26,30 +26,35 @@ exports.uploadProductImages = upload.fields([
 ]);
 
 exports.resizeProductImages = catchAsync(async (req, res, next) => {
-  if (!req.files || !req.files.imageCover || !req.files.images) return next();
+  //if (!req.files || !req.files.imageCover || !req.files.images) return next();
+
+  if (!req.file) return next();
 
   //1) Cover image
-  req.body.imageCover = `product-${req.params.id}-${Date.now()}-cover.jpeg`;
+  if (req.files.imageCover) {
+    req.body.imageCover = `product-${req.params.id}-${Date.now()}-cover.jpeg`;
 
-  await sharp(req.files.imageCover[0].buffer)
-    .resize(2000, 1333)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/images/products/${req.body.imageCover}`);
-
-  //2)Images
-  req.body.images = [];
-  await Promise.all(
-    req.files.images.map(async (file, i) => {
-      const filename = `product-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
-      await sharp(req.files.images[i].buffer)
-        .resize(2000, 1333)
-        .toFormat('jpeg')
-        .jpeg({ quality: 90 })
-        .toFile(`public/images/products/${filename}`);
-      req.body.images.push(filename);
-    })
-  );
+    await sharp(req.files.imageCover[0].buffer)
+      .resize(2000, 1333)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toFile(`public/images/products/${req.body.imageCover}`);
+  }
+  if (req.files.images) {
+    //2)Images
+    req.body.images = [];
+    await Promise.all(
+      req.files.images.map(async (file, i) => {
+        const filename = `product-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+        await sharp(req.files.images[i].buffer)
+          .resize(2000, 1333)
+          .toFormat('jpeg')
+          .jpeg({ quality: 90 })
+          .toFile(`public/images/products/${filename}`);
+        req.body.images.push(filename);
+      })
+    );
+  }
 
   next();
 });

@@ -116,6 +116,7 @@ if (userDataForm)
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
+    console.log(document.getElementById('photo').files[0]);
 
     updateSettings(form, 'data');
   });
@@ -290,7 +291,9 @@ if (productsTable)
     keys.forEach((key) => {
       if ($(`input[name='${key}']`).is(':checkbox')) {
         $(`input[name='${key}']`).attr('checked', product[key]);
-      } else $(`input[name='${key}']`).val(product[key]);
+      } else if (key === 'imageCover') {
+        $('.imageCover').attr('src', `/images/products/${product[key]}`);
+      } else $(`[name='${key}']`).val(product[key]);
     });
 
     $('#editProductModal').modal('show');
@@ -302,7 +305,8 @@ if (btnProductUpdateSubmit)
   btnProductUpdateSubmit.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     let updatedProduct = {};
-    $('input')
+    const form = new FormData();
+    $('input, .txtArea')
       .not(':input[type=button], :input[type=submit], :input[type=reset]')
       .each(function () {
         console.log($(this).val());
@@ -312,7 +316,15 @@ if (btnProductUpdateSubmit)
           value = $(this).is(':checked');
         } else value = $(this).val();
         updatedProduct = { ...updatedProduct, ...{ [keyValue]: value } };
+        form.append(`${keyValue}`, value);
       });
+    console.log(document.getElementById('photo-imageCover').files[0]);
 
-    updateProduct(updatedProduct);
+    form.append(
+      'imageCover',
+      document.getElementById('photo-imageCover').files[0]
+    );
+    console.log(document.getElementById('photo-imageCover').files[0]);
+
+    updateProduct($(`input[name='_id']`).val(), form);
   });
