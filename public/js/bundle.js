@@ -58317,9 +58317,7 @@ var updateProduct = /*#__PURE__*/function () {
           case 0:
             _id = _ref._id, name = _ref.name, ingredients = _ref.ingredients, weight = _ref.weight, orderByWeight = _ref.orderByWeight, customColors = _ref.customColors, customFlavors = _ref.customFlavors, price = _ref.price, summary = _ref.summary, description = _ref.description, isFeatured = _ref.isFeatured;
             _context.prev = 1;
-            console.log('hello admin');
-            console.log(name, ingredients, weight, orderByWeight, customColors, customFlavors, price, summary, description, isFeatured);
-            _context.next = 6;
+            _context.next = 4;
             return (0, _axios.default)({
               method: 'PATCH',
               url: "/api/v1/products/".concat(_id),
@@ -58337,7 +58335,7 @@ var updateProduct = /*#__PURE__*/function () {
               }
             });
 
-          case 6:
+          case 4:
             res = _context.sent;
 
             if (res.data.status === 'success') {
@@ -58347,20 +58345,20 @@ var updateProduct = /*#__PURE__*/function () {
               }, 1500);
             }
 
-            _context.next = 13;
+            _context.next = 11;
             break;
 
-          case 10:
-            _context.prev = 10;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](1);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 10]]);
+    }, _callee, null, [[1, 8]]);
   }));
 
   return function updateProduct(_x) {

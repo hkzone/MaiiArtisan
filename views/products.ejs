@@ -4,6 +4,9 @@
 <%  const iconPath = `images/icons.svg#icon-${icon}` %>
 <%  const html =` <li class=${active ? 'list-group-item side-nav--active' : 'list-group-item'}> <a href=${link}><svg><use xlink:href=${iconPath}></use></svg>${text}</a></li>` %>
 <%  return html } %>
+<%let keys=Object.keys(allProducts[0].toJSON())%> 
+<% //const keys={ name:{ visible:true, boolean:false, texarea:false },ingredients:{ visible:true, boolean:false, texarea:false },weight:{ visible:true, boolean:false, texarea:false },price:{ number:true,visible:true, boolean:false, texarea:false},summary:{ visible:true, boolean:false, texarea:false },description:{ visible:true, boolean:false, texarea:true},imageCover:{ visible:true, boolean:false, texarea:false, isImage:true },images:{ visible:true, boolean:false, texarea:false, isImage:true }, orderByWeight:{ visible:true, boolean:true, texarea:false },customColors:{ visible:true, boolean:true, texarea:false },customFlavors:{ visible:true, boolean:true, texarea:false } ,   isFeatured:{ visible:true, boolean:true, texarea:false },_id:{ visible:false, boolean:false, texarea:false }}  %> 
+
 
 <main class="main">
   <div class="user-view container-fluid">
@@ -143,12 +146,12 @@
 		      	<div class="modal-body">
 		        	<form action="" id="edit-form" >
                         <div class='form-row '>
-    
-                        <% Object.keys(allProducts[0].toJSON()).forEach((key)=> { %>
+                  
+                        <% keys.forEach((key)=> { %>
                         
-				        <div class="<%= allProducts[0][key]===true||false?'form-check d-flex align-items-center justify-content-center':'form-group'%> col-md-4 col-sm-12">
-						    <label class="<%= allProducts[0][key]===true||false?'form-check-label':''%>" for="<%= key %>"><%= key %></label>
-						    <input class="<%= allProducts[0][key]===true||false?'':'form-control'%>" type="<%= allProducts[0][key]===true||false?'checkbox':'text' %>" name="<%= key %>">
+				        <div class="<%= allProducts[0][key]===true||allProducts[0][key]===false?'form-check d-flex align-items-center justify-content-center':'form-group'%> col-md-4 col-sm-12">
+						    <label class="<%= allProducts[0][key]===true||allProducts[0][key]===false?'form-check-label':''%>" for="<%= key %>"><%= key %></label>
+						    <input class="<%= allProducts[0][key]===true||allProducts[0][key]===false?'':'form-control'%>" type="<%= allProducts[0][key]===true||allProducts[0][key]===false?'checkbox':'text' %>" name="<%= key %>">
 					  	</div>
 					  	
 					  	

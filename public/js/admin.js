@@ -15,19 +15,6 @@ export const updateProduct = async ({
   isFeatured,
 }) => {
   try {
-    console.log('hello admin');
-    console.log(
-      name,
-      ingredients,
-      weight,
-      orderByWeight,
-      customColors,
-      customFlavors,
-      price,
-      summary,
-      description,
-      isFeatured
-    );
     const res = await axios({
       method: 'PATCH',
       url: `/api/v1/products/${_id}`,
