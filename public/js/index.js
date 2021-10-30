@@ -293,7 +293,17 @@ if (productsTable)
         $(`input[name='${key}']`).attr('checked', product[key]);
       } else if (key === 'imageCover') {
         $('.imageCover').attr('src', `/images/products/${product[key]}`);
-      } else $(`[name='${key}']`).val(product[key]);
+      } else if (key === 'images') {
+        console.log('imnages+++', product[key]);
+        product[key].forEach((el, index) => {
+          $(`.photo-images${index}`).attr('src', `/images/products/${el}`);
+        });
+      } else {
+        $(`[name='${key}']`).val(product[key]);
+        $(`[name='${key}']`).attr('data-field', product[key]);
+      }
+
+      $(`[name='${key}']`).attr('data-field', product[key]);
     });
 
     $('#editProductModal').modal('show');
@@ -304,27 +314,43 @@ if (productsTable)
 if (btnProductUpdateSubmit)
   btnProductUpdateSubmit.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
-    let updatedProduct = {};
+    // let updatedProduct = {};
     const form = new FormData();
     $('input, .txtArea')
       .not(':input[type=button], :input[type=submit], :input[type=reset]')
       .each(function () {
-        console.log($(this).val());
         const keyValue = $(this).attr('name');
         let value;
         if ($(this).is(':checkbox')) {
           value = $(this).is(':checked');
         } else value = $(this).val();
-        updatedProduct = { ...updatedProduct, ...{ [keyValue]: value } };
-        form.append(`${keyValue}`, value);
-      });
-    console.log(document.getElementById('photo-imageCover').files[0]);
 
-    form.append(
-      'imageCover',
-      document.getElementById('photo-imageCover').files[0]
-    );
-    console.log(document.getElementById('photo-imageCover').files[0]);
+        // updatedProduct = { ...updatedProduct, ...{ [keyValue]: value } };
+        if (value.toString() !== $(this).attr('data-field')) {
+          if ($(this).is(':file')) {
+            if ($(this).get(0).files.length !== 0) {
+              for (let i = 0; i < $(this).get(0).files.length || i < 3; i++) {
+                form.append(`${keyValue}`, $(this).get(0).files[i]);
+              }
+            }
+          } else form.append(`${keyValue}`, value);
+        }
+      });
+
+    // //1) Cover image
+    // const imageCoverFiles =
+    //   document.getElementById('photo-imageCover').files[0];
+    // if (imageCoverFiles !== undefined) {
+    //   form.append('imageCover', imageCoverFiles);
+    // }
+
+    // //2)Images
+    // const imagesFiles = document.getElementById('photo-images').files;
+    // if (imagesFiles !== undefined) {
+    //   for (let i = 0; i < imagesFiles.length || i < 3; i++) {
+    //     form.append('images', imagesFiles[i]);
+    //   }
+    // }
 
     updateProduct($(`input[name='_id']`).val(), form);
   });

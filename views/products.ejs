@@ -5,7 +5,7 @@
 <%  const html =` <li class=${active ? 'list-group-item side-nav--active' : 'list-group-item'}> <a href=${link}><svg><use xlink:href=${iconPath}></use></svg>${text}</a></li>` %>
 <%  return html } %>
 <%//let keys=Object.keys(allProducts[0].toJSON())%> 
-<% const productSchema={ _id:{ visible:false, boolean:false, textarea:false },name:{ visible:true, boolean:false, textarea:false },ingredients:{ visible:true, boolean:false, textarea:false },weight:{ visible:true, boolean:false, textarea:false },price:{ number:true,visible:true, boolean:false, textarea:false},summary:{ visible:true, boolean:false, textarea:true },description:{ visible:true, boolean:false, textarea:true},imageCover:{ visible:true, boolean:false, textarea:false, isImage:true },images:{ visible:true, boolean:false, textarea:false, isImage:false }, orderByWeight:{ visible:true, boolean:true, textarea:false },customColors:{ visible:true, boolean:true, textarea:false },customFlavors:{ visible:true, boolean:true, textarea:false } ,   isFeatured:{ visible:true, boolean:true, textarea:false }}  %> 
+<% const productSchema={ _id:{ visible:false, boolean:false, textarea:false },name:{ visible:true, boolean:false, textarea:false },ingredients:{ visible:true, boolean:false, textarea:false },weight:{ visible:true, boolean:false, textarea:false },price:{ number:true,visible:true, boolean:false, textarea:false},summary:{ visible:true, boolean:false, textarea:true },description:{ visible:true, boolean:false, textarea:true},imageCover:{ visible:true, boolean:false, textarea:false, isImage:true },images:{ visible:true, boolean:false, textarea:false, isImages:true }, orderByWeight:{ visible:true, boolean:true, textarea:false },customColors:{ visible:true, boolean:true, textarea:false },customFlavors:{ visible:true, boolean:true, textarea:false } ,   isFeatured:{ visible:true, boolean:true, textarea:false }}  %> 
 
 
 <main class="main">
@@ -168,8 +168,22 @@
                                        
                                     
                                     </div>
+                                    <% } else if (value['isImages']===true) { %> 
+                                    <div class="form-group custom-file col-md-4 col-sm-12">
+                                        <img src="" alt="" width="60" class="img-fluid rounded shadow-sm photo-<%= key %>0 "/>
+                                        <img src="" alt="" width="60" class="img-fluid rounded shadow-sm photo-<%= key %>1 "/>   
+                                        <img src="" alt="" width="60" class="img-fluid rounded shadow-sm photo-<%= key %>2 "/>
+                    
+                                      
+                                        
+                                        <input class="" id ="photo-<%= key %>" type="file" accept="image/*" name="<%= key %>" multiple/>
+                                        <!-- <label class="" for="<%= key %>">Choose new photo</label> -->
+                                       
+                                    
+                                    </div>
 
                                      <% } else { %> 
+
                                             <div class="form-group col-md-4 col-sm-12">
                                                 <label class="form-label"  type=" for="<%= key %>"><%= key %></label>
                                                 <input class="form-control" type="text" <%= value['visible']===false?'readonly':''%> name="<%= key %>">

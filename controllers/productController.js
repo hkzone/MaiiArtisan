@@ -21,6 +21,7 @@ const upload = multer({
 });
 
 exports.uploadProductImages = upload.fields([
+  // = upload.single('imageCover');
   { name: 'imageCover', maxCount: 1 },
   { name: 'images', maxCount: 3 },
 ]);
@@ -28,26 +29,27 @@ exports.uploadProductImages = upload.fields([
 exports.resizeProductImages = catchAsync(async (req, res, next) => {
   //if (!req.files || !req.files.imageCover || !req.files.images) return next();
 
-  if (!req.file) return next();
+  if (!req.files) return next();
 
   //1) Cover image
   if (req.files.imageCover) {
     req.body.imageCover = `product-${req.params.id}-${Date.now()}-cover.jpeg`;
 
     await sharp(req.files.imageCover[0].buffer)
-      .resize(2000, 1333)
+      .resize(2000, 2000)
       .toFormat('jpeg')
       .jpeg({ quality: 90 })
       .toFile(`public/images/products/${req.body.imageCover}`);
   }
+
+  //2)Images
   if (req.files.images) {
-    //2)Images
     req.body.images = [];
     await Promise.all(
       req.files.images.map(async (file, i) => {
         const filename = `product-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
         await sharp(req.files.images[i].buffer)
-          .resize(2000, 1333)
+          .resize(2000, 2000)
           .toFormat('jpeg')
           .jpeg({ quality: 90 })
           .toFile(`public/images/products/${filename}`);

@@ -13,7 +13,7 @@ export const updateProduct = async (_id, data) => {
       showAlert('success', 'Updated product successfully!');
       window.setTimeout(() => {
         location.reload(true);
-      }, 5000);
+      }, 2000);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
