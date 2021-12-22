@@ -12579,7 +12579,19 @@ Url.prototype.resolveObject = function(relative) {
   return result;
 };
 
-Url.prototype.pa
+Url.prototype.parseHost = function() {
+  var host = this.host;
+  var port = portPattern.exec(host);
+  if (port) {
+    port = port[0];
+    if (port !== ':') {
+      this.port = port.substr(1);
+    }
+    host = host.substr(0, host.length - port.length);
+  }
+  if (host) this.hostname = host;
+};
+
 },{"punycode":"../../node_modules/punycode/punycode.js","./util":"../../node_modules/url/util.js","querystring":"../../node_modules/querystring-es3/index.js"}],"../../node_modules/@pixi/constants/lib/constants.es.js":[function(require,module,exports) {
 "use strict";
 
@@ -59019,7 +59031,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55998" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58357" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
