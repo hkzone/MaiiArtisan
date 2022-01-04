@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: $body-font;
+  text-align: center;
+
+  main {
+    margin-bottom: 2rem;
+  }
+
+  .navbar {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .container-xl {
+    padding: 0;
+    margin: 0 auto;
+
+    .row {
+      margin: 0;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: $big-font-size;
+      letter-spacing: 0.3rem;
+    }
+
+    h3 {
+      font-family: $secondary-font;
+      font-size: $medium-font-size;
+      color: $secondary-font-color;
+      margin: 0 auto -0.2rem;
+    }
+
+    p {
+      font-family: $font-text;
+      font-style: italic;
+      font-weight: 400;
+      font-size: $normal-font-size;
+      padding: 1rem 0.5rem 2rem;
+    }
+
+    .responsive-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top;
+    }
+
+    .carousel-control-next,
+    .carousel-indicators,
+    .carousel-control-prev,
+    .carousel-indicators {
+      filter: invert(100%);
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+}

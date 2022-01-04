@@ -1,0 +1,118 @@
+<%- include("./_header") -%>
+
+<main class="account-container">
+  <div class="user-view container-xl">
+    <div class="row d-flex title-div ">
+      <div class="col-md-3">
+       <%- include("./_nav") -%>
+      </div> 
+    <div class="col-md-9  align-self-center user-view__content">
+      <div class="user-view__form-container">
+        <h2 class="heading-secondary" id="settings">Your account settings</h2>
+        <form class="form-user-data needs-validation" novalidate>
+          <div class="form-row form__group">
+            <label class="form__label" for="name">Name</label>
+            <input
+              class="form-control form__input"
+              id="name"
+              type="text"
+              value=<%=user.name%>
+              required
+              name='name'
+            />
+             <div class="invalid-feedback">
+            Please provide name
+          </div>
+          </div>
+          <div class="form-row form__group">
+            <label class="form__label" for="email">Email address</label>
+            <input
+              class="form-control form__input"
+              id="email"
+              type="email"
+              value=<%=user.email%>
+              required
+              name='email'
+            />
+             <div class="invalid-feedback">
+            Please enter a valid e-mail
+          </div>
+          </div>
+          <div class="form-row form__group form__photo-upload">
+            <img
+              class="form__user-photo"
+              src="/images/users/<%=user.photo%>" 
+              alt="User photo"
+            /><input class="form__upload" type="file" accept="image/*" id="photo" name='photo'/>
+            <label for="photo">Choose new photo</label>
+            
+          </div>
+          <div class="d-flex  justify-content-end">
+            <button class="btn btn-dark submit-form">Save settings</button>
+          </div>
+        </form>
+      </div>
+      <div class="line">&nbsp;</div>
+      <div class="user-view__form-container">
+        <h2 class="heading-secondary ma-bt-md">Password change</h2>
+        <form class="form form-user-settings needs-validation" novalidate>
+          <div class="form-row form__group">
+            <label class="form__label" for="password-current"
+              >Current password</label
+            >
+            <input
+              class="form-control form__input"
+              id="password-current"
+              type="password"
+              placeholder="••••••••"
+              required
+              minlength="8"
+            />
+             <div class="invalid-feedback">
+            Password must be at least 8 characters
+          </div>
+          </div>
+          <div class="form-row form__group">
+            <label class="form__label" for="password">New password</label>
+            <input
+              class=" form-control form__input"
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              required
+              minlength="8"
+            />
+             <div class="invalid-feedback">
+            Password must be at least 8 characters
+          </div>
+          </div>
+          <div class="form-row form__group">
+            <label class="form__label" for="password-confirm"
+              >Confirm password</label
+            >
+            <input
+              class="form-control form__input"
+              id="password-confirm"
+              type="password"
+              placeholder="••••••••"
+              required
+              minlength="8"
+            />
+             <div class="invalid-feedback">
+            Password must be at least 8 characters
+          </div>
+          </div>
+         <div class="d-flex  justify-content-end"> <button class="btn btn-dark submit-form">Save password</button></div>
+           
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("./_footer") -%>
+
+<!--TODO: Make footer at the boottom
+ const footer =document.querySelector('.footer__container') 
+ footer.classList.add("fixed-bottom ")  -->

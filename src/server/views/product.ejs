@@ -1,0 +1,155 @@
+<%- include("./_header") -%>
+<main class="main container-xl product-wrapper">
+<div class="row">
+      <!-------------- LEFT PANEL -------------->
+      <div class="col-md-5">
+        <div class="product-column">
+          <img id=product-featured src="/images/products/<%=product.imageCover%>">
+
+          <div id="product-slide-wrapper">
+            <img id="product-slideLeft" class="product-arrow" src="/images/arrow-left.png">
+
+            <div id="product-slider">
+              <img class="product-thumbnail product-active" src="/images/products/<%=product.imageCover%>">
+              <% product.images.forEach((el, i)=>{ %>
+              <img class="product-thumbnail" src="/images/products/<%=el%>">
+              <%}) %>
+            </div>
+
+            <img id="product-slideRight" class="product-arrow" src="/images/arrow-right.png">
+          </div>
+        </div>
+      </div>
+      <!-------------- RIGHT PANEL -------------->
+      <div class="col-md-7">
+         
+            <h1><%=product.name%></h1>
+            <hr>
+            <h3>$89.99</h3>
+            <p><%=product.description%></p>
+            <form class="form product-form needs-validation" novalidate action="/cart" method="post">
+              <div class="form-row">
+                <!-------------- WEIGHT -------------->
+                <div class="col-md-6 form-group">
+                  <label for="weight">Choose weight</label>
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="weight">
+                        <span>-</span>
+                      </button>
+                    </span>
+                    <input type="number" name="weight" class="form-control input-number" data-increaseBy=<%=product.weight[0]%> value=<%=product.weight[0]%> min=<%=product.weight[0]%> max=<%=product.weight[product.weight.length-1]%> readonly required>                    
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="weight">
+                        <span>+</span>
+                      </button>
+                    </span>
+                    <div class="invalid-feedback">Please provide weight.</div>
+                  </div>
+                  </div>
+                
+                <!-- ------------QUANTITY -------------->
+                <div class="col-md-6 form-group">
+                  <label for="qty">Quantity</label>
+
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="qty">
+                        <span>-</span>
+                      </button>
+                    </span>
+                    <input type="number" name="qty" class="form-control input-number" data-increaseby="1" value="1" min="1" max="10" readonly required>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="qty">
+                        <span>+</span>
+                      </button>
+                    </span>
+                    <div class="invalid-feedback">Please provide quantity.</div>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div class="form-row">
+                <!-------------- CUSTOM COLOR -------------->
+                <div class="col-md-6 form-group">
+                  <label for="color">Custom color (optional)</label>
+                  <select class="custom-select d-block w-100" name="color">
+                    <option value="">Choose...</option>
+                    <% color.forEach(el=>{ %>
+                    <option><%=el%></option>
+                    <%})%>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid color.
+                  </div>
+                </div>
+                <div class="col-md-6 form-group">
+                  <!-------------- CUSTOM FLAVOR -------------->
+                  <label for="flavor">Flavor (optional)</label>
+                  <select class="custom-select d-block w-100" name="flavor">
+                    <option value="">Choose...</option>
+                    <% flavor.forEach(el=>{ %>
+                    <option><%=el%></option>
+                    <%})%>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid flavor.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <!-------------- DATE -------------->
+                <div class="col-md-6 form-group">
+                  <label for="date">Choose your date </label>
+                  <input type="date" name="date" id="date" class="form-control" required>
+                  <span class="validity"></span>
+                  <div class="invalid-feedback">
+                    Please select a valid date.
+                  </div>
+                </div>
+                <!-------------- OPTIONS -------------->
+                <div class="col-md-6 form-group">
+                  <label for="color">Special options (optional)</label>
+                  <select class="custom-select d-block w-100" name="option" >
+                    <option value="">Choose...</option>
+                    <% options.forEach(el=>{ %>
+                    <option><%=el%></option>
+                    <%})%>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid color.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <!--------------  Inscription Text ------------ -->
+                <div class="col-md-12 form-group">
+                  <label for="message">Inscription Text (optional)</label>
+                  <input type="text" class="form-control" name="message" placeholder="maximum <%=maxLength%> characters" maxlength= <%=maxLength%> >
+                  <div class="invalid-feedback">
+                    Please provide a valid text.
+                  </div>
+                </div>
+
+                <!--------------  SET ID and NONCE. ADD TO CART -------------->
+                
+                  <input type="hidden" name="product_id" value="<%= product._id %>">
+                  <input type="hidden" name="nonce" value="<%= nonce %>">
+                  
+                    <div class="col-md-12 form-group d-flex justify-content-end">
+                      <input type="hidden" name="product_id" value="<%= product._id %>">
+                      <input type="hidden" name="nonce" value="<%= nonce %>">
+                      <button type="submit" class="btn btn-dark pr__button" name="button">Add to cart</button>
+                    </div>
+          
+            </form>
+   
+     
+      </div>
+   
+</div>
+</main>
+<%- include("./_footer") -%>

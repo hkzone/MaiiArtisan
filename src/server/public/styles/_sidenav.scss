@@ -1,0 +1,95 @@
+.user-view__menu {
+  padding: 2rem 0;
+  background: $background-color;
+  height: 100%;
+
+  .menu__heading {
+    margin: 0.75rem 1.25rem;
+    padding: 0 1rem 3px;
+    text-align: left;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid $font-color;
+  }
+
+  .list-group {
+    list-style: none;
+
+    li {
+      border: 0;
+      margin: 1rem 0;
+      transition: all 0.2s;
+
+      a {
+        color: $font-color;
+        &:link,
+        &:visited {
+          padding-left: 1rem;
+          display: flex;
+          text-decoration: none;
+        }
+
+        svg {
+          height: 1.5rem;
+          width: 1.5rem;
+          fill: $font-color;
+          margin-right: 2rem;
+          margin-left: 0rem;
+        }
+      }
+    }
+
+    .side-nav:hover {
+      border-left: 4px solid $font-color !important;
+    }
+
+    .side-nav-active {
+      border-left: 4px solid $font-color !important;
+
+      a {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+
+        &:hover,
+        &:active {
+          -webkit-transform: translateX(3px);
+          transform: translateX(3px);
+        }
+      }
+    }
+  }
+}
+
+.admin-menu {
+  margin-top: 5.5rem;
+}
+
+.nav__user-img {
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  margin-right: 0rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .admin-menu {
+    margin-top: 1rem;
+  }
+
+  .user-view__menu .list-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    li a {
+      &:link {
+        padding: 0;
+      }
+
+      svg {
+        margin: 0 0.5rem;
+      }
+    }
+  }
+}

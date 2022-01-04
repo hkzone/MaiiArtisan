@@ -1,17 +1,16 @@
 [
   {
-
     "name": "Carrot cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.8,
     "ratingsQuantity": 6,
     "price": 497,
@@ -20,21 +19,19 @@
     "imageCover": "carrot.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Napoleon cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 5,
     "ratingsQuantity": 9,
     "price": 497,
@@ -43,21 +40,19 @@
     "imageCover": "napoleon.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Chocolate cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -66,21 +61,19 @@
     "imageCover": "Choc.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Kyiv cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -89,21 +82,19 @@
     "imageCover": "Kyiv.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Honey cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -112,21 +103,19 @@
     "imageCover": "honey.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Red Velvet cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":true,
-    "customFlavors":false,
+    "customColors": true,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -135,21 +124,19 @@
     "imageCover": "redvelvet.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Mocha cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":true,
-    "customFlavors":false,
+    "customColors": true,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -158,21 +145,19 @@
     "imageCover": "mocha.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Mint Chocolate cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -181,21 +166,19 @@
     "imageCover": "mintchocolate.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Lemon Lavender cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":true,
-    "customFlavors":false,
+    "customColors": true,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -204,21 +187,19 @@
     "imageCover": "lemonlavender.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Rum Raising cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -227,44 +208,40 @@
     "imageCover": "rumraising.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Black Forest cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":true,
-    "customFlavors":true,
+    "customColors": true,
+    "customFlavors": true,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
-    "summary": "This cheeky, cream cheese-frosted carrot cake has a secret crush.",
-    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "summary": "Chocolate sponge cake sandwiched with a rich cherry filling and whipped cream.",
+    "description": "Black Forest Cake combines rich chocolate cake layers with fresh cherries, cherry liqueur, and a simple whipped cream frosting.",
     "imageCover": "blackforest.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Sacher  Torte",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -273,21 +250,19 @@
     "imageCover": "sacher.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Classic Vanilla cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":true,
-    "customFlavors":false,
+    "customColors": true,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -296,21 +271,19 @@
     "imageCover": "classicvanilla.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": true
-
   },
   {
-
     "name": "Poop cake",
-    "ingredients":[
-      "flour",
-      "butter",
-      "egg"
+    "ingredients": ["flour", "butter", "egg"],
+    "weight": [500, 1000, 1500, 2000, 2500, 3000],
+    "size": [
+      { "sizeValue": 4, "sizeUnit": "inch" },
+      { "sizeValue": 8, "sizeUnit": "inch" },
+      { "sizeValue": 12, "sizeUnit": "inch" }
     ],
-    "weight": [500,1000,1500,2000,2500,3000],
-    "size": [{"sizeValue":4,"sizeUnit":"inch"},{"sizeValue":8,"sizeUnit":"inch"},{"sizeValue":12,"sizeUnit":"inch"}],
     "orderByWeight": true,
-    "customColors":false,
-    "customFlavors":false,
+    "customColors": false,
+    "customFlavors": false,
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
     "price": 497,
@@ -319,6 +292,5 @@
     "imageCover": "poop.jpeg",
     "images": ["cake-1-1.jpg", "cake-1-2.jpg", "cake-1-3.jpg"],
     "isFeatured": false
-
   }
 ]

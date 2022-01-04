@@ -1,14 +1,14 @@
 {
   "name": "backery",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "./src/server/app.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js",
+    "start": "node ./src/server/server.js",
+    "dev": "nodemon ./src/server/server.js",
+    "start:prod": "NODE_ENV=production nodemon ./src/server/server.js",
     "debug": "ndb server.js",
-    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js --public-url .",
-    "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js --public-url ."
+    "watch:js": "parcel watch ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url .",
+    "build:js": "parcel build ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url ."
   },
   "author": "",
   "license": "ISC",
@@ -49,16 +49,17 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "eslint": "^7.30.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.5.1",
+    "sass": "^1.45.1"
   },
   "description": ""
 }

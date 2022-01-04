@@ -1,0 +1,25 @@
+<% const navItem =(link, text, icon, active)=>{  %>
+  <%  const iconPath = `images/icons.svg#${icon}` %>
+  <%  const html =` <li class=${active?"side-nav-active":"side-nav"}> <a href=${link}><svg><use xlink:href=${iconPath}></use></svg>${text}</a></li>` %>
+  <%  return html } %>
+
+   <nav class="user-view__menu">
+            <h5 class="menu__heading">Menu</h5>
+          <ul class="list-group">
+            <%- navItem('/me', 'Settings', 'settings', true) -%>
+            <%- navItem('/my-orders', 'My orders', 'order')-%>
+            <%- navItem('#', 'My reviews', 'star')-%>
+            <%- navItem('#', 'Payments', 'payments')-%>
+          </ul>
+          <% if (user.role==='admin') { %>
+          <div class="admin-menu">
+            <h5 class="menu__heading">Admin</h5>
+            <ul class="list-group">
+              <%-navItem('/products', 'Manage products', 'products')-%>
+              <%-navItem('#', 'Manage orders', 'order')-%>
+              <%-navItem('#', 'Manage users', 'users')-%>
+              <%-navItem('#', 'Manage settings', 'settings')-%>
+            </ul>
+          </div>
+          <% } %>
+        </nav>

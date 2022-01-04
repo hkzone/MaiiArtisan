@@ -1,0 +1,46 @@
+/*=============== FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap');
+/*========== Colors ==========*/
+
+$color-off-white: #f2f2f2;
+
+$clr-strong: #ca4807;
+$border-color: #c0c0c0;
+$border-color-light: #eeeeee;
+$menu-alternate-bg: #212129;
+
+$accent-color: #18bfef;
+
+// OK
+$background: #fff;
+$background-color: #e7ebec;
+$background-color-secondary: rgba(255, 255, 255, 0.5);
+$clr-white: #fff;
+$alert-success: rgba(28, 199, 28, 0.9);
+$alert-error: rgba(252, 86, 86, 0.9);
+$gray-dark: #343a40;
+
+/*========== Font and typography ==========*/
+//ok
+$body-font: 'Montserrat', sans-serif;
+$font-text: 'Cormorant Garamond', serif;
+$secondary-font: 'Great Vibes', cursive;
+$secondary-font-color: #c59f4e;
+$big-font-size: 3.5rem;
+$medium-font-size: 2.2rem;
+$normal-font-size: 1.1rem;
+$font-color: #212529;
+
+$argent-gray: #8c8c8c; //Argent Gray
+$font-color-dark: #333333;
+$font-color-dark-secondary: #212931;
+$font-color-light: #909498;
+$font-color-secondary: #6d6d64;
+
+$small-font-size: 0.85rem;
+
+/*========== Other ==========*/
+
+@mixin easeOut {
+  transition: all 0.3s ease-out;
+}

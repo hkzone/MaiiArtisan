@@ -1,0 +1,54 @@
+/* -------------------CART STYLES-------------------- */
+
+.cart-wrapper {
+  padding: 2rem;
+
+  .cart-table {
+    tbody tr {
+      td {
+        vertical-align: middle;
+      }
+    }
+
+    .product-thumb {
+      max-width: 5rem;
+    }
+
+    .qty {
+      width: 2em;
+      border: none;
+      margin: 0 2em;
+      height: 100%;
+      line-height: 2;
+      text-align: center;
+      background: transparent;
+    }
+  }
+
+  .cart-footer .btn {
+    border: none;
+    font-weight: bold;
+    @include easeOut();
+
+    &:hover,
+    &:focus,
+    &:active {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .cart-wrapper {
+    padding: 1rem 0;
+
+    th {
+      font-size: 0.8rem;
+    }
+
+    .table td,
+    .table th {
+      padding: 0.4rem 0;
+    }
+  }
+}
