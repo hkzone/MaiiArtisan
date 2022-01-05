@@ -58477,7 +58477,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../images/bg.jpeg":[["bg.bb1f2570.jpeg","../images/bg.jpeg"],"../images/bg.jpeg"],"_css_loader":"../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./../images/bg.jpeg":[["bg.bb1f2570.jpeg","../images/bg.jpeg"],"../images/bg.jpeg"],"./../images/pexels-pavel-danilyuk-7180723.jpg":[["pexels-pavel-danilyuk-7180723.1a4eee9f.jpg","../images/pexels-pavel-danilyuk-7180723.jpg"],"../images/pexels-pavel-danilyuk-7180723.jpg"],"_css_loader":"../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("core-js/modules/es6.array.copy-within.js");
@@ -58801,42 +58801,40 @@ if (image3d) {
 
   var renderer = new PIXI.Renderer();
   (0, _dimage.render3dImage)('.image3d', './../images/image.jpg', './../images/image_depth.jpg', PIXI);
-}
+} // fetch all the forms we want to apply custom style
 
-window.addEventListener('load', function () {}, false);
-window.addEventListener('load', function () {
-  // fetch all the forms we want to apply custom style
-  var inputs = document.getElementsByClassName('form-control'); // loop over each input and watch blur event
 
-  var validation = Array.prototype.filter.call(inputs, function (input) {
-    input.addEventListener('blur', function (event) {
-      // reset
-      input.classList.remove('is-invalid');
-      input.classList.remove('is-valid');
+var inputs = document.getElementsByClassName('form-control'); // loop over each input and watch blur event
 
-      if (input.checkValidity() === false) {
-        input.classList.add('is-invalid');
-      } else {
-        input.classList.add('is-valid');
-      }
-    }, false);
-  }); // Fetch all the forms we want to apply custom Bootstrap validation styles to
+var validation = Array.prototype.filter.call(inputs, function (input) {
+  input.addEventListener('blur', function (event) {
+    // reset
+    input.classList.remove('is-invalid');
+    input.classList.remove('is-valid');
 
-  var forms = document.getElementsByClassName('needs-validation'); // Loop over them and prevent submission
+    if (input.checkValidity() === false) {
+      input.classList.add('is-invalid');
+    } else {
+      input.classList.add('is-valid');
+    }
+  }, false);
+}); // Fetch all the forms we want to apply custom Bootstrap validation styles to
 
-  var validation = Array.prototype.filter.call(forms, function (form) {
-    form.addEventListener('submit', function (event) {
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
+var forms = document.getElementsByClassName('needs-validation'); // Loop over them and prevent submission
 
-      form.classList.add('was-validated');
-    }, false);
-  }); // //Contact Form
-  // const contactForm = document.getElementById('contact-form');
-  // if (contactForm) validateForm(contactForm);
-}, false); //const bookBtn = document.getElementById('book-tour');
+var validation2 = Array.prototype.filter.call(forms, function (form) {
+  form.addEventListener('submit', function (event) {
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+
+    form.classList.add('was-validated');
+  });
+}); // //Contact Form
+// const contactForm = document.getElementById('contact-form');
+// if (contactForm) validateForm(contactForm);
+//const bookBtn = document.getElementById('book-tour');
 // DELEGATION
 // if (mapBox) {
 //   const locations = JSON.parse(mapBox.dataset.locations);
@@ -58848,24 +58846,6 @@ if (loginForm) loginForm.addEventListener('submit', function (e) {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   (0, _login.login)(email, password);
-});
-if (signupForm) signupForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var name = document.getElementById('name').value;
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  var passwordConfirm = document.getElementById('passwordConfirm').value;
-  var unit = document.getElementById('unit').value;
-  var floorNo = document.getElementById('floorNo').value;
-  var blockNo = document.getElementById('blockNo').value;
-  var buildingName = document.getElementById('buildingName').value;
-  var estateOrVillageName = document.getElementById('estateOrVillageName').value;
-  var buildingNo = document.getElementById('buildingNo').value;
-  var streetName = document.getElementById('streetName').value;
-  var district = document.getElementById('district').value;
-  var region = document.getElementById('region').value;
-  var phoneNumber = document.getElementById('phoneNumber').value;
-  (0, _login.signup)(name, email, password, passwordConfirm, unit, floorNo, blockNo, buildingName, estateOrVillageName, buildingNo, streetName, district, region, phoneNumber);
 });
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 if (userDataForm) userDataForm.addEventListener('submit', function (e) {
@@ -58914,7 +58894,26 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/f
   return function (_x) {
     return _ref.apply(this, arguments);
   };
-}()); // if (bookBtn)
+}());
+if (signupForm) signupForm.addEventListener('submit', function (e) {
+  console.log('inside signup');
+  e.preventDefault();
+  var name = document.getElementById('name').value;
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+  var passwordConfirm = document.getElementById('passwordConfirm').value;
+  var unit = document.getElementById('unit').value;
+  var floorNo = document.getElementById('floorNo').value;
+  var blockNo = document.getElementById('blockNo').value;
+  var buildingName = document.getElementById('buildingName').value;
+  var estateOrVillageName = document.getElementById('estateOrVillageName').value;
+  var buildingNo = document.getElementById('buildingNo').value;
+  var streetName = document.getElementById('streetName').value;
+  var district = document.getElementById('district').value;
+  var region = document.getElementById('region').value;
+  var phoneNumber = document.getElementById('phoneNumber').value;
+  (0, _login.signup)(name, email, password, passwordConfirm, unit, floorNo, blockNo, buildingName, estateOrVillageName, buildingNo, streetName, district, region, phoneNumber);
+}, false); // if (bookBtn)
 //   bookBtn.addEventListener('click', (e) => {
 //     e.target.textContent = 'Processing...';
 //     const { tourId } = e.target.dataset;
@@ -59043,8 +59042,9 @@ if (chekoutBtn) chekoutBtn.addEventListener('click', function (e) {
 
 if (productsTable) {
   //File upload styling
-  var inputs = document.querySelectorAll('.inputfile');
-  inputs.forEach(function (input) {
+  var _inputs = document.querySelectorAll('.inputfile');
+
+  _inputs.forEach(function (input) {
     var label = input.nextElementSibling,
         labelVal = label.innerHTML;
     input.addEventListener('change', function (e) {
@@ -59053,6 +59053,7 @@ if (productsTable) {
       if (fileName) label.querySelector('span').innerHTML = fileName;else label.innerHTML = labelVal;
     });
   }); //product edit functionality
+
 
   productsTable.addEventListener('click', function (e) {
     var editProductBtn = e.target.classList.contains('editProductBtn');
@@ -59153,7 +59154,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54445" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62289" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

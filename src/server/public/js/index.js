@@ -52,55 +52,43 @@ if (image3d) {
   );
 }
 
-window.addEventListener('load', function () {}, false);
+// fetch all the forms we want to apply custom style
+const inputs = document.getElementsByClassName('form-control');
 
-window.addEventListener(
-  'load',
-  function () {
-    // fetch all the forms we want to apply custom style
-    var inputs = document.getElementsByClassName('form-control');
+// loop over each input and watch blur event
+const validation = Array.prototype.filter.call(inputs, function (input) {
+  input.addEventListener(
+    'blur',
+    function (event) {
+      // reset
+      input.classList.remove('is-invalid');
+      input.classList.remove('is-valid');
 
-    // loop over each input and watch blur event
-    var validation = Array.prototype.filter.call(inputs, function (input) {
-      input.addEventListener(
-        'blur',
-        function (event) {
-          // reset
-          input.classList.remove('is-invalid');
-          input.classList.remove('is-valid');
+      if (input.checkValidity() === false) {
+        input.classList.add('is-invalid');
+      } else {
+        input.classList.add('is-valid');
+      }
+    },
+    false
+  );
+});
 
-          if (input.checkValidity() === false) {
-            input.classList.add('is-invalid');
-          } else {
-            input.classList.add('is-valid');
-          }
-        },
-        false
-      );
-    });
-
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function (form) {
-      form.addEventListener(
-        'submit',
-        function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        },
-        false
-      );
-    });
-    // //Contact Form
-    // const contactForm = document.getElementById('contact-form');
-    // if (contactForm) validateForm(contactForm);
-  },
-  false
-);
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+const forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+const validation2 = Array.prototype.filter.call(forms, function (form) {
+  form.addEventListener('submit', (event) => {
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+    form.classList.add('was-validated');
+  });
+});
+// //Contact Form
+// const contactForm = document.getElementById('contact-form');
+// if (contactForm) validateForm(contactForm);
 
 //const bookBtn = document.getElementById('book-tour');
 
@@ -113,48 +101,9 @@ window.addEventListener(
 if (loginForm)
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     login(email, password);
-  });
-
-if (signupForm)
-  signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const passwordConfirm = document.getElementById('passwordConfirm').value;
-    const unit = document.getElementById('unit').value;
-    const floorNo = document.getElementById('floorNo').value;
-    const blockNo = document.getElementById('blockNo').value;
-    const buildingName = document.getElementById('buildingName').value;
-    const estateOrVillageName = document.getElementById(
-      'estateOrVillageName'
-    ).value;
-    const buildingNo = document.getElementById('buildingNo').value;
-    const streetName = document.getElementById('streetName').value;
-    const district = document.getElementById('district').value;
-    const region = document.getElementById('region').value;
-    const phoneNumber = document.getElementById('phoneNumber').value;
-
-    signup(
-      name,
-      email,
-      password,
-      passwordConfirm,
-      unit,
-      floorNo,
-      blockNo,
-      buildingName,
-      estateOrVillageName,
-      buildingNo,
-      streetName,
-      district,
-      region,
-      phoneNumber
-    );
   });
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
@@ -190,6 +139,49 @@ if (userPasswordForm)
     document.getElementById('password').value = '';
     document.getElementById('password-confirm').value = '';
   });
+
+if (signupForm)
+  signupForm.addEventListener(
+    'submit',
+    (e) => {
+      console.log('inside signup');
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('passwordConfirm').value;
+      const unit = document.getElementById('unit').value;
+      const floorNo = document.getElementById('floorNo').value;
+      const blockNo = document.getElementById('blockNo').value;
+      const buildingName = document.getElementById('buildingName').value;
+      const estateOrVillageName = document.getElementById(
+        'estateOrVillageName'
+      ).value;
+      const buildingNo = document.getElementById('buildingNo').value;
+      const streetName = document.getElementById('streetName').value;
+      const district = document.getElementById('district').value;
+      const region = document.getElementById('region').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+
+      signup(
+        name,
+        email,
+        password,
+        passwordConfirm,
+        unit,
+        floorNo,
+        blockNo,
+        buildingName,
+        estateOrVillageName,
+        buildingNo,
+        streetName,
+        district,
+        region,
+        phoneNumber
+      );
+    },
+    false
+  );
 
 // if (bookBtn)
 //   bookBtn.addEventListener('click', (e) => {

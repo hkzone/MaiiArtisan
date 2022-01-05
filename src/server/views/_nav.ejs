@@ -8,8 +8,8 @@
           <ul class="list-group">
             <%- navItem('/me', 'Settings', 'settings', true) -%>
             <%- navItem('/my-orders', 'My orders', 'order')-%>
-            <%- navItem('#', 'My reviews', 'star')-%>
-            <%- navItem('#', 'Payments', 'payments')-%>
+            <!-- <%- navItem('#', 'My reviews', 'star')-%> -->
+            <!-- <%- navItem('#', 'Payments', 'payments')-%> -->
           </ul>
           <% if (user.role==='admin') { %>
           <div class="admin-menu">
@@ -17,7 +17,7 @@
             <ul class="list-group">
               <%-navItem('/products', 'Manage products', 'products')-%>
               <%-navItem('#', 'Manage orders', 'order')-%>
-              <%-navItem('#', 'Manage users', 'users')-%>
+              <!-- <%-navItem('#', 'Manage users', 'users')-%> -->
               <%-navItem('#', 'Manage settings', 'settings')-%>
             </ul>
           </div>

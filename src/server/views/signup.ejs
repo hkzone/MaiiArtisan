@@ -1,193 +1,247 @@
 <%- include("./_header") -%>
-<main class="main main-signup">
-  <div class="container-fluid">
-
-    <div class="row">
-
-      <!-- <section id="signup-section">
-        <div class="row">
-          <div class="col-sm-6 d-flex align-items-end">
-
-          </div>
-          <div class="col-sm-6">
-            <h4>Welcome to the world of moves</h4>
-          </div>
+<main class="main signup-container">
+  <div class="container-xl">
+    <div class="form-row">
+      <div class="col-md-5 signup__left-panel rounded-left">
+        <div>
+          <h2 class="signup__sign-txt">Sign up:</h2>
+          <h4 class="signup__pitch-txt">For the treats you always wanted</h4>
         </div>
-
-      </section> -->
-
-      <div class="col-md-5 col-sm-6 signup__left-panel">
-        <h2 class="signup__sign-txt signup__pitch-txt">Sign up:</h2>
-        <h4 class="signup__pitch-txt">For the treats you always wanted</h4>
-
-        <img class="signup__responsive-img signup-img rounded-left" src="images/pexels-pavel-danilyuk-7180723.jpg" alt="Photo by cottonbro from Pexels">
       </div>
 
-      <div class="col-md-7 signup__right-panel row-eq-height rounded-right">
-        <p class="signup__brand">
-          <!-- <i class="fas fa-ellipsis-v"></i><i class="fas fa-ellipsis-v"></i> -->
-          Moi du Artisan
-        </p>
+      <div
+        class="col-md-7 signup__right-panel form-row-eq-height rounded-right"
+      >
+        <h2 class="signup__brand">Maii Artisan Patisserie</h2>
         <h4 class="signup__pitch-txt2">Welcome to the world of pâtisserie</h4>
+        <hr />
 
-
-
-        <section id="signup__form-section">
-
-
-          <form class="form signup__form">
-
-            <div class="form-group signup__form-group row">
-              <div class="col-md-6 mb-3">
-                <label class="" for="inputName">Name:</label>
-                <input class="form-control" type="text" name="inputName" value="" id="name">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="" for="inputEmail">E-mail:</label>
-                <input class="form-control" type="email" name="inputEmail" value="" id="email">
-              </div>
+        <form class="form signup__form needs-validation" novalidate>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputName">Name:</label>
+              <input
+                class="form-control"
+                type="text"
+                name="inputName"
+                value=""
+                id="name"
+                required
+              />
+              <div class="invalid-feedback">Please enter your name</div>
             </div>
-
-
-
-            <div class="form-group signup__form-group row">
-              <div class="col-md-6 mb-3">
-                <label class="" for="password">Password:</label>
-                <input class="form-control" type="password" value="" id="password">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="" for="passwordConfirm">Re-enter password:</label>
-                <input class="form-control" type="password" value="" id="passwordConfirm">
-              </div>
-
+            <div class="form-group col-md-6">
+              <label for="inputEmail">E-mail:</label>
+              <input
+                class="form-control"
+                type="email"
+                name="inputEmail"
+                value=""
+                id="email"
+                required
+              />
+              <div class="invalid-feedback">Please enter a valid e-mail</div>
             </div>
-
-
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="unit">Unit (Appartment) </label>
-                <input type="text" class="form-control" id="unit" placeholder="Unit (Appartment) ">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="floorNo">Floor No</label>
-                <input type="text" class="form-control" id="floorNo" placeholder="Floor No">
-              </div>
-
-
-            </div>
-
-            <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="blockNo">Block or Tower No</label>
-                <input type="text" class="form-control" id="blockNo" placeholder="Block or Tower No">
-              </div>
-              <div class="col-md-7 mb-3">
-                <label for=" buildingName">Building Name<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control" id="buildingName" placeholder="Building Name">
-              </div>
-
-
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 mb-3">
-                <label for="estateOrVillageName">Estate or Village name</label>
-                <input type="text" class="form-control" id="estateOrVillageName" placeholder="Estate or Village name">
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4 mb-3">
-                <label for="buildingNo">Building No </label>
-                <input type="text" class="form-control" id="buildingNo" placeholder="Building No">
-              </div>
-              <div class="col-md-8 mb-3">
-                <label for="streetName">Street name</label>
-                <input type="text" class="form-control" id="streetName" placeholder="Street Name">
-              </div>
-
-            </div>
-
-
-            <div class="row">
-              <div class="col-md-7 mb-3">
-                <label for="district">District</label>
-                <select class="custom-select d-block w-100" id="district" required="">
-                  <option value="">Choose...</option>
-                  <% district.forEach(el=>{ %>
-                  <option><%=el%></option>
-                  <%})%>
-                </select>
-                <div class="invalid-feedback">
-                  Please select a valid district.
-                </div>
-              </div>
-              <div class="col-md-5 mb-3">
-                <label for="region">Region</label>
-                <select class="custom-select d-block w-100" id="region" required="">
-                  <option value="">Choose...</option>
-                  <% region.forEach(el=>{ %>
-                  <option><%=el%></option>
-                  <%})%>
-
-                </select>
-                <div class="invalid-feedback">
-                  Please provide a valid region.
-                </div>
-              </div>
-
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 mb-3">
-                <label for="phoneNumber">Mobile Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="" required="">
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
-              </div>
-
-              <div class="form-group signup__form-group row">
-                <div class="col-sm-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inputCheck" value="">
-                    <label class="form-check-label signup__newsletters-txt" for="inputCheck">I'd like to receive a newsletters</label>
-                  </div>
-                </div>
-              </div>
-        </section>
-        <section id="signup__button-section">
-          <div class="form-group row">
-            <div class="col-sm-5">
-              <button type="submit" class="btn btn-light signup__button" name="button">Sign Up Now</button>
-            </div>
-            <div class="col-sm-6 d-flex align-items-center"><a class="signup__login-member" href="/login">I'm already a member</a></div>
           </div>
-          </form>
 
-        </section>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="password">Password:</label>
+              <input
+                class="form-control"
+                type="password"
+                value=""
+                id="password"
+                placeholder="••••••••"
+                required
+                minlength="8"
+              />
+              <div class="invalid-feedback">
+                Password must be at least 8 characters
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="passwordConfirm">Re-enter password:</label>
+              <input
+                class="form-control"
+                type="password"
+                value=""
+                id="passwordConfirm"
+                placeholder="••••••••"
+                required
+                minlength="8"
+              />
+              <div class="invalid-feedback">
+                Password must be at least 8 characters
+              </div>
+            </div>
+          </div>
 
-        <hr class="signup__hr">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="unit">Unit (Appartment) </label>
+              <input
+                type="text"
+                class="form-control"
+                id="unit"
+                placeholder="Unit (Appartment) "
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="floorNo">Floor No</label>
+              <input
+                type="text"
+                class="form-control"
+                id="floorNo"
+                placeholder="Floor No"
+              />
+            </div>
+          </div>
 
-        <section id="signup__connect-section">
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label for="blockNo">Block or Tower No</label>
+              <input
+                type="text"
+                class="form-control"
+                id="blockNo"
+                placeholder="Block or Tower No"
+              />
+            </div>
+            <div class="form-group col-md-7">
+              <label for=" buildingName"
+                >Building Name<span class="text-muted">(Optional)</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="buildingName"
+                placeholder="Building Name"
+              />
+            </div>
+          </div>
 
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="estateOrVillageName">Estate or Village name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="estateOrVillageName"
+                placeholder="Estate or Village name"
+                required
+              />
+              <div class="invalid-feedback">
+                Please provide a valid estate or village name
+              </div>
+            </div>
+          </div>
 
-          <div class="row">
-            <div class="col-sm">or connect with -
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="buildingNo">Building No </label>
+              <input
+                type="text"
+                class="form-control"
+                id="buildingNo"
+                placeholder="Building No"
+                required
+              />
+              <div class="invalid-feedback">Please enter a building No</div>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="streetName">Street name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="streetName"
+                placeholder="Street Name"
+                required
+              />
+              <div class="invalid-feedback">Please enter a street name</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-7">
+              <label for="district">District</label>
+              <select
+                class="custom-select d-block w-100"
+                id="district"
+                required
+              >
+                <option value="">Choose...</option>
+                <% district.forEach(el=>{ %>
+                <option><%=el%></option>
+                <%})%>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid district.
+              </div>
+            </div>
+            <div class="form-group col-md-5">
+              <label for="region">Region</label>
+              <select class="custom-select d-block w-100" id="region" required>
+                <option value="">Choose...</option>
+                <% region.forEach(el=>{ %>
+                <option><%=el%></option>
+                <%})%>
+              </select>
+              <div class="invalid-feedback">Please provide a valid region.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="phoneNumber">Mobile Phone Number</label>
+              <input type="text" class="form-control" id="phoneNumber"
+              placeholder="" required=>
+              <div class="invalid-feedback">Phone Number is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group form-check text-left">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="inputCheck"
+              value=""
+            />
+            <label
+              class="form-check-label signup__newsletters-txt"
+              for="inputCheck"
+              >I'd like to receive a newsletters</label
+            >
+          </div>
+          <hr />
+
+          <div class="form-row align-items-center">
+            <div class="form-group col-sm-5">
+              <button class="btn btn-dark signup__button">Sign Up Now</button>
+            </div>
+            <div class="form-group col-sm-7 align-items-center">
+              <a class="signup__login-member" href="/login"
+                >I'm already a member</a
+              >
+            </div>
+          </div>
+        </form>
+
+        <!-- <hr /> -->
+
+        <!-- <section id="signup__connect-section">
+          <div class="form-row">
+            <div class="col-sm">
+              or connect with -
               <i class="signup__icon fab fa-facebook-f"></i>
               <i class="signup__icon fab fa-google"></i>
               <i class="signup__icon fab fa-apple"></i>
               <!-- <hr class="signup__hr-2"> -->
-            </div>
-
-
-
+        <!-- </div>
           </div>
-
-        </section>
+        </section>  -->
       </div>
     </div>
-
   </div>
 </main>
 <%- include("./_footer") -%>

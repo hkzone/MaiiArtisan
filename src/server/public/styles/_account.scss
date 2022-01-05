@@ -76,6 +76,8 @@
 
   img {
     aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 3.75rem;
   }
 
   .custom-file {
@@ -123,15 +125,17 @@
   }
 }
 
+.editProductBtn:hover {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 767px) {
   .user-view__form-container {
     padding: 1rem 4rem 1rem;
   }
 
-  .account-products-container {
-    .optional-show {
-      display: none;
-    }
+  .optional-show {
+    display: none;
   }
 }
 

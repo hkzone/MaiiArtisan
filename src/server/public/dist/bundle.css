@@ -40,6 +40,19 @@ body .container-xl p {
   font-size: 1.1rem;
   padding: 1rem 0.5rem 2rem;
 }
+body .container-xl .cart-wrapper a,
+body .container-xl .table-my-orders .user-view__form-container a,
+body .container-xl .account-products-container a,
+body .container-xl .signup-container a {
+  color: #343a40 !important;
+  text-decoration: none !important;
+}
+body .container-xl .cart-wrapper a:hover,
+body .container-xl .table-my-orders .user-view__form-container a:hover,
+body .container-xl .account-products-container a:hover,
+body .container-xl .signup-container a:hover {
+  color: #4b545c !important;
+}
 body .container-xl .responsive-img {
   width: 100%;
   height: 100%;
@@ -272,127 +285,72 @@ body .container-xl .carousel-indicators {
 }
 
 /* -------------------SIGNUP STYLES-------------------- */
-.main-signup {
+.signup-container {
   background: #e84545;
   background: radial-gradient(circle, rgba(232, 69, 69, 0.9500191131) 38%, #903749 94%);
-  padding: 4% 5% 8%;
+  padding: 2rem 4rem 4rem;
   font-weight: 400;
-  font-size: 0.9rem;
 }
-
-.signup__left-panel {
+.signup-container .signup__left-panel {
   padding-right: 0;
+  background-image: url(pexels-pavel-danilyuk-7180723.1a4eee9f.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom right;
 }
-
-.signup__right-panel {
-  padding: 3.5% 5%;
+.signup-container .signup__left-panel .signup__sign-txt {
+  text-align: left;
+  margin: 1.2rem 0 0 2rem;
+  color: #333333;
+  font-weight: 800;
+  font-size: 3rem;
+  font-family: "Great Vibes", cursive;
+}
+.signup-container .signup__left-panel .signup__pitch-txt {
+  text-align: right;
+  color: #53354a;
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0.2rem 1rem 1.2rem;
+}
+.signup-container .signup__right-panel {
+  padding: 1.5rem 3rem 1.5rem;
   background-color: #fff;
-  /* background-color: #94d0cc; */
-  /* background-color: #2b2e4a; */
 }
-
-.signup__pitch-txt {
-  position: absolute;
-  padding: 7% 2%;
-  text-align: right;
-  color: #53354a;
-  font-weight: 800;
-  font-size: 1rem;
-  top: 80px;
-  right: 40px;
-  text-align: right;
-}
-
-.signup__pitch-txt2 {
-  color: #53354a;
-  font-size: 1rem;
-  font-weight: 800;
-  text-align: left;
-}
-
-.signup__sign-txt {
-  position: absolute;
-  padding: 8% 2%;
-  text-align: left;
-  color: #fff;
-  font-weight: 800;
-  font-size: 2rem;
-  top: 0;
-  left: 45px;
-}
-
-.signup__brand {
-  color: #53354a;
+.signup-container .signup__right-panel .signup__brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
   font-size: 2.5rem;
-  text-align: left;
-  padding: 1.5% 0 0;
-  margin-bottom: 13px;
-}
-
-#signup__form-section {
-  padding: 6% 0 0;
-}
-
-.signup__newsletters-txt {
-  font-size: 0.9rem;
-}
-
-#signup__button-section {
-  padding: 2% 0 0;
-}
-
-.signup__button {
-  background-color: #eec4c4;
-}
-
-.signup-button:hover {
-  background-color: #ce97b0;
-}
-
-.login-member {
-  font-size: 1rem;
-  margin: 0;
-  padding: 0;
-  color: #53354a;
-}
-
-.signup__login-member:hover {
-  color: #e84545;
-}
-
-.signup__hr {
-  margin: 0 0 5%;
-}
-
-.signup__hr-2 {
-  margin: 4% auto 4%;
-}
-
-#signup__connect-section {
+  color: #333333;
   text-align: center;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 800;
 }
-
-.signup__icon {
+.signup-container .signup__right-panel .signup__pitch-txt2 {
   color: #53354a;
-  margin-left: 6px;
-  /* font-size: 1.3rem; */
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 800;
 }
-
-.icon:hover {
-  color: #e84545;
+@media only screen and (max-width: 767px) {
+  .signup-container .signup__left-panel {
+    min-height: max(50vh, 400px);
+    border-radius: 0 !important;
+  }
+  .signup-container .signup__left-panel > div {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 0.5rem;
+    margin: 0.2rem 0.3rem;
+    border-radius: 0.25rem !important;
+  }
+  .signup-container .signup__right-panel {
+    padding: 0.5rem;
+    border-radius: 0 !important;
+  }
 }
-
-.signup__form {
-  padding: 0;
-}
-
-.signup__responsive-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: right;
+@media only screen and (max-width: 575px) {
+  .signup-container {
+    padding: 0 0.5rem;
+  }
 }
 
 .product-wrapper {
@@ -540,6 +498,8 @@ body .container-xl .carousel-indicators {
 }
 .modal img {
   aspect-ratio: 1/1;
+  object-fit: cover;
+  width: 3.75rem;
 }
 .modal .custom-file {
   height: 100%;
@@ -580,12 +540,16 @@ body .container-xl .carousel-indicators {
   color: #060708;
 }
 
+.editProductBtn:hover {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 767px) {
   .user-view__form-container {
     padding: 1rem 4rem 1rem;
   }
 
-  .account-products-container .optional-show {
+  .optional-show {
     display: none;
   }
 }
@@ -673,47 +637,60 @@ body .container-xl .carousel-indicators {
 }
 
 /* MY ORDERS */
-#img-wrap {
-  width: 100px;
-  height: 100px;
-  position: relative;
+.table-my-orders * div {
+  padding: 0 !important;
 }
-
-#img-wrap img {
+.table-my-orders #img-wrap {
+  position: relative;
+  padding: 0 !important;
+  width: 6.25rem;
+  height: 6.25rem;
+}
+.table-my-orders #img-wrap img {
   object-fit: cover;
-  height: 100px;
-  clip-path: inset(0 0% 0 0%);
+  width: 6.25rem;
+  height: 6.25rem;
+  clip-path: inset(0 0% 0 50%);
   position: absolute;
   z-index: 0;
-  transition: all 0.2s ease 0.2s;
-  left: 0%;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease-out;
 }
-
-#img-wrap img:nth-of-type(2) {
+.table-my-orders #img-wrap img:nth-of-type(2) {
   clip-path: inset(0% 50% 0% 0%);
 }
-
-#img-wrap img:hover {
-  clip-path: inset(0 0% 0);
-  z-index: 10;
-}
-
-#img-wrap img:nth-of-type(2):hover {
+.table-my-orders #img-wrap img:nth-of-type(2):hover {
   clip-path: inset(0% 0% 0 0%);
   z-index: 10;
 }
-
-.panel-group a {
-  color: var(--dark);
+.table-my-orders #img-wrap img:hover {
+  clip-path: inset(0 0% 0 0%);
+  z-index: 10;
 }
-
-.editProductBtn:hover {
-  cursor: pointer;
+.table-my-orders .panel-collapse {
+  padding: 1rem 0 0.5rem;
 }
-
-.form-check input {
-  display: block !important;
-  margin-left: 1.25rem;
+.table-my-orders .panel-collapse p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+@media only screen and (max-width: 767px) {
+  .table-my-orders .table td,
+.table-my-orders .table th {
+    vertical-align: top !important;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .table-my-orders #img-wrap {
+    width: 4rem;
+    height: 4rem;
+  }
+  .table-my-orders #img-wrap img {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 .user-view__menu {

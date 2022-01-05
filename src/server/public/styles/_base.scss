@@ -40,6 +40,19 @@ body {
       padding: 1rem 0.5rem 2rem;
     }
 
+    .cart-wrapper,
+    .table-my-orders .user-view__form-container,
+    .account-products-container,
+    .signup-container {
+      a {
+        color: $gray-dark !important;
+        text-decoration: none !important;
+
+        &:hover {
+          color: lighten($gray-dark, 10%) !important;
+        }
+      }
+    }
     .responsive-img {
       width: 100%;
       height: 100%;
