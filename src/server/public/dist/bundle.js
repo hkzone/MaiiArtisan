@@ -8983,7 +8983,7 @@ var contactUs = /*#__PURE__*/function () {
             _context.next = 3;
             return (0, _axios.default)({
               method: 'POST',
-              url: '/api/v1/users/contactus',
+              url: '/contact',
               data: {
                 name: name,
                 surname: surname,
@@ -59236,7 +59236,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50382" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55141" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
