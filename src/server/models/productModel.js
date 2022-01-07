@@ -14,8 +14,8 @@ const productSchema = new mongoose.Schema(
         'A product name must have less or equal then 40 characters',
       ],
       minLength: [
-        8,
-        'A product name must have more or equal then 10 characters',
+        5,
+        'A product name must have more or equal then 5 characters',
       ],
       //validate: [validator.isAlpha, 'A product name must only contain characters'],
     },

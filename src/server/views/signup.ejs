@@ -4,19 +4,17 @@
     <div class="form-row">
       <div class="col-md-5 signup__left-panel rounded-left">
         <div>
-          <h2 class="signup__sign-txt">Sign up:</h2>
-          <h4 class="signup__pitch-txt">For the treats you always wanted</h4>
+          <h2>Sign up:</h2>
+          <h4>For the treats you always wanted</h4>
         </div>
       </div>
 
-      <div
-        class="col-md-7 signup__right-panel form-row-eq-height rounded-right"
-      >
-        <h2 class="signup__brand">Maii Artisan Patisserie</h2>
-        <h4 class="signup__pitch-txt2">Welcome to the world of pâtisserie</h4>
+      <div class="col-md-7 signup__right-panel rounded-right">
+        <h2>Maii Artisan Patisserie</h2>
+        <h4>Welcome to the world of pâtisserie</h4>
         <hr />
 
-        <form class="form signup__form needs-validation" novalidate>
+        <form class="form signup-form needs-validation" novalidate>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputName">Name:</label>
@@ -84,7 +82,7 @@
                 type="text"
                 class="form-control"
                 id="unit"
-                placeholder="Unit (Appartment) "
+                placeholder="optional"
               />
             </div>
             <div class="form-group col-md-6">
@@ -93,7 +91,7 @@
                 type="text"
                 class="form-control"
                 id="floorNo"
-                placeholder="Floor No"
+                placeholder="optional"
               />
             </div>
           </div>
@@ -105,18 +103,16 @@
                 type="text"
                 class="form-control"
                 id="blockNo"
-                placeholder="Block or Tower No"
+                placeholder="optional"
               />
             </div>
             <div class="form-group col-md-7">
-              <label for=" buildingName"
-                >Building Name<span class="text-muted">(Optional)</span></label
-              >
+              <label for=" buildingName">Building Name</label>
               <input
                 type="text"
                 class="form-control"
                 id="buildingName"
-                placeholder="Building Name"
+                placeholder="optional"
               />
             </div>
           </div>
@@ -128,7 +124,7 @@
                 type="text"
                 class="form-control"
                 id="estateOrVillageName"
-                placeholder="Estate or Village name"
+                placeholder=""
                 required
               />
               <div class="invalid-feedback">
@@ -144,7 +140,7 @@
                 type="text"
                 class="form-control"
                 id="buildingNo"
-                placeholder="Building No"
+                placeholder=""
                 required
               />
               <div class="invalid-feedback">Please enter a building No</div>
@@ -155,7 +151,7 @@
                 type="text"
                 class="form-control"
                 id="streetName"
-                placeholder="Street Name"
+                placeholder=""
                 required
               />
               <div class="invalid-feedback">Please enter a street name</div>
@@ -207,9 +203,7 @@
               id="inputCheck"
               value=""
             />
-            <label
-              class="form-check-label signup__newsletters-txt"
-              for="inputCheck"
+            <label class="form-check-label" for="inputCheck"
               >I'd like to receive a newsletters</label
             >
           </div>
@@ -220,9 +214,7 @@
               <button class="btn btn-dark signup__button">Sign Up Now</button>
             </div>
             <div class="form-group col-sm-7 align-items-center">
-              <a class="signup__login-member" href="/login"
-                >I'm already a member</a
-              >
+              <a href="/login">I'm already a member</a>
             </div>
           </div>
         </form>

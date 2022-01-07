@@ -37,14 +37,41 @@ export const logout = async () => {
   }
 };
 
-
-export const signup = async (name,email, password,passwordConfirm,unit,floorNo,blockNo,buildingName,estateOrVillageName,buildingNo,streetName,district,region,phoneNumber) => {
+export const signup = async (
+  name,
+  email,
+  password,
+  passwordConfirm,
+  unit,
+  floorNo,
+  blockNo,
+  buildingName,
+  estateOrVillageName,
+  buildingNo,
+  streetName,
+  district,
+  region,
+  phoneNumber
+) => {
   try {
     const res = await axios({
       method: 'POST',
       url: '/api/v1/users/signup',
       data: {
-        name,email, password,passwordConfirm,unit,floorNo,blockNo,buildingName,estateOrVillageName,buildingNo,streetName,district,region,phoneNumber
+        name,
+        email,
+        password,
+        passwordConfirm,
+        unit,
+        floorNo,
+        blockNo,
+        buildingName,
+        estateOrVillageName,
+        buildingNo,
+        streetName,
+        district,
+        region,
+        phoneNumber,
       },
     });
 

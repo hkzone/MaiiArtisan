@@ -1,19 +1,21 @@
-const nodemailer = require("nodemailer");
-const ejs = require("ejs");
-const htmlToText = require("html-to-text");
+const nodemailer = require('nodemailer');
+const ejs = require('ejs');
+const htmlToText = require('html-to-text');
 
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
-    this.firstName = user.name.split(" ")[0];
-    this.lastName = user.name.split(" ")[0];
+    this.firstName = user.name.split(' ')[0];
+    // this.lastName = user.name.split(' ')[1];
     this.url = url;
-    this.from = `Vita Min<${process.env.EMAIL_FROM}>`;
+    this.from = `Maii Artisan Patisserie<${process.env.EMAIL_FROM}>`;
+    this.alldata = user;
   }
+
   newTransport() {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === 'production') {
       return nodemailer.createTransport({
-        service: "SendGrid",
+        service: 'SendGrid',
         auth: {
           user: process.env.SENDGRID_USERNAME,
           pass: process.env.SENDGRID_PASSWORD,
@@ -29,16 +31,20 @@ module.exports = class Email {
       },
     });
   }
+
   async send(template, subject) {
     // Send the actual email
     //1) Render HTML based on the template
-    const html = await ejs.renderFile(`${__dirname}/../views/email/${template}.ejs`, {
-      firstName: this.firstName,
-      url: this.url,
-      subject,
-    });
+    const html = await ejs.renderFile(
+      `${__dirname}/../views/email/${template}.ejs`,
+      {
+        firstName: this.firstName,
+        url: this.url,
+        subject,
+        alldata: this.alldata,
+      }
+    );
 
- 
     //Define e-mail options
     const mailOptions = {
       from: this.from,
@@ -52,14 +58,22 @@ module.exports = class Email {
 
     await this.newTransport().sendMail(mailOptions);
   }
+
   async sendWelcome() {
-    await this.send("welcome", "Welcome to the Mai bakery Family");
+    await this.send('welcome', 'Welcome to the Maii Artisan Patisserie Family');
   }
 
   async sendPasswordReset() {
     await this.send(
-      "passwordReset",
-      "Your password reset password (valid for only  10 minutes"
+      'passwordReset',
+      'Your password reset password (valid for only  10 minutes'
+    );
+  }
+
+  async sendContactUs() {
+    await this.send(
+      'contactUs',
+      'New contact form message from Maii Artisan Patisserie Family'
     );
   }
 };

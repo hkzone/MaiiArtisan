@@ -141,6 +141,7 @@ body .container-xl .carousel-indicators {
   column-count: 5;
 }
 #shop .card-columns .card img {
+  object-fit: cover;
   aspect-ratio: 1/1;
 }
 
@@ -184,6 +185,11 @@ body .container-xl .carousel-indicators {
 /*************************************************************************************************/
 /****************************************** MEDIA QUERIES ****************************************/
 /*************************************************************************************************/
+@media only screen and (max-width: 991px) {
+  #shop .card-columns {
+    column-count: 3;
+  }
+}
 @media only screen and (max-width: 767px) {
   #title {
     align-content: flex-start !important;
@@ -203,7 +209,8 @@ body .container-xl .carousel-indicators {
     padding: 0;
     min-height: 50vh;
   }
-  #products .card-columns {
+
+  #shop .card-columns {
     column-count: 2;
   }
 }
@@ -249,18 +256,25 @@ body .container-xl .carousel-indicators {
 }
 /* -------------------SIGNIN STYLES-------------------- */
 .main-signin {
-  min-height: 80vh;
+  padding: 5% 10%;
+  min-height: 95vh;
+  background: #e84545;
+  background: radial-gradient(circle, rgba(232, 69, 69, 0.9500191131) 38%, #903749 94%);
 }
 .main-signin svg {
-  fill: var(--gray-dark);
-  height: 8rem;
-  width: 8rem;
+  fill: #53354a;
+  height: 6rem;
+  width: 6rem;
 }
 .main-signin .form-signin {
   width: 100%;
   max-width: 20rem;
   padding: 1rem;
   margin: auto;
+  background-color: #fff;
+}
+.main-signin .form-signin h2 {
+  color: #53354a;
 }
 .main-signin .form-signin .form-control {
   margin: 0;
@@ -283,6 +297,11 @@ body .container-xl .carousel-indicators {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+@media only screen and (max-width: 575px) {
+  .main-signin {
+    padding: 5% 3%;
+  }
+}
 
 /* -------------------SIGNUP STYLES-------------------- */
 .signup-container {
@@ -298,7 +317,7 @@ body .container-xl .carousel-indicators {
   background-repeat: no-repeat;
   background-position: bottom right;
 }
-.signup-container .signup__left-panel .signup__sign-txt {
+.signup-container .signup__left-panel h2 {
   text-align: left;
   margin: 1.2rem 0 0 2rem;
   color: #333333;
@@ -306,7 +325,7 @@ body .container-xl .carousel-indicators {
   font-size: 3rem;
   font-family: "Great Vibes", cursive;
 }
-.signup-container .signup__left-panel .signup__pitch-txt {
+.signup-container .signup__left-panel h4 {
   text-align: right;
   color: #53354a;
   font-weight: 800;
@@ -317,7 +336,7 @@ body .container-xl .carousel-indicators {
   padding: 1.5rem 3rem 1.5rem;
   background-color: #fff;
 }
-.signup-container .signup__right-panel .signup__brand {
+.signup-container .signup__right-panel > h2 {
   font-family: "Cormorant Garamond", serif;
   font-style: italic;
   font-size: 2.5rem;
@@ -325,7 +344,7 @@ body .container-xl .carousel-indicators {
   text-align: center;
   font-weight: 800;
 }
-.signup-container .signup__right-panel .signup__pitch-txt2 {
+.signup-container .signup__right-panel > h4 {
   color: #53354a;
   font-size: 1rem;
   text-align: center;
@@ -492,6 +511,10 @@ body .container-xl .carousel-indicators {
 .account-products-container th {
   background-color: #fff !important;
 }
+.account-products-container img {
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
 
 .modal .form-check {
   min-height: 4rem;
@@ -544,6 +567,11 @@ body .container-xl .carousel-indicators {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 991px) {
+  .modal-dialog {
+    max-width: 99%;
+  }
+}
 @media only screen and (max-width: 767px) {
   .user-view__form-container {
     padding: 1rem 4rem 1rem;
@@ -551,11 +579,6 @@ body .container-xl .carousel-indicators {
 
   .optional-show {
     display: none;
-  }
-}
-@media only screen and (max-width: 991px) {
-  .modal-dialog {
-    max-width: 99%;
   }
 }
 @media only screen and (max-width: 575px) {

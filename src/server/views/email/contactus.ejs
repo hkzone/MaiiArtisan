@@ -1,0 +1,16 @@
+<%- include("_emailHeader") -%>
+
+<p>Hi admin,</p>
+  <p>New Message from <%=firstName%></p>
+  <p>email address: alldata.contactEmail</p>
+  <p><a href=<%=url%> target="_blank">URL address</a></p>
+  <table class="" role="presentation" border="0" cellpadding="0" cellspacing="0">
+    <tbody></tbody>
+    <tr>
+      <td align="left"><%=alldata.mesage%></td> 
+    </tr>
+  </table>
+</p>
+
+
+<%- include("_emailFooter") -%>

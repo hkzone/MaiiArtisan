@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 import { login, logout, signup } from './login';
+import { contactUs } from './contactUs';
 import { updateCart } from './cart';
 import { updateSettings } from './updateSettings';
 import { showAlert } from './alerts';
@@ -24,7 +25,8 @@ import './../styles/main.scss';
 // DOM ELEMENTS
 //const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form-signin');
-const signupForm = document.querySelector('.signup__form');
+const signupForm = document.querySelector('.signup-form');
+const contactForm = document.querySelector('#contact-form');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
@@ -140,11 +142,21 @@ if (userPasswordForm)
     document.getElementById('password-confirm').value = '';
   });
 
+if (contactForm)
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const surname = document.getElementById('surname').value;
+    const email = document.getElementById('email').value;
+    const url = document.getElementById('url').value;
+    const message = document.getElementById('message').value;
+    contactUs(name, surname, email, url, message);
+  });
+
 if (signupForm)
   signupForm.addEventListener(
     'submit',
     (e) => {
-      console.log('inside signup');
       e.preventDefault();
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;

@@ -2,7 +2,7 @@
   <%- include("./_header") -%>
   <section
     id="title"
-    class="title .container-fluid row d-flex align-items-center align-content-center justify-items-center justify-content-center"
+    class="title container-fluid row d-flex align-items-center align-content-center justify-items-center justify-content-center"
   >
     <!-- Title -->
 
@@ -72,6 +72,13 @@
           <div class="carousel-item" data-interval="4000">
             <img src="/images/choc1.jpg" class="d-block w-100" alt="..." />
           </div>
+          <div class="carousel-item" data-interval="4000">
+            <img
+              src="/images/blackforest.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
         </div>
         <a
           class="carousel-control-prev"
@@ -105,16 +112,18 @@
       <% products.forEach((elem,index)=>{ %> <% if (index===7) { %>
       <div class="card bg-danger text-white text-center p-3">
         <blockquote class="blockquote mb-0">
-          <p>Mai is just amazing I can't stop ordering from her</p>
+          <h5 class="font-italic">
+            Mai is just amazing I can't stop ordering from her
+          </h5>
           <footer class="blockquote-footer text-white">
             <small>
-              New customer turned to regular from
+              New customer turned regular from
               <cite title="">TKO</cite>
             </small>
           </footer>
         </blockquote>
       </div>
-      <%}%>
+      <%}%> <% if (index<13) { %>
       <div class="card">
         <img
           src="/images/products/<%=elem.imageCover%>"
@@ -135,7 +144,7 @@
           >
         </div>
       </div>
-      <% }) %>
+      <%}%> <% }) %>
 
       <div class="card">
         <img src="/images/products/many.jpeg" class="card-img-top" alt="..." />

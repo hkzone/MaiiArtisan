@@ -45,3 +45,12 @@ $font-color-secondary: #6d6d64;
 @mixin easeOut {
   transition: all 0.3s ease-out;
 }
+
+@mixin gradient-background {
+  background: rgb(232, 69, 69);
+  background: radial-gradient(
+    circle,
+    rgba(232, 69, 69, 0.9500191131498471) 38%,
+    rgba(144, 55, 73, 1) 94%
+  );
+}

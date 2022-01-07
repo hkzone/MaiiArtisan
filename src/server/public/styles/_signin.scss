@@ -1,12 +1,14 @@
 /* -------------------SIGNIN STYLES-------------------- */
 
 .main-signin {
-  min-height: 80vh;
+  padding: 5% 10%;
+  min-height: 95vh;
+  @include gradient-background();
 
   svg {
-    fill: var(--gray-dark);
-    height: 8rem;
-    width: 8rem;
+    fill: $font-color-dark;
+    height: 6rem;
+    width: 6rem;
   }
 
   .form-signin {
@@ -14,6 +16,10 @@
     max-width: 20rem;
     padding: 1rem;
     margin: auto;
+    background-color: $clr-white;
+    h2 {
+      color: $font-color-dark;
+    }
 
     .form-control {
       margin: 0;
@@ -39,5 +45,9 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
+  }
+
+  @media only screen and (max-width: 575px) {
+    padding: 5% 3%;
   }
 }

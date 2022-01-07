@@ -1,8 +1,8 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const User = require('../models/userModel');
-const AppError = require('./../utils/appError');
-const catchAsync = require('./../utils/catchAsync');
+const AppError = require('../utils/appError');
+const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 
 // const multerStorage = multer.diskStorage({
@@ -71,13 +71,12 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   //2) Update user document
   const filteredBody = filterObj(req.body, 'name', 'email');
-  console.log(req.body);
   if (req.file) filteredBody.photo = req.file.filename;
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
     runValidators: true,
   });
- // console.log(updatedUser,filteredBody);
+  // console.log(updatedUser,filteredBody);
 
   res.status(200).json({
     status: 'success',

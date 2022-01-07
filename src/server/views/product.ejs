@@ -25,7 +25,7 @@
          
             <h1><%=product.name%></h1>
             <hr>
-            <h3>$89.99</h3>
+            <h3>$<%=product.price%></h3>
             <p><%=product.description%></p>
             <form class="form product-form needs-validation" novalidate action="/cart" method="post">
               <div class="form-row">
@@ -72,6 +72,7 @@
 
               <div class="form-row">
                 <!-------------- CUSTOM COLOR -------------->
+                <% if(product.customColors) { %>
                 <div class="col-md-6 form-group">
                   <label for="color">Custom color (optional)</label>
                   <select class="custom-select d-block w-100" name="color">
@@ -84,8 +85,11 @@
                     Please select a valid color.
                   </div>
                 </div>
-                <div class="col-md-6 form-group">
+                <% } %>
+                
                   <!-------------- CUSTOM FLAVOR -------------->
+                  <% if(product.customFlavors) { %>
+                  <div class="col-md-6 form-group"></div>
                   <label for="flavor">Flavor (optional)</label>
                   <select class="custom-select d-block w-100" name="flavor">
                     <option value="">Choose...</option>
@@ -97,6 +101,7 @@
                     Please select a valid flavor.
                   </div>
                 </div>
+                 <% } %>
               </div>
 
               <div class="form-row">
