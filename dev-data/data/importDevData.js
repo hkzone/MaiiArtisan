@@ -1,10 +1,10 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Product = require('./../../models/productModel');
+const Product = require('../../src/server/models/productModel');
 // const Review = require('./../../models/reviewModel');
-const User = require('./../../models/userModel');
-const Config = require('./../../models/configModel');
+const User = require('../../src/server/models/userModel');
+const Config = require('../../src/server/models/configModel');
 dotenv.config({ path: `${__dirname}/../../config.env` });
 
 const DB = process.env.DATABASE.replace(
@@ -21,7 +21,9 @@ mongoose
   .then(() => console.log('DB connection established'));
 
 //READ JSON file
-const products = JSON.parse(fs.readFileSync(`${__dirname}/products.json`, 'utf-8'));
+const products = JSON.parse(
+  fs.readFileSync(`${__dirname}/products.json`, 'utf-8')
+);
 const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, 'utf-8'));
 const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 // const reviews = JSON.parse(
