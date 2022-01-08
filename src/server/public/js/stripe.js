@@ -16,7 +16,6 @@ export const checkoutCart = async (nonce) => {
         nonce,
       },
     });
-    console.log(session);
 
     // 2) Create checkout form + charge credit card
     await stripe.redirectToCheckout({
