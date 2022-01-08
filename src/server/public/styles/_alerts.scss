@@ -14,7 +14,7 @@
   text-align: center;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  padding: 1rem 5rem;
+  padding: 1rem 5rem !important;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
 }
@@ -26,3 +26,7 @@
 .alert--error {
   background-color: $alert-error;
 }
+
+// .alert-info {
+//   color: $font-grey;
+// }

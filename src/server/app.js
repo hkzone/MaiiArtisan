@@ -144,7 +144,7 @@ app.use('/cart', cartRouter);
 app.use('/contact', contactRouter);
 
 app.get('/favicon.ico', (req, res) => {
-  res.sendFile('./favicon.ico');
+  res.sendFile('/src/server/favicon.ico');
 });
 
 app.all('*', (req, res, next) => {

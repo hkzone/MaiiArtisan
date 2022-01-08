@@ -58,7 +58,7 @@
           <li class="nav-item d-flex flex-column justify-content-center">
             <span>
               <a class="nav-link" href="/cart">
-                <i class="fas fa-cart-arrow-down"></i> <sup><%= cartQty>0 ?` ${cartQty} items`:' ' %></sup>
+                <i class="fas fa-cart-arrow-down"></i> <sup><%= typeof cartQty!== undefined && cartQty>0 ?` ${cartQty} items`:' (0)' %></sup>
               </a>
             </span>
            </li>

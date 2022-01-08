@@ -33,13 +33,6 @@ body .container-xl h3 {
   color: #c59f4e;
   margin: 0 auto -0.2rem;
 }
-body .container-xl p {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.1rem;
-  padding: 1rem 0.5rem 2rem;
-}
 body .container-xl .cart-wrapper a,
 body .container-xl .table-my-orders .user-view__form-container a,
 body .container-xl .account-products-container a,
@@ -79,6 +72,14 @@ body .container-xl .carousel-indicators {
     font-size: 1rem;
   }
 }
+.front-page p {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 1rem 0.5rem 2rem;
+}
+
 /*************************************************************************************************/
 /********************************************** TITLE ********************************************/
 /*************************************************************************************************/
@@ -646,7 +647,7 @@ body .container-xl .carousel-indicators {
   text-align: center;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  padding: 1rem 5rem;
+  padding: 1rem 5rem !important;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
 }
@@ -657,6 +658,10 @@ body .container-xl .carousel-indicators {
 
 .alert--error {
   background-color: rgba(252, 86, 86, 0.9);
+}
+
+.alert-info {
+  color: #333333;
 }
 
 /* MY ORDERS */

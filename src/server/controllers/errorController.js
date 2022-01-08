@@ -1,4 +1,4 @@
-const AppError = require('./../utils/appError');
+const AppError = require('../utils/appError');
 const cartController = require('./cartController');
 
 const handleCastErrorDB = (err) => {
@@ -27,6 +27,7 @@ const handleJWTExpiredError = () =>
   new AppError('Expired token. Please log in again!', 401);
 
 const sendErrorDev = (err, req, res) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
   //API
   if (req.originalUrl.startsWith('/api')) {
     res.status(err.statusCode).json({
@@ -37,9 +38,11 @@ const sendErrorDev = (err, req, res) => {
     });
   } else {
     //Rendered web-site
-    res
-      .status(err.statusCode)
-      .render('error', { title: 'Something went wrong', msg: err.message });
+    res.status(err.statusCode).render('error', {
+      title: 'Something went wrong',
+      msg: err.message,
+      cartQty,
+    });
   }
 };
 
