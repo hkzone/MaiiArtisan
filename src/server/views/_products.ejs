@@ -1,0 +1,55 @@
+<!-- SHOP -->
+<section id="products">
+  <div class="shop-txt">
+    <h3>Our best creations</h3>
+    <h1>SHOP NOW</h1>
+  </div>
+  <div class="card-columns">
+    <% products.forEach((elem,index)=>{ %> <% if (index===7&&isFrontPage) { %>
+    <div class="card bg-danger text-white text-center p-3">
+      <blockquote class="blockquote mb-0">
+        <h5 class="font-italic">
+          Mai is just amazing I can't stop ordering from her
+        </h5>
+        <footer class="blockquote-footer text-white">
+          <small>
+            New customer turned regular from
+            <cite title="">TKO</cite>
+          </small>
+        </footer>
+      </blockquote>
+    </div>
+    <%}%>
+    <div class="card">
+      <img
+        src="/images/products/<%=elem.imageCover%>"
+        class="card-img-top"
+        alt="..."
+      />
+
+      <div class="card-body">
+        <h5 class="card-title"><%=elem.name%></h5>
+        <p class="card-text"><%=elem.summary%></p>
+        <a href="/product/<%=elem.slug%>"
+          ><button type="button" class="btn btn-dark btn-block discover-button">
+            Order
+          </button></a
+        >
+      </div>
+    </div>
+    <% }) %> <% if(isFrontPage) { %>
+    <div class="card">
+      <img src="/images/products/many.jpeg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Other cakes</h5>
+        <p class="card-text">
+          TLorem ipsum dolor sit amet consectetur, adipisicing elit.
+        </p>
+        <button type="button" class="btn btn-outline-dark btn-lg shop-button">
+          <a href="/shop">See more</a>
+        </button>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</section>

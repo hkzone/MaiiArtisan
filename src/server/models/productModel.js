@@ -98,6 +98,10 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
     imageCover: {
       type: String,
       required: [true, 'A product must have a cover image'],

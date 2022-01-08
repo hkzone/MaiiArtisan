@@ -18,7 +18,8 @@
     "description": "Fluffy moist carrot cake sponge, liberally studded crispy crunch walnuts, layered with velvet smooth citrus cream cheese.",
     "imageCover": "carrot.jpeg",
     "images": ["carrot-1.jpg", "carrot-2.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Napoleon cake",
@@ -39,7 +40,8 @@
     "description": "Napoleon Cake is a classic Eastern European cake, made of very thin and flaky puff pastry cake layers and a smooth, rich and luscious pastry cream in between the layers. ",
     "imageCover": "napoleon.jpeg",
     "images": ["napoleon-1.jpg", "napoleon-2.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Chocolate cake",
@@ -60,7 +62,8 @@
     "description": "Chocolate sponge cake, with a fresh cream filling. Topped with cocoa powder, and fresh fruit",
     "imageCover": "choc.jpeg",
     "images": ["choc-1.jpeg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Kyiv cake",
@@ -81,7 +84,8 @@
     "description": "Kyiv Cake is light and airy in the center, with a bit of a crunch, sandwiched by soft sponge layers. It's a true Ukrainian Classic cake.",
     "imageCover": "kyiv.jpeg",
     "images": ["kyiv-1.jpeg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Honey cake",
@@ -102,7 +106,8 @@
     "description": "Honey cake is made up of crispy and thin cake layers that are separated by a thick cream cheese frosting.",
     "imageCover": "honey.jpeg",
     "images": ["honey-1.jpeg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Red Velvet cake",
@@ -123,7 +128,8 @@
     "description": " Red Velvet Cake is instantly recognizable with its bright red color offset by a white Cream Cheese Frosting",
     "imageCover": "redvelvet.jpeg",
     "images": ["redvelvet-1.jpeg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Mint Chocolate cake",
@@ -144,7 +150,8 @@
     "description": "Mint Chocolate Cake is three amazing layers of dark chocolate cake with a delicate mint buttercream in between each layer.",
     "imageCover": "mintchocolate.jpg",
     "images": ["mintchocolate-1.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Rainbow cake",
@@ -165,7 +172,8 @@
     "description": "Rainbow cake has the vanilla layers that are sandwiched together with cream cheese frosting.",
     "imageCover": "rainbow.jpg",
     "images": ["rainbow-1.jpg", "rainbow-2.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Black Forest cake",
@@ -186,7 +194,8 @@
     "description": "Black Forest Cake combines rich chocolate cake layers with fresh cherries, cherry liqueur, and a simple whipped cream frosting.",
     "imageCover": "blackforest.jpeg",
     "images": ["blackforest-1.jpg", "blackforest-2.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Classic Vanilla cake",
@@ -207,7 +216,8 @@
     "description": "Four layers of the most moist and tender cake and vanilla butter cream frosting, this is The Best Classic Vanilla Cake",
     "imageCover": "classicvanilla.jpg",
     "images": ["classicvanilla-1.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Éclair",
@@ -224,7 +234,8 @@
     "description": "An éclair is a French dessert made from choux pastry, filled with pastry cream or custard and topped with fondant icing.",
     "imageCover": "eclair.jpg",
     "images": ["eclair-1.jpg"],
-    "isFeatured": false
+    "isFeatured": false,
+    "isAvailable": true
   },
   {
     "name": "Coconut cake",
@@ -245,7 +256,8 @@
     "description": "Fluffy, soft, with the perfect amount of coconut flavor, topped with creamy coconut buttercream frosting!",
     "imageCover": "coconut.jpg",
     "images": ["coconut-1.jpg", "coconut-2.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Macha cake",
@@ -266,7 +278,8 @@
     "description": "It's the perfect birthday cake for anyone obsessed with matcha! The sponge is infused with the green tea and sandwiched together with lashings of butter cream",
     "imageCover": "macha.jpg",
     "images": ["macha-1.jpg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   },
   {
     "name": "Caramel cake",
@@ -287,6 +300,7 @@
     "description": "This moist, fluffy caramel cake has layers of vanilla yellow cake covered in homemade salted caramel and creamy caramel-infused Swiss meringue buttercream.",
     "imageCover": "caramel.jpeg",
     "images": ["caramel-1.jpeg"],
-    "isFeatured": true
+    "isFeatured": true,
+    "isAvailable": true
   }
 ]

@@ -52,7 +52,7 @@
   </section>
 
   <!-- Products photos-->
-  <section id="products">
+  <section>
     <div>
       <div class="product-txt">
         <h3>We know that</h3>
@@ -102,64 +102,7 @@
     </div>
   </section>
 
-  <!-- SHOP -->
-  <section id="shop">
-    <div class="shop-txt">
-      <h3>Our best creations</h3>
-      <h1>SHOP NOW</h1>
-    </div>
-    <div class="card-columns">
-      <% products.forEach((elem,index)=>{ %> <% if (index===7) { %>
-      <div class="card bg-danger text-white text-center p-3">
-        <blockquote class="blockquote mb-0">
-          <h5 class="font-italic">
-            Mai is just amazing I can't stop ordering from her
-          </h5>
-          <footer class="blockquote-footer text-white">
-            <small>
-              New customer turned regular from
-              <cite title="">TKO</cite>
-            </small>
-          </footer>
-        </blockquote>
-      </div>
-      <%}%> <% if (index<13) { %>
-      <div class="card">
-        <img
-          src="/images/products/<%=elem.imageCover%>"
-          class="card-img-top"
-          alt="..."
-        />
-
-        <div class="card-body">
-          <h5 class="card-title"><%=elem.name%></h5>
-          <p class="card-text"><%=elem.summary%></p>
-          <a href="/product/<%=elem.slug%>"
-            ><button
-              type="button"
-              class="btn btn-dark btn-block discover-button"
-            >
-              Order
-            </button></a
-          >
-        </div>
-      </div>
-      <%}%> <% }) %>
-
-      <div class="card">
-        <img src="/images/products/many.jpeg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Other cakes</h5>
-          <p class="card-text">
-            TLorem ipsum dolor sit amet consectetur, adipisicing elit.
-          </p>
-          <button type="button" class="btn btn-outline-dark btn-lg shop-button">
-            See more
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <%- include("./_products") -%>
 
   <!-- Contact -->
   <section id="contact">

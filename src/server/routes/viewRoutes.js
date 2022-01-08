@@ -11,6 +11,8 @@ router.use(authController.isLoggedIn);
 
 router.get('/', authController.isLoggedIn, viewController.getIndex);
 
+router.get('/shop', authController.isLoggedIn, viewController.getShop);
+
 router.get(
   '/product/:slug',
   authController.isLoggedIn,

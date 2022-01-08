@@ -17,13 +17,31 @@ exports.alerts = (req, res, next) => {
 
 exports.getIndex = catchAsync(async (req, res, next) => {
   //1) Get Feaured Product data from collection
-  const products = await Product.find({ isFeatured: true }).limit(14);
+  const products = await Product.find({
+    isFeatured: true,
+    isAvailable: true,
+  }).limit(14);
   console.log('isLoggedIn');
   //2) Build template
   //3) Render that template using data from step 1
   //3) Render  template
 
-  res.status(200).render('index', { products: products, user: res.user });
+  res
+    .status(200)
+    .render('index', { products: products, user: res.user, isFrontPage: true });
+});
+
+exports.getShop = catchAsync(async (req, res, next) => {
+  //1) Get Feaured Product data from collection
+  const products = await Product.find({ isAvailable: true });
+  console.log('isLoggedIn');
+  //2) Build template
+  //3) Render that template using data from step 1
+  //3) Render  template
+
+  res
+    .status(200)
+    .render('shop', { products: products, user: res.user, isFrontPage: false });
 });
 
 // exports.getOverview = catchAsync(async (req, res, next) => {

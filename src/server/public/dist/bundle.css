@@ -716,6 +716,10 @@ body .container-xl .carousel-indicators {
   }
 }
 
+.shop {
+  margin-bottom: 4rem !important;
+}
+
 .user-view__menu {
   padding: 2rem 0;
   background: #e7ebec;
