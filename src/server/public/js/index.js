@@ -377,15 +377,20 @@ if (productsTable) {
     const product = JSON.parse(e.target.dataset.field);
     const keys = Object.keys(product).map((key) => key);
 
+    $('.edit-images').attr('src', '');
+    $('.edit-images').css('display', 'none');
+
     keys.forEach((key) => {
       if ($(`input[name='${key}']`).is(':checkbox')) {
         $(`input[name='${key}']`).attr('checked', product[key]);
       } else if (key === 'imageCover') {
         $('.imageCover').attr('src', `/images/products/${product[key]}`);
       } else if (key === 'images') {
-        console.log('imnages+++', product[key]);
+        console.log('images+++', product[key]);
+
         product[key].forEach((el, index) => {
           $(`.photo-images${index}`).attr('src', `/images/products/${el}`);
+          $(`.photo-images${index}`).css('display', 'block');
         });
       } else {
         $(`[name='${key}']`).val(product[key]);

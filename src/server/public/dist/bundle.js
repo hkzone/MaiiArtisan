@@ -59202,15 +59202,18 @@ if (productsTable) {
     var keys = Object.keys(product).map(function (key) {
       return key;
     });
+    $('.edit-images').attr('src', '');
+    $('.edit-images').css('display', 'none');
     keys.forEach(function (key) {
       if ($("input[name='".concat(key, "']")).is(':checkbox')) {
         $("input[name='".concat(key, "']")).attr('checked', product[key]);
       } else if (key === 'imageCover') {
         $('.imageCover').attr('src', "/images/products/".concat(product[key]));
       } else if (key === 'images') {
-        console.log('imnages+++', product[key]);
+        console.log('images+++', product[key]);
         product[key].forEach(function (el, index) {
           $(".photo-images".concat(index)).attr('src', "/images/products/".concat(el));
+          $(".photo-images".concat(index)).css('display', 'block');
         });
       } else {
         $("[name='".concat(key, "']")).val(product[key]);
@@ -59290,7 +59293,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49540" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63700" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

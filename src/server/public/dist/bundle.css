@@ -660,10 +660,6 @@ body .container-xl .carousel-indicators {
   background-color: rgba(252, 86, 86, 0.9);
 }
 
-.alert-info {
-  color: #333333;
-}
-
 /* MY ORDERS */
 .table-my-orders * div {
   padding: 0 !important;
