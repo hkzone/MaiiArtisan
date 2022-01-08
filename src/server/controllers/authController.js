@@ -24,7 +24,7 @@ const createSendToken = (user, statusCode, req, res) => {
     secure: req.secure,
 
     //FIXME: need to use for HEROKU
-    /// || req.headers("x-forwarded-proto") === "https",
+    / || req.headers("x-forwarded-proto") === "https",
   });
 
   //Remove password from output
