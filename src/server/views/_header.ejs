@@ -54,7 +54,14 @@
           </li>
            <li class="nav-item">
             <a class="nav-link" href="/shop">Shop</a>
-          </li>
+         
+          <li class="nav-item d-flex flex-column justify-content-center">
+            <span>
+              <a class="nav-link" href="/cart">
+                <i class="fas fa-cart-arrow-down"></i> <sup><%= cartQty>0 ?` ${cartQty} items`:' ' %></sup>
+              </a>
+            </span>
+           </li>
           <% if (user!==undefined){ %>
 
             <li class="nav-item nav__el nav__el--logout">

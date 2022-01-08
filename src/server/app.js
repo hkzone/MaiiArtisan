@@ -143,6 +143,10 @@ app.use('/api/v1/bookings', bookingRouter);
 app.use('/cart', cartRouter);
 app.use('/contact', contactRouter);
 
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile('./favicon.ico');
+});
+
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find  ${req.originalUrl} on this server`));
 });

@@ -1,4 +1,5 @@
-const AppError = require("./../utils/appError");
+const AppError = require('./../utils/appError');
+const cartController = require('./cartController');
 
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
@@ -15,19 +16,19 @@ const handleDuplicateFieldsDB = (err) => {
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
 
-  const message = `Invalid input data. ${errors.join(". ")}`;
+  const message = `Invalid input data. ${errors.join('. ')}`;
   return new AppError(message, 400);
 };
 
 const handleJWTError = () =>
-  new AppError("Invalid token. Please log in again!", 401);
+  new AppError('Invalid token. Please log in again!', 401);
 
 const handleJWTExpiredError = () =>
-  new AppError("Expired token. Please log in again!", 401);
+  new AppError('Expired token. Please log in again!', 401);
 
 const sendErrorDev = (err, req, res) => {
   //API
-  if (req.originalUrl.startsWith("/api")) {
+  if (req.originalUrl.startsWith('/api')) {
     res.status(err.statusCode).json({
       status: err.status,
       error: err,
@@ -38,13 +39,14 @@ const sendErrorDev = (err, req, res) => {
     //Rendered web-site
     res
       .status(err.statusCode)
-      .render("error", { title: "Something went wrong", msg: err.message });
+      .render('error', { title: 'Something went wrong', msg: err.message });
   }
 };
 
 const sendErrorProd = (err, req, res) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
   // a) API
-  if (req.originalUrl.startsWith("/api")) {
+  if (req.originalUrl.startsWith('/api')) {
     // Operational, trusted error: send message to client
     if (err.isOperational) {
       res.status(err.statusCode).json({
@@ -55,12 +57,12 @@ const sendErrorProd = (err, req, res) => {
       // Programming or other unknown error: don't leak error details
     } else {
       // 1) Log error
-      console.error("ERROR 💥", err);
+      console.error('ERROR 💥', err);
 
       // 2) Send generic message
       res.status(500).json({
-        status: "error",
-        message: "Something went very wrong!",
+        status: 'error',
+        message: 'Something went very wrong!',
       });
     }
   } else {
@@ -68,11 +70,11 @@ const sendErrorProd = (err, req, res) => {
     if (err.isOperational) {
       msg = err.message;
     } else {
-      msg = "Please try again later";
+      msg = 'Please try again later';
     }
     res
       .status(err.statusCode)
-      .render("error", { title: "Something went wrong", msg: msg });
+      .render('error', { title: 'Something went wrong', msg: msg, cartQty });
   }
 };
 
@@ -80,19 +82,19 @@ module.exports = (err, req, res, next) => {
   console.log(err.stack);
 
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
-  console.log("💥💥💥💥💥💥💥");
-  if (process.env.NODE_ENV === "development") {
+  err.status = err.status || 'error';
+  console.log('💥💥💥💥💥💥💥');
+  if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, req, res);
-  } else if (process.env.NODE_ENV === "production") {
+  } else if (process.env.NODE_ENV === 'production') {
     let error = JSON.parse(JSON.stringify(err));
     error.message = err.message;
-    if (error.name === "CastError") error = handleCastErrorDB(error);
+    if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === "ValidationError")
+    if (error.name === 'ValidationError')
       error = handleValidationErrorDB(error);
-    if (error.name === "JsonWebTokenError") error = handleJWTError();
-    if (error.name === "TokenExpiredError") error = handleJWTExpiredError();
+    if (error.name === 'JsonWebTokenError') error = handleJWTError();
+    if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
 
     sendErrorProd(error, req, res);
   }

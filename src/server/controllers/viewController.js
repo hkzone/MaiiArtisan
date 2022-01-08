@@ -6,6 +6,7 @@ const Booking = require('../models/bookingModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Security = require('../utils/security');
+const cartController = require('./cartController');
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
@@ -22,26 +23,38 @@ exports.getIndex = catchAsync(async (req, res, next) => {
     isAvailable: true,
   }).limit(14);
   console.log('isLoggedIn');
+
+  const cartQty = cartController.checkQtyInCart(req, res);
+
   //2) Build template
   //3) Render that template using data from step 1
   //3) Render  template
 
-  res
-    .status(200)
-    .render('index', { products: products, user: res.user, isFrontPage: true });
+  res.status(200).render('index', {
+    products: products,
+    user: res.user,
+    isFrontPage: true,
+    cartQty,
+  });
 });
 
 exports.getShop = catchAsync(async (req, res, next) => {
   //1) Get Feaured Product data from collection
   const products = await Product.find({ isAvailable: true });
   console.log('isLoggedIn');
+
+  const cartQty = cartController.checkQtyInCart(req, res);
+
   //2) Build template
   //3) Render that template using data from step 1
   //3) Render  template
 
-  res
-    .status(200)
-    .render('shop', { products: products, user: res.user, isFrontPage: false });
+  res.status(200).render('shop', {
+    products: products,
+    user: res.user,
+    isFrontPage: false,
+    cartQty,
+  });
 });
 
 // exports.getOverview = catchAsync(async (req, res, next) => {
@@ -72,6 +85,8 @@ exports.getProduct = catchAsync(async (req, res, next) => {
     };
   }
 
+  const cartQty = cartController.checkQtyInCart(req, res);
+
   //2) Build template
 
   //3) Render that template using data from step 1)
@@ -84,7 +99,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
     color: config.customColors,
     flavor: config.customFlavor,
     options: config.specialRequestOptions,
-    user: res.user,
+    cartQty,
   });
 });
 
@@ -93,10 +108,13 @@ exports.getLoginForm = (req, res) => {
   //   'Content-Security-Policy',
   //   "script-src 'self' cdn.jsdelivr.net  blob: data: gap:"
   // );
+  const cartQty = cartController.checkQtyInCart(req, res);
 
-  res.status(200).render('login', { title: 'Login', user: res.user });
+  res.status(200).render('login', { title: 'Login', user: res.user, cartQty });
 };
 exports.getSignupForm = (req, res) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
+
   // res.setHeader(
   //   'Content-Security-Policy',
   //   "script-src 'self' cdn.jsdelivr.net  blob: data: gap:"
@@ -109,14 +127,18 @@ exports.getSignupForm = (req, res) => {
     region: region,
     district: district,
     user: res.user,
+    cartQty,
   });
 };
 
 exports.getAccount = (req, res) => {
-  res.status(200).render('account', { title: 'Your account' });
+  const cartQty = cartController.checkQtyInCart(req, res);
+  res.status(200).render('account', { title: 'Your account', cartQty });
 };
 
 exports.getMyProducts = catchAsync(async (req, res, next) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
+
   // 1) Find all bookings
   const orders = await Booking.find({ user: req.user.id });
   console.log(orders);
@@ -128,16 +150,20 @@ exports.getMyProducts = catchAsync(async (req, res, next) => {
   res.status(200).render('myOrders', {
     title: 'My Orders',
     orders,
+    cartQty,
   });
 });
 
 exports.getProducts = catchAsync(async (req, res, next) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
+
   // 1) Find all bookings
   const allProducts = await Product.find({});
 
   res.status(200).render('products', {
     title: 'products',
     allProducts: allProducts,
+    cartQty,
   });
 });
 

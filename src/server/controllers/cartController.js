@@ -3,6 +3,16 @@ const Product = require('../models/productModel');
 // const AppError = require('../utils/appError');
 const Security = require('../utils/security');
 
+exports.checkQtyInCart = (req, res) => {
+  const sess = req.session;
+  const cart = typeof sess.cart !== 'undefined' ? sess.cart : false;
+
+  if (cart && cart.items.length > 0) {
+    return cart.items.map((el) => parseInt(el.qty, 10)).reduce((a, b) => a + b);
+  }
+  return 0;
+};
+
 exports.getCart = (req, res) => {
   const sess = req.session;
   const cart = typeof sess.cart !== 'undefined' ? sess.cart : false;
@@ -12,6 +22,7 @@ exports.getCart = (req, res) => {
     cart: cart,
     nonce: Security.md5(req.sessionID + req.headers['user-agent']),
     user: res.user,
+    cartQty: this.checkQtyInCart(req, res),
   });
 };
 
