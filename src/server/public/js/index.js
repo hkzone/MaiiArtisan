@@ -143,21 +143,32 @@ if (userPasswordForm)
   });
 
 if (contactForm)
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const button = contactForm.querySelector('[type = "submit"]');
+    const buttonInnerText = button.innerText;
+    button.innerText = 'Processing...';
+    button.disabled = true;
     const name = document.getElementById('name').value;
     const surname = document.getElementById('surname').value;
     const email = document.getElementById('email').value;
     const url = document.getElementById('url').value;
     const message = document.getElementById('message').value;
-    contactUs(name, surname, email, url, message);
+    await contactUs(name, surname, email, url, message);
+    button.innerText = buttonInnerText;
+    button.disabled = false;
   });
 
 if (signupForm)
   signupForm.addEventListener(
     'submit',
-    (e) => {
+    async (e) => {
       e.preventDefault();
+      const button = signupForm.querySelector('[type = "submit"]');
+      const buttonInnerText = button.innerText;
+      button.innerText = 'Processing...';
+      button.disabled = true;
+
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
@@ -175,7 +186,7 @@ if (signupForm)
       const region = document.getElementById('region').value;
       const phoneNumber = document.getElementById('phoneNumber').value;
 
-      signup(
+      await signup(
         name,
         email,
         password,
@@ -191,6 +202,8 @@ if (signupForm)
         region,
         phoneNumber
       );
+      button.innerText = buttonInnerText;
+      button.disabled = false;
     },
     false
   );

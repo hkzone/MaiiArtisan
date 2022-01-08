@@ -58969,33 +58969,87 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/f
     return _ref.apply(this, arguments);
   };
 }());
-if (contactForm) contactForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var name = document.getElementById('name').value;
-  var surname = document.getElementById('surname').value;
-  var email = document.getElementById('email').value;
-  var url = document.getElementById('url').value;
-  var message = document.getElementById('message').value;
-  (0, _contactUs.contactUs)(name, surname, email, url, message);
-});
-if (signupForm) signupForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var name = document.getElementById('name').value;
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  var passwordConfirm = document.getElementById('passwordConfirm').value;
-  var unit = document.getElementById('unit').value;
-  var floorNo = document.getElementById('floorNo').value;
-  var blockNo = document.getElementById('blockNo').value;
-  var buildingName = document.getElementById('buildingName').value;
-  var estateOrVillageName = document.getElementById('estateOrVillageName').value;
-  var buildingNo = document.getElementById('buildingNo').value;
-  var streetName = document.getElementById('streetName').value;
-  var district = document.getElementById('district').value;
-  var region = document.getElementById('region').value;
-  var phoneNumber = document.getElementById('phoneNumber').value;
-  (0, _login.signup)(name, email, password, passwordConfirm, unit, floorNo, blockNo, buildingName, estateOrVillageName, buildingNo, streetName, district, region, phoneNumber);
-}, false); // if (bookBtn)
+if (contactForm) contactForm.addEventListener('submit', /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
+    var button, buttonInnerText, name, surname, email, url, message;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            e.preventDefault();
+            button = contactForm.querySelector('[type = "submit"]');
+            buttonInnerText = button.innerText;
+            button.innerText = 'Processing...';
+            button.disabled = true;
+            name = document.getElementById('name').value;
+            surname = document.getElementById('surname').value;
+            email = document.getElementById('email').value;
+            url = document.getElementById('url').value;
+            message = document.getElementById('message').value;
+            _context2.next = 12;
+            return (0, _contactUs.contactUs)(name, surname, email, url, message);
+
+          case 12:
+            button.innerText = buttonInnerText;
+            button.disabled = false;
+
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function (_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}());
+if (signupForm) signupForm.addEventListener('submit', /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
+    var button, buttonInnerText, name, email, password, passwordConfirm, unit, floorNo, blockNo, buildingName, estateOrVillageName, buildingNo, streetName, district, region, phoneNumber;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            e.preventDefault();
+            button = signupForm.querySelector('[type = "submit"]');
+            buttonInnerText = button.innerText;
+            button.innerText = 'Processing...';
+            button.disabled = true;
+            name = document.getElementById('name').value;
+            email = document.getElementById('email').value;
+            password = document.getElementById('password').value;
+            passwordConfirm = document.getElementById('passwordConfirm').value;
+            unit = document.getElementById('unit').value;
+            floorNo = document.getElementById('floorNo').value;
+            blockNo = document.getElementById('blockNo').value;
+            buildingName = document.getElementById('buildingName').value;
+            estateOrVillageName = document.getElementById('estateOrVillageName').value;
+            buildingNo = document.getElementById('buildingNo').value;
+            streetName = document.getElementById('streetName').value;
+            district = document.getElementById('district').value;
+            region = document.getElementById('region').value;
+            phoneNumber = document.getElementById('phoneNumber').value;
+            _context3.next = 21;
+            return (0, _login.signup)(name, email, password, passwordConfirm, unit, floorNo, blockNo, buildingName, estateOrVillageName, buildingNo, streetName, district, region, phoneNumber);
+
+          case 21:
+            button.innerText = buttonInnerText;
+            button.disabled = false;
+
+          case 23:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function (_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}(), false); // if (bookBtn)
 //   bookBtn.addEventListener('click', (e) => {
 //     e.target.textContent = 'Processing...';
 //     const { tourId } = e.target.dataset;
@@ -59236,7 +59290,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55141" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

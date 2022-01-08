@@ -72,7 +72,7 @@ module.exports = class Email {
 
   async sendContactUs() {
     await this.send(
-      'contactUs',
+      'contactus',
       'New contact form message from Maii Artisan Patisserie Family'
     );
   }
