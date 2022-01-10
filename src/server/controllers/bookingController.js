@@ -88,7 +88,7 @@ const createBookingCheckout = async (session) => {
 
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
-  const orderItems = lineItems.data.map((el) => {
+  const orderItems = lineItems.line_items.data.map((el) => {
     console.log('element', el);
     return {
       product: el.price.product.metadata.id,
