@@ -79,13 +79,13 @@ const createBookingCheckout = async (session) => {
     expand: ['line_items.data.price.product'],
   });
 
-  console.log(lineItems);
+  console.log('lineItems', lineItems);
 
   // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   // console.log('lineItems', lineItems);
 
-  const user = (await User.findOne({ email: session.customer_email })).id;
-  const totalAmount = session.amount_total / 100;
+  // const user = (await User.findOne({ email: session.customer_email })).id;
+  // const totalAmount = session.amount_total / 100;
   const orderItems = lineItems.data.map((el) => {
     console.log('element', el);
     return {
