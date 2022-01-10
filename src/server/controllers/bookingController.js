@@ -77,9 +77,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 const createBookingCheckout = async (session) => {
   const lineItems = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
-  }).line_items;
+  });
 
-  console.log('lineItems', lineItems);
+  console.log('lineItems', lineItems.line_items);
 
   // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   // console.log('lineItems', lineItems);
@@ -114,7 +114,7 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
-  console.log('event.data.object', event.data.object);
+  // console.log('event.data.object', event.data.object);
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed')
     createBookingCheckout(event.data.object);
