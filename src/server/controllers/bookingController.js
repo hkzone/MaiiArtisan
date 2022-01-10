@@ -75,11 +75,12 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
 const createBookingCheckout = async (session) => {
-  const { lineItems } = await stripe.checkout.sessions.retrieve(session.id, {
+  const lineItems = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
   });
 
   console.log('lineItems', lineItems);
+  console.log('lineItems2', lineItems.lineItems);
 
   // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   // console.log('lineItems', lineItems);
