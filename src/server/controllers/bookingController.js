@@ -77,16 +77,15 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 const createBookingCheckout = async (session) => {
   const lineItems = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
-  });
+  }).line_items;
 
   console.log('lineItems', lineItems);
-  console.log('lineItems2', lineItems.lineItems);
 
   // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   // console.log('lineItems', lineItems);
 
-  // const user = (await User.findOne({ email: session.customer_email })).id;
-  // const totalAmount = session.amount_total / 100;
+  const user = (await User.findOne({ email: session.customer_email })).id;
+  const totalAmount = session.amount_total / 100;
   const orderItems = lineItems.data.map((el) => {
     console.log('element', el);
     return {
@@ -98,7 +97,7 @@ const createBookingCheckout = async (session) => {
     };
   });
 
-  // await Booking.create({ user, orderItems, totalAmount });
+  await Booking.create({ user, orderItems, totalAmount });
 };
 
 exports.webhookCheckout = (req, res, next) => {
