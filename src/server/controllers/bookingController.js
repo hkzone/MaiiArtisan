@@ -75,29 +75,22 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
 const createBookingCheckout = async (session) => {
-  const lineItems = await stripe.checkout.sessions.retrieve(session.id, {
+  const expandedData = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
   });
-
-  console.log('typeof', typeof lineItems);
-  console.log('object', lineItems.object);
-  console.log('lineItems', lineItems.line_items);
 
   // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   // console.log('lineItems', lineItems);
 
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
-  const orderItems = lineItems.line_items.data.map((el) => {
-    console.log('element', el);
-    return {
-      product: el.price.product.metadata.id,
-      qty: el.quantity,
-      customColor: el.price.product.metadata.customColor,
-      customFlavor: el.price.product.metadata.customFlavor,
-      customMessage: el.price.product.metadata.customMessage,
-    };
-  });
+  const orderItems = expandedData.line_items.data.map((el) => ({
+    product: el.price.product.metadata.id,
+    qty: el.quantity,
+    customColor: el.price.product.metadata.customColor,
+    customFlavor: el.price.product.metadata.customFlavor,
+    customMessage: el.price.product.metadata.customMessage,
+  }));
 
   await Booking.create({ user, orderItems, totalAmount });
 };
