@@ -88,13 +88,16 @@ const createBookingCheckout = async (session) => {
 
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
-  const orderItems = lineItems.data.map((el) => ({
-    product: el.price.product.metadata.id,
-    qty: el.quantity,
-    customColor: el.price.product.metadata.customColor,
-    customFlavor: el.price.product.metadata.customFlavor,
-    customMessage: el.price.product.metadata.customMessage,
-  }));
+  const orderItems = lineItems.data.map((el) => {
+    console.log(el);
+    return {
+      product: el.price.product.metadata.id,
+      qty: el.quantity,
+      customColor: el.price.product.metadata.customColor,
+      customFlavor: el.price.product.metadata.customFlavor,
+      customMessage: el.price.product.metadata.customMessage,
+    };
+  });
 
   await Booking.create({ user, orderItems, totalAmount });
 };
