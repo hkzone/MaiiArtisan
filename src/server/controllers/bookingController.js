@@ -78,8 +78,13 @@ const createBookingCheckout = async (session) => {
   // const { lineItems } = await stripe.checkout.sessions.retrieve(session.id, {
   //   expand: ['line_items.data.price.product'],
   // });
+  console.log(
+    '@@@@@',
+    await stripe.checkout.sessions.listLineItems(session.id).price
+  );
 
-  const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+  const lineItems = await stripe.checkout.sessions.listLineItems(session.id)
+    .price.product;
 
   console.log('lineItems', lineItems);
 
