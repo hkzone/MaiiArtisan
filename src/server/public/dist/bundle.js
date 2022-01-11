@@ -58329,7 +58329,9 @@ var checkoutCart = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
+            // 1) Get checkout session from API
+            console.log('dueDate', dueDate);
+            _context.next = 4;
             return (0, _axios.default)({
               method: 'GET',
               url: '/api/v1/orders/checkout-session',
@@ -58339,29 +58341,29 @@ var checkoutCart = /*#__PURE__*/function () {
               }
             });
 
-          case 3:
+          case 4:
             session = _context.sent;
-            _context.next = 6;
+            _context.next = 7;
             return stripe.redirectToCheckout({
               sessionId: session.data.session.id
             });
 
-          case 6:
-            _context.next = 12;
+          case 7:
+            _context.next = 13;
             break;
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
             (0, _alerts.showAlert)('error', _context.t0);
 
-          case 12:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function checkoutCart(_x, _x2) {
