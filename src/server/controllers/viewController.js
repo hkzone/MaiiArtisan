@@ -2,7 +2,7 @@ const Product = require('../models/productModel');
 const User = require('../models/userModel');
 const Cart = require('../models/cartModel');
 const Config = require('../models/configModel');
-const Booking = require('../models/bookingModel');
+const Order = require('../models/orderModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Security = require('../utils/security');
@@ -10,9 +10,9 @@ const cartController = require('./cartController');
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
-  if (alert === 'booking')
+  if (alert === 'order')
     res.locals.alert =
-      "Your booking was successful! Please check your email for a confirmation. If your booking doesn't show up here immediatly, please come back later.";
+      "Your order was successful! Please check your email for a confirmation. If your order doesn't show up here immediatly, please come back later.";
   next();
 };
 
@@ -139,8 +139,8 @@ exports.getAccount = (req, res) => {
 exports.getMyProducts = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  // 1) Find all bookings
-  const orders = await Booking.find({ user: req.user.id });
+  // 1) Find all orders
+  const orders = await Order.find({ user: req.user.id });
   console.log(orders);
 
   // 2) Find products with the returned IDs
@@ -157,12 +157,25 @@ exports.getMyProducts = catchAsync(async (req, res, next) => {
 exports.getProducts = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  // 1) Find all bookings
+  // 1) Find all orders
   const allProducts = await Product.find({});
 
   res.status(200).render('products', {
     title: 'products',
     allProducts: allProducts,
+    cartQty,
+  });
+});
+
+exports.getOrders = catchAsync(async (req, res, next) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
+
+  // 1) Find all orders
+  const allOrders = await Order.find({});
+
+  res.status(200).render('allOrders', {
+    title: 'orders',
+    orders: allOrders,
     cartQty,
   });
 });

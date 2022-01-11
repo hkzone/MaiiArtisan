@@ -58332,7 +58332,7 @@ var checkoutCart = /*#__PURE__*/function () {
             _context.next = 3;
             return (0, _axios.default)({
               method: 'GET',
-              url: '/api/v1/bookings/checkout-session',
+              url: '/api/v1/orders/checkout-session',
               data: {
                 nonce: nonce
               }

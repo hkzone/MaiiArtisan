@@ -11,7 +11,7 @@ export const checkoutCart = async (nonce) => {
 
     const session = await axios({
       method: 'GET',
-      url: '/api/v1/bookings/checkout-session',
+      url: '/api/v1/orders/checkout-session',
       data: {
         nonce,
       },

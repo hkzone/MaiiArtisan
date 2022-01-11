@@ -1,0 +1,94 @@
+<%- include("./_header") -%>
+<main class="main">
+  <div class="user-view container-xl">
+    <!--  Side Nav-->
+    <div class="row d-flex title-div ">
+      <div class="col-md-3  ">
+            <%- include("./_nav") -%>
+      </div>
+      <!-- End  Side Nav-->
+
+      <div class="col-md-9  user-view__content">
+         <div class="account-products-container"></div>
+        <h2 class="heading-secondary ma-bt-md">My Orders</h2>
+        <% if(orders.length > 0) { %>
+        <div class="col-lg-12 ">
+
+          <!-- Orders table -->
+          <div class="table-responsive ">
+            <table class="table table-sm table-hover table-borderless table-my-orders">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" >
+                    Order
+                  </th>
+                  <th scope="col" class="optional-show">
+                    Quantity
+                  </th>
+                  <th scope="col" >
+                    Total
+                  </th>
+                  <th scope="col" >
+                    Date
+                  </th>
+                  <th scope="col" >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% orders.forEach(function(order,index) { %>
+                <tr>
+                  <th scope="row" class="align-middle row">
+                      <div id="img-wrap" class=" align-middle  d-inline-block col-lg-3">
+                        <% for(let i=0; i<order.orderItems.length && i<2; i++) { %>
+                        <img src="/images/products/<%= order.orderItems[i].product.imageCover %>" alt="product image"  class="img-fluid rounded shadow-sm">
+                        <% } %>
+                      </div>
+                      <div class="d-inline-flex col-lg-9">
+                        <a class="text-left" data-toggle="collapse" href="#<%=`collapse${index}`%>"><%= order.orderItems.map((el) =>` ${el.product.name}`)  %></a>    
+                      </div>
+                  </th>
+                  <td class="align-middle optional-show"><%= order.orderItems.map((el) =>el.qty).reduce((a, b) => a + b, 0)  %></td>
+                  <td class="align-middle"><%= order.totalAmount %></td>
+                  <td class="align-middle"><%= order.createdAt.toISOString().split('T')[0]%></td>
+                  <td class="align-middle"><i class="fas fa-dollar-sign <%= order.isPaid?'text-success':'text-danger'%>" title="<%= order.isPaid?'Paid':'Unpaid'%>"></i>
+                    <i class="fas fa-truck <%= order.isDelivered?'text-success':'text-danger'%>" title="<%= order.isDelivered?'Delivered':'Not delivered'%>" </i>
+                  </td>
+                  </tr>
+                  <tr id="<%=`collapse${index}`%>" class="panel-collapse collapse">
+                     <td colspan="999">
+                            <table class="table table-sm">
+                              <tbody>
+                                <% order.orderItems.forEach(function(el) { %>
+                                <tr>
+                                  <td class="w-100 text-left">
+                                    <h5><%= el.product.name %></h5>     
+                                    <p class="text-muted font-weight-normal font-italic"><%= el.customColor?`Color: ${el.customColor} `:''%></p>
+                                    <p class="text-muted font-weight-normal font-italic"><%=el.customFlavor?`Flavor: ${el.customFlavor} `:''%> </p>
+                                    <p class="text-muted font-weight-normal font-italic"><%=el.customMessage?`Message: ${el.customMessage} `:''%></p>
+                                    <p class="text-muted font-weight-normal font-italic"><%=`Q-ty: ${el.qty} `%></p>
+                                  </td>
+                                </tr>
+                                <% }); %>
+                        </tbody></table></td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <!-- End  Order Table-->
+          
+        </div>
+        <% } else { %>
+          <div class="d-flex h-100 w-100 align-items-center justify-content-center"><p class="text-muted">No orders yet.</p></div>
+        
+        <% } %>
+      </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("./_footer") -%>
+

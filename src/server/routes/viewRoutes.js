@@ -1,7 +1,7 @@
 const express = require('express');
 const viewController = require('../controllers/viewController');
 const authController = require('../controllers/authController');
-const bookingController = require('../controllers/bookingController');
+const orderController = require('../controllers/orderController');
 
 const router = express.Router();
 
@@ -32,7 +32,7 @@ router.get(
   '/my-orders',
 
   //TODO: COMMENT OUT  AFTER DEPLOYMENT
-  // bookingController.createBookingCheckout,
+  // orderController.createOrderCheckout,
 
   authController.protect,
   viewController.getMyProducts
@@ -42,11 +42,19 @@ router.get(
   '/products',
 
   //TODO: COMMENT OUT  AFTER DEPLOYMENT
-  // bookingController.createBookingCheckout,
+  // orderController.createOrderCheckout,
 
   authController.protect,
   authController.restrictTo('admin'),
   viewController.getProducts
+);
+
+router.get(
+  '/orders',
+
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewController.getOrders
 );
 
 module.exports = router;

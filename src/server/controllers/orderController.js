@@ -1,7 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Product = require('../models/productModel');
 const User = require('../models/userModel');
-const Booking = require('../models/bookingModel');
+const Order = require('../models/orderModel');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 const Security = require('../utils/security');
@@ -17,7 +17,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // success_url: `${req.protocol}://${req.get('host')}/my-tours/?tour=${
     //   req.params.tourId
     // }&user=${req.user.id}&price=${tour.price}`,
-    success_url: `${req.protocol}://${req.get('host')}/my-orders?alert=booking`,
+    success_url: `${req.protocol}://${req.get('host')}/my-orders?alert=order`,
     cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.params.Id,
@@ -63,18 +63,18 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 });
 
 //TODO: COMMENT OUT  AFTER DEPLOYMENT
-// exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-//   // This is only TEMPORARY, because it's UNSECURE: everyone can make bookings without paying
+// exports.createOrderCheckout = catchAsync(async (req, res, next) => {
+//   // This is only TEMPORARY, because it's UNSECURE: everyone can make orders without paying
 //   const { tour, user, price } = req.query;
 
 //   if (!tour && !user && !price) return next();
-//   await Booking.create({ tour, user, price });
+//   await Order.create({ tour, user, price });
 
 //   res.redirect(req.originalUrl.split('?')[0]);
 // });
 
 //TODO: CHANGE TO THIS AFTER DEPLOYMENT
-const createBookingCheckout = async (session) => {
+const createOrderCheckout = async (session) => {
   const expandedData = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
   });
@@ -92,7 +92,7 @@ const createBookingCheckout = async (session) => {
     customMessage: el.price.product.metadata.customMessage,
   }));
 
-  await Booking.create({ user, orderItems, totalAmount });
+  await Order.create({ user, orderItems, totalAmount });
 };
 
 exports.webhookCheckout = (req, res, next) => {
@@ -112,13 +112,13 @@ exports.webhookCheckout = (req, res, next) => {
   // console.log('event.data.object', event.data.object);
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed')
-    createBookingCheckout(event.data.object);
+    createOrderCheckout(event.data.object);
 
   res.status(200).json({ received: true });
 };
 
-exports.createBooking = factory.createOne(Booking);
-exports.getBooking = factory.getOne(Booking);
-exports.getAllBookings = factory.getAll(Booking);
-exports.updateBooking = factory.updateOne(Booking);
-exports.deleteBooking = factory.deleteOne(Booking);
+exports.createOrder = factory.createOne(Order);
+exports.getOrder = factory.getOne(Order);
+exports.getAllOrders = factory.getAll(Order);
+exports.updateOrder = factory.updateOne(Order);
+exports.deleteOrder = factory.deleteOne(Order);
