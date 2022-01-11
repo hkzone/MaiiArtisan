@@ -8,10 +8,9 @@ const stripe = Stripe(
 export const checkoutCart = async (nonce, dueDate) => {
   try {
     // 1) Get checkout session from API
-    console.log('dueDate', dueDate);
 
     const session = await axios({
-      method: 'GET',
+      method: 'POST',
       url: '/api/v1/orders/checkout-session',
       data: {
         nonce,
