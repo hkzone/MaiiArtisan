@@ -35,11 +35,20 @@ const orderSchema = new mongoose.Schema({
     require: [true, 'order must have a total amount.'],
   },
 
+  dueDate: {
+    type: Date,
+    require: [true, 'order must have a delivery date.'],
+  },
+
   createdAt: {
     type: Date,
     default: Date.now(),
   },
   isPaid: {
+    type: Boolean,
+    default: false,
+  },
+  isReady: {
     type: Boolean,
     default: false,
   },

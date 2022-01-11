@@ -58322,7 +58322,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var stripe = Stripe('pk_test_51J69McLJWUFHJnVSrgJ6QIdRoxJTLxAE5YSAUztis2OCSRNWrqqWyp6BuLYPnTpq3Wn0xyHhxEO8NLakiGkk0mSA00yKoWcotW');
 
 var checkoutCart = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(nonce) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(nonce, dueDate) {
     var session;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -58334,7 +58334,8 @@ var checkoutCart = /*#__PURE__*/function () {
               method: 'GET',
               url: '/api/v1/orders/checkout-session',
               data: {
-                nonce: nonce
+                nonce: nonce,
+                dueDate: dueDate
               }
             });
 
@@ -58363,7 +58364,7 @@ var checkoutCart = /*#__PURE__*/function () {
     }, _callee, null, [[0, 8]]);
   }));
 
-  return function checkoutCart(_x) {
+  return function checkoutCart(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -58862,6 +58863,7 @@ var userDataForm = document.querySelector('.form-user-data');
 var userPasswordForm = document.querySelector('.form-user-password');
 var image3d = document.querySelector('.image3d');
 var btnQuantity = document.querySelector('.btn-number');
+var cart = document.querySelector('.cart-wrapper');
 var cartUpdateForm = document.querySelector('.cart__update');
 var chekoutBtn = document.querySelector('.chekoutBtn');
 var productsTable = document.querySelector('.products-table');
@@ -59136,7 +59138,8 @@ if (btnQuantity) {
         alert('Sorry, the maximum value was reached');
         $(this).val($(this).data('oldValue'));
       }
-    }); //Set current min and max date values
+    }); //TODO:DELETE this
+    //Set current min and max date values
 
     $(function () {
       $('[type="date"]#date').prop('min', function () {
@@ -59154,25 +59157,44 @@ if (btnQuantity) {
       });
     });
   })();
-} // Update cart
+} //CHECKOUT CART
 
 
-if (cartUpdateForm) cartUpdateForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var quantitiesAndIds = $('.qty').map(function () {
-    return {
-      qty: parseInt($(this).val()),
-      product_id: $(this).data('productid')
-    };
-  }).toArray();
-  (0, _cart.updateCart)(quantitiesAndIds, $('.nonce').attr('value'));
-}); //CHECKOUT CART
+if (cart) {
+  $(function () {
+    $('[type="date"]#due-date').prop('min', function () {
+      var future = new Date();
+      future.setDate(future.getDate() + 1);
+      return future.toJSON().split('T')[0];
+    }).prop('max', function () {
+      var future = new Date();
+      future.setDate(future.getDate() + 30);
+      return future.toJSON().split('T')[0];
+    }).prop('value', function () {
+      var future = new Date();
+      future.setDate(future.getDate() + 2);
+      return future.toJSON().split('T')[0];
+    });
+  }); // Update cart
 
-if (chekoutBtn) chekoutBtn.addEventListener('click', function (e) {
-  e.target.textContent = 'Processing...'; // const { tourId } = e.target.dataset;
+  cartUpdateForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var quantitiesAndIds = $('.qty').map(function () {
+      return {
+        qty: parseInt($(this).val()),
+        product_id: $(this).data('productid')
+      };
+    }).toArray();
+    (0, _cart.updateCart)(quantitiesAndIds, $('.nonce').attr('value'));
+  }); //Checkout Cart
 
-  (0, _stripe.checkoutCart)($('.nonce').attr('value'));
-}); //Edit Product
+  chekoutBtn.addEventListener('click', function (e) {
+    e.target.textContent = 'Processing...'; // const { tourId } = e.target.dataset;
+
+    (0, _stripe.checkoutCart)($('.nonce').attr('value'), $('#due-date').attr('value'));
+  });
+} //Edit Product
+
 
 if (productsTable) {
   //File upload styling

@@ -157,7 +157,7 @@ exports.getMyProducts = catchAsync(async (req, res, next) => {
 exports.getProducts = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  // 1) Find all orders
+  // 1) Find all products
   const allProducts = await Product.find({});
 
   res.status(200).render('products', {
@@ -171,7 +171,8 @@ exports.getOrders = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
   // 1) Find all orders
-  const allOrders = await Order.find({});
+  const allOrders = await Order.find({}).populate('user');
+  console.log(allOrders);
 
   res.status(200).render('allOrders', {
     title: 'orders',

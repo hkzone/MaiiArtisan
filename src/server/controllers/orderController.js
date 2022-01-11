@@ -22,6 +22,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     customer_email: req.user.email,
     client_reference_id: req.params.Id,
     mode: 'payment',
+    metadata: { dueDate: req.body.dueDate },
     line_items: cart.items.map((el) => ({
       price_data: {
         // product: el.id,
@@ -84,6 +85,7 @@ const createOrderCheckout = async (session) => {
 
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
+  const dueDate = session.metadata.dueDate;
   const orderItems = expandedData.line_items.data.map((el) => ({
     product: el.price.product.metadata.id,
     qty: el.quantity,
@@ -92,7 +94,7 @@ const createOrderCheckout = async (session) => {
     customMessage: el.price.product.metadata.customMessage,
   }));
 
-  await Order.create({ user, orderItems, totalAmount });
+  await Order.create({ user, orderItems, totalAmount, dueDate });
 };
 
 exports.webhookCheckout = (req, res, next) => {

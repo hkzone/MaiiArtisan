@@ -33,6 +33,7 @@ const userPasswordForm = document.querySelector('.form-user-password');
 const image3d = document.querySelector('.image3d');
 const btnQuantity = document.querySelector('.btn-number');
 
+const cart = document.querySelector('.cart-wrapper');
 const cartUpdateForm = document.querySelector('.cart__update');
 const chekoutBtn = document.querySelector('.chekoutBtn');
 const productsTable = document.querySelector('.products-table');
@@ -303,6 +304,7 @@ if (btnQuantity) {
     }
   });
 
+  //TODO:DELETE this
   //Set current min and max date values
   $(function () {
     $('[type="date"]#date')
@@ -323,8 +325,29 @@ if (btnQuantity) {
       });
   });
 }
-// Update cart
-if (cartUpdateForm)
+
+//CHECKOUT CART
+if (cart) {
+  $(function () {
+    $('[type="date"]#due-date')
+      .prop('min', function () {
+        let future = new Date();
+        future.setDate(future.getDate() + 1);
+        return future.toJSON().split('T')[0];
+      })
+      .prop('max', function () {
+        let future = new Date();
+        future.setDate(future.getDate() + 30);
+        return future.toJSON().split('T')[0];
+      })
+      .prop('value', function () {
+        let future = new Date();
+        future.setDate(future.getDate() + 2);
+        return future.toJSON().split('T')[0];
+      });
+  });
+
+  // Update cart
   cartUpdateForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const quantitiesAndIds = $('.qty')
@@ -338,13 +361,13 @@ if (cartUpdateForm)
     updateCart(quantitiesAndIds, $('.nonce').attr('value'));
   });
 
-//CHECKOUT CART
-if (chekoutBtn)
+  //Checkout Cart
   chekoutBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     // const { tourId } = e.target.dataset;
-    checkoutCart($('.nonce').attr('value'));
+    checkoutCart($('.nonce').attr('value'), $('#due-date').attr('value'));
   });
+}
 
 //Edit Product
 if (productsTable) {

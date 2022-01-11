@@ -34,17 +34,18 @@
                   <th scope="col" >
                     Status
                   </th>
+                   <th scope="col" >
+                    Customer
+                  </th>
+                   <th scope="col" >
+                   Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <% orders.forEach(function(order,index) { %>
                 <tr>
                   <th scope="row" class="align-middle row">
-                      <div id="img-wrap" class=" align-middle  d-inline-block col-lg-3">
-                        <% for(let i=0; i<order.orderItems.length && i<2; i++) { %>
-                        <img src="/images/products/<%= order.orderItems[i].product.imageCover %>" alt="product image"  class="img-fluid rounded shadow-sm">
-                        <% } %>
-                      </div>
                       <div class="d-inline-flex col-lg-9">
                         <a class="text-left" data-toggle="collapse" href="#<%=`collapse${index}`%>"><%= order.orderItems.map((el) =>` ${el.product.name}`)  %></a>    
                       </div>
@@ -55,6 +56,8 @@
                   <td class="align-middle"><i class="fas fa-dollar-sign <%= order.isPaid?'text-success':'text-danger'%>" title="<%= order.isPaid?'Paid':'Unpaid'%>"></i>
                     <i class="fas fa-truck <%= order.isDelivered?'text-success':'text-danger'%>" title="<%= order.isDelivered?'Delivered':'Not delivered'%>" </i>
                   </td>
+                   <td class="align-middle"><%= order.user.name%></td>
+                   <td class="align-middle"><button class="btn btn-dark>Mark as Delivered</button></td>
                   </tr>
                   <tr id="<%=`collapse${index}`%>" class="panel-collapse collapse">
                      <td colspan="999">
