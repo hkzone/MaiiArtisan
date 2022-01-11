@@ -365,7 +365,7 @@ if (cart) {
   chekoutBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     // const { tourId } = e.target.dataset;
-    checkoutCart($('.nonce').attr('value'), $('#due-date').attr('value'));
+    checkoutCart($('.nonce').attr('value'), $('#due-date').val());
   });
 }
 

@@ -59193,7 +59193,7 @@ if (cart) {
   chekoutBtn.addEventListener('click', function (e) {
     e.target.textContent = 'Processing...'; // const { tourId } = e.target.dataset;
 
-    (0, _stripe.checkoutCart)($('.nonce').attr('value'), $('#due-date').attr('value'));
+    (0, _stripe.checkoutCart)($('.nonce').attr('value'), $('#due-date').val());
   });
 } //Edit Product
 

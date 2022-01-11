@@ -32,12 +32,12 @@ const orderSchema = new mongoose.Schema({
 
   totalAmount: {
     type: Number,
-    require: [true, 'order must have a total amount.'],
+    required: [true, 'order must have a total amount.'],
   },
 
   dueDate: {
     type: Date,
-    require: [true, 'order must have a delivery date.'],
+    required: [true, 'order must have a delivery date.'],
   },
 
   createdAt: {
