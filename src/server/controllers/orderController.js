@@ -82,10 +82,10 @@ const createOrderCheckout = async (session) => {
 
   // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   // console.log('lineItems', lineItems);
-
+  const isPaid = true;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
-  const dueDate = session.metadata.dueDate;
+  const { dueDate } = session.metadata;
   const orderItems = expandedData.line_items.data.map((el) => ({
     product: el.price.product.metadata.id,
     qty: el.quantity,
@@ -94,7 +94,7 @@ const createOrderCheckout = async (session) => {
     customMessage: el.price.product.metadata.customMessage,
   }));
 
-  await Order.create({ user, orderItems, totalAmount, dueDate });
+  await Order.create({ user, orderItems, totalAmount, dueDate, isPaid });
 };
 
 exports.webhookCheckout = (req, res, next) => {
