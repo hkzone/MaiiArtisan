@@ -1,0 +1,100 @@
+<%- include("./_header") -%>
+<main class="main">
+  <div class="user-view admin-settings-container container-xl">
+    <!--  Side Nav-->
+    <div class="row d-flex title-div ">
+      <div class="col-md-3  ">
+            <%- include("./_nav") -%>
+      </div>
+      <!-- End  Side Nav-->
+
+      <div class="col-md-9  user-view__content">
+         <div class="account-products-container"></div>
+        <h2 class="heading-secondary ma-bt-md">Admin Settings</h2>
+        <form class="form  needs-validation text-left" novalidate>
+          <div class="form-row">
+              <div class="form-group col-lg-12">
+              <span>Custom flavor:</span>
+              <smart-list-box id="listbox-custom-flavor" selection-mode="one" editable item-template="template" >
+                <%settings.customFlavor.forEach(el=>{%>
+                <smart-list-item value="<%=el%>"><%=el%></smart-list-item>
+                <%});%>
+             </smart-list-box>
+             <div class="add-input-container">
+                  <smart-input class="underlined" placeholder="Add item"></smart-input> 
+                  <smart-button class="material flat add-item"><i class="fa fa-plus" aria-hidden="true"></i></smart-button>
+                </div>  
+                <div class="invalid-feedback">Please enter a custom flavor</div>
+            </div>
+            
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6  ">
+                <span>Custom colors:</span>
+                <template id="template">
+                    <div class="template-container">
+                        <div class="primary-action">{{label}}</div>
+                        <div class="secondary-action"><smart-button class="material flat delete-item" ><i class="fa fa-minus" aria-hidden="true"></i></smart-button></i></div>
+                    </div>
+                </template>
+                <smart-list-box id="listbox-custom-colors" selection-mode="one" editable item-template="template" >
+                    <%settings.customColors.forEach(el=>{%>
+                        <smart-list-item value="<%=el%>"><%=el%></smart-list-item>
+                    <%});%>
+                </smart-list-box>
+                <div class="add-input-container">
+                    <smart-input class="underlined" placeholder="Add item"></smart-input> 
+                    <smart-button class="material flat add-item"><i class="fa fa-plus" aria-hidden="true"></i></smart-button>
+                </div>         
+                <div class="invalid-feedback">Please provide a custom color</div>
+            </div>
+            <div class="form-group col-md-6">
+                
+               <span>Special Request Options:</span>
+              <smart-list-box id="listbox-special-request-options" selection-mode="one" editable item-template="template" >
+                <%settings.specialRequestOptions.forEach(el=>{%>
+                <smart-list-item value="<%=el%>"><%=el%></smart-list-item>
+                <%});%>
+             </smart-list-box>
+             <div class="add-input-container">
+                  <smart-input class="underlined" placeholder="Add item"></smart-input> 
+                  <smart-button class="material flat add-item"><i class="fa fa-plus" aria-hidden="true"></i></smart-button>
+                </div>  
+              <div class="invalid-feedback">
+                Please provide Special Request Options
+              </div>
+            </div>
+           
+          </div>
+     
+          <div class="form-row align-items-center">
+           <div class="form-group col-md-6">
+              <label for="custom-message-length">Custom Message Length:</label>
+              <input
+                class="form-control"
+                type="number"
+                value="<%=settings.customMessageLength%>"
+                id="custom-message-length"
+                min="1"
+                max="100"
+                required
+              />
+              <div class="invalid-feedback">
+                Must be a number between 1 and 100 
+              </div>
+            </div>
+        </div>
+             <hr />
+          <div class="form-row align-items-cente justify-content-center mb-4">
+              <button class="btn btn-dark" type="submit" data-field="<%=settings._id%>">
+                Save Settings
+              </button>
+            </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("./_footer") -%>

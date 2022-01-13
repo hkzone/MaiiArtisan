@@ -8,9 +8,17 @@ import * as PIXI from 'pixi.js';
 import { install } from '@pixi/unsafe-eval';
 import { render3dImage } from './3dimage.js';
 import { checkoutCart } from './stripe.js';
-import { updateProduct } from './admin.js';
+import {
+  updateProduct,
+  updateOrder,
+  getOrders,
+  updateAdminSettings,
+} from './admin.js';
 
 import './../styles/main.scss';
+import './../../../../node_modules/smart-webcomponents/source/modules/smart.listbox.js';
+import './../../../../node_modules/smart-webcomponents/source/modules/smart.input.js';
+import './../../../../node_modules/smart-webcomponents/source/styles/smart.default.css';
 
 // Colaplse navBar after use
 // const navLinks = document.querySelectorAll('.nav-item');
@@ -40,6 +48,12 @@ const productsTable = document.querySelector('.products-table');
 const btnProductUpdateSubmit = document.querySelector(
   '#btnProductUpdateSubmit'
 );
+
+const editOrdersTable = document.querySelector('.admin-orders-table');
+const filterOrders = document.querySelector('#filter-orders');
+
+const adminSettings = document.querySelector('.admin-settings-container');
+
 if (image3d) {
   // Apply the patch to PIXI
   install(PIXI);
@@ -366,6 +380,102 @@ if (cart) {
     e.target.textContent = 'Processing...';
     // const { tourId } = e.target.dataset;
     checkoutCart($('.nonce').attr('value'), $('#due-date').val());
+  });
+}
+
+//Edit orders
+if (editOrdersTable) {
+  getOrders();
+  editOrdersTable.addEventListener('click', (e) => {
+    if (e.target.classList.contains('edit-order-status-ready')) {
+      updateOrder(e.target.dataset.field, { isReady: true });
+    } else if (e.target.classList.contains('edit-order-status-delivered')) {
+      updateOrder(e.target.dataset.field, { isDelivered: true });
+    }
+  });
+
+  filterOrders.addEventListener('click', (e) => {
+    e.preventDefault();
+    const dueDate = $('#due-date').val();
+    const isReady =
+      $('#is-ready').val() === 'Ready'
+        ? true
+        : $('#is-ready').val() === 'Not ready'
+        ? false
+        : '';
+
+    const isDelivered =
+      $('#is-delivered').val() === 'Delivered'
+        ? true
+        : $('#is-delivered').val() === 'Not delivered'
+        ? false
+        : '';
+
+    const isPaid =
+      $('#is-paid').val() === 'Paid'
+        ? true
+        : $('#is-paid').val() === 'Unpaid'
+        ? false
+        : '';
+
+    const query = `?${dueDate !== '' ? `dueDate=${dueDate}&` : ''}${
+      typeof isReady == 'boolean' ? `isReady=${isReady}&` : ''
+    }${typeof isDelivered == 'boolean' ? `isDelivered=${isDelivered}&` : ''}${
+      typeof isPaid == 'boolean' ? `isPaid=${isPaid}&` : ''
+    }`;
+
+    console.log(query);
+
+    getOrders(query);
+  });
+}
+
+//Admin Settings
+
+if (adminSettings) {
+  const form = document.querySelector('form');
+  form.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-item')) {
+      const listbox =
+        event.target.parentElement.parentElement.parentElement.parentElement
+          .parentElement.parentElement.parentElement.parentElement.parentElement
+          .parentElement;
+
+      const item =
+        event.target.parentElement.parentElement.parentElement.parentElement
+          .parentElement.parentElement;
+
+      listbox.removeChild(item);
+    }
+    if (event.target.classList.contains('add-item')) {
+      const listbox =
+        event.target.parentElement.parentElement.querySelector(
+          'smart-list-box'
+        );
+      const input = event.target.parentElement.querySelector('smart-input');
+      listbox.insert(0, input.value);
+      input.value = '';
+    }
+  });
+
+  const button = form.querySelector('[type = "submit"]');
+
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const data = {
+      customColors: form
+        .querySelector('#listbox-custom-colors')
+        .items.map((el) => el.value),
+      customFlavor: form
+        .querySelector('#listbox-custom-flavor')
+        .items.map((el) => el.value),
+      specialRequestOptions: form
+        .querySelector('#listbox-special-request-options')
+        .items.map((el) => el.value),
+      customMessageLength: $('#custom-message-length').val(),
+    };
+
+    updateAdminSettings(button.dataset.field, data);
   });
 }
 

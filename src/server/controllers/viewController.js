@@ -7,6 +7,8 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Security = require('../utils/security');
 const cartController = require('./cartController');
+const orderController = require('./orderController');
+const axios = require('axios');
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
@@ -141,7 +143,6 @@ exports.getMyProducts = catchAsync(async (req, res, next) => {
 
   // 1) Find all orders
   const orders = await Order.find({ user: req.user.id });
-  console.log(orders);
 
   // 2) Find products with the returned IDs
   //const productIDs = orders.map((el) => el.product);
@@ -171,12 +172,24 @@ exports.getOrders = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
   // 1) Find all orders
-  const allOrders = await Order.find({}).populate('user');
-  console.log(allOrders);
+  // const allOrders = await Order.find({}).populate('user');
 
   res.status(200).render('allOrders', {
     title: 'orders',
     orders: allOrders,
+    cartQty,
+  });
+});
+
+exports.getAdminSettings = catchAsync(async (req, res, next) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
+
+  // 1) Find all orders
+  const settings = await Config.find({});
+
+  res.status(200).render('adminSettings', {
+    title: 'Admin Settings',
+    settings: settings[0],
     cartQty,
   });
 });

@@ -57,4 +57,12 @@ router.get(
   viewController.getOrders
 );
 
+router.get(
+  '/admin-settings',
+
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewController.getAdminSettings
+);
+
 module.exports = router;

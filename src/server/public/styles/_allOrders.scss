@@ -1,0 +1,38 @@
+.orders-container {
+  .dropdown-toggle {
+    &:hover {
+      transform: translateY(-1px);
+      @include easeOut();
+    }
+    &::after {
+      font-size: 1.5em;
+      font-weight: 800;
+      content: '⋮';
+      border: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  table {
+    font-size: 0.8rem;
+    thead th {
+    }
+    .panel-collapse {
+      > td {
+        border-top-width: 0px;
+      }
+    }
+
+    table {
+      background-color: $background-color;
+    }
+
+    span {
+      padding: 2px 6px;
+      background-color: green;
+      border-radius: 0.25rem;
+      color: #fff;
+    }
+  }
+}

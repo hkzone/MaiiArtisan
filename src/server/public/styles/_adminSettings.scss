@@ -1,0 +1,34 @@
+.template-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+smart-list-box {
+  width: 100% !important;
+}
+.smart-content-label {
+  width: 100%;
+}
+
+.smart-list-item-container {
+  padding-right: 0 !important;
+}
+
+.add-input-container {
+  display: flex;
+  align-items: center;
+
+  .smart-input {
+    // width: calc(var(--smart-text-box-default-width) - 46.25px) !important;
+    width: calc(100% - 46.25px) !important;
+  }
+}
+
+.smart-button {
+  button,
+  i {
+    pointer-events: none;
+  }
+}

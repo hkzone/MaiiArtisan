@@ -28,6 +28,7 @@ const orderRouter = require('./routes/orderRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const contactRouter = require('./routes/contactRoutes');
+const settingsRouter = require('./routes/settingsRoutes');
 const orderController = require('./controllers/orderController');
 
 const app = express();
@@ -142,6 +143,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/cart', cartRouter);
 app.use('/contact', contactRouter);
+app.use('/settings', settingsRouter);
 
 app.get('/favicon.ico', (req, res) => {
   res.sendFile('/src/server/favicon.ico');
