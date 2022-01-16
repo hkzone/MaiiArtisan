@@ -77,8 +77,8 @@ const orderTable = (orders) =>
                                 </tr>
                               </thead>
                               <tbody>
-                  ${order.orderItems.map((el) => {
-                    return `
+                  ${order.orderItems.map(
+                    (el) => `
                                   <tr>
                                     <td class="text-left">${
                                       el.product.name
@@ -94,8 +94,8 @@ const orderTable = (orders) =>
                                       el.customMessage ? el.customMessage : ''
                                     }</td>
                                   </tr>
-                                 `;
-                  })}  </tbody>
+                                 `
+                  )}  </tbody>
                             </table>
                       </td>
                   </tr>

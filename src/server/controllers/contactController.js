@@ -1,6 +1,9 @@
 const catchAsync = require('../utils/catchAsync');
 const Email = require('../utils/email');
 
+// ************************************************************************** //
+// ************* Sends e-mail  our email address in the ENV file ************ //
+// ************************************************************************** //
 exports.contactUs = catchAsync(async (req, res, next) => {
   const newMessage = {
     name: `${req.body.name} ${req.body.surname}`,

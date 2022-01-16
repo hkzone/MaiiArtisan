@@ -1,7 +1,8 @@
+/* eslint-disable no-restricted-globals */
 import axios from 'axios';
 import { showAlert } from './alerts';
 
-export const contactUs = async (name, surname, email, url, message) => {
+const contactUs = async (name, surname, email, url, message) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -25,3 +26,5 @@ export const contactUs = async (name, surname, email, url, message) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export default contactUs;

@@ -1,11 +1,11 @@
-/* eslint-disable */
 import axios from 'axios';
 import { showAlert } from './alerts';
+
 const stripe = Stripe(
   'pk_test_51J69McLJWUFHJnVSrgJ6QIdRoxJTLxAE5YSAUztis2OCSRNWrqqWyp6BuLYPnTpq3Wn0xyHhxEO8NLakiGkk0mSA00yKoWcotW'
 );
 
-export const checkoutCart = async (nonce, dueDate) => {
+const checkoutCart = async (nonce, dueDate) => {
   try {
     // 1) Get checkout session from API
 
@@ -23,7 +23,7 @@ export const checkoutCart = async (nonce, dueDate) => {
       sessionId: session.data.session.id,
     });
   } catch (err) {
-    console.log(err);
     showAlert('error', err);
   }
 };
+export default checkoutCart;

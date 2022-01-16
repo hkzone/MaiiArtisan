@@ -1,5 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const Product = require('../models/productModel');
+
 const User = require('../models/userModel');
 const Order = require('../models/orderModel');
 const catchAsync = require('../utils/catchAsync');
@@ -7,69 +7,65 @@ const factory = require('./handlerFactory');
 const Security = require('../utils/security');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  // 1) Get the
-  // if (Security.isValidNonce(req.body.nonce, req)) {
-  const cart = req.session.cart ? req.session.cart : null;
+  // 1) Check if there's a valid session
+  if (Security.isValidNonce(req.body.nonce, req)) {
+    const cart = req.session.cart ? req.session.cart : null;
 
-  // 2) Create checkout session
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    // success_url: `${req.protocol}://${req.get('host')}/my-tours/?tour=${
-    //   req.params.tourId
-    // }&user=${req.user.id}&price=${tour.price}`,
-    success_url: `${req.protocol}://${req.get('host')}/my-orders?alert=order`,
-    cancel_url: `${req.protocol}://${req.get('host')}/`,
-    customer_email: req.user.email,
-    client_reference_id: req.params.Id,
-    mode: 'payment',
-    metadata: { dueDate: req.body.dueDate },
-    line_items: cart.items.map((el) => ({
-      price_data: {
-        // product: el.id,
-        product_data: {
-          name: el.name,
-          description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
-            el.flavor ? ` Flavor: ${el.flavor}, ` : ''
-          }${el.option ? ` Option: ${el.option}, ` : ''} ${
-            el.message ? `Message: ${el.message}, ` : ''
-          }`,
-          //TODO: remove comments once hosted
-          images: [
-            `${req.protocol}://${req.get('host')}/images/products/${
-              el.imageCover
+    // 2) Create checkout session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+
+      success_url: `${req.protocol}://${req.get('host')}/my-orders?alert=order`,
+      cancel_url: `${req.protocol}://${req.get('host')}/`,
+      customer_email: req.user.email,
+      client_reference_id: req.params.Id,
+      mode: 'payment',
+      metadata: { dueDate: req.body.dueDate },
+      line_items: cart.items.map((el) => ({
+        price_data: {
+          product_data: {
+            name: el.name,
+            description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
+              el.flavor ? ` Flavor: ${el.flavor}, ` : ''
+            }${el.option ? ` Option: ${el.option}, ` : ''} ${
+              el.message ? `Message: ${el.message}, ` : ''
             }`,
-          ],
-          metadata: {
-            id: el._id.toString(),
-            customColor: el.color,
-            customFlavor: el.flavor,
-            customMessage: el.message,
+            images: [
+              `${req.protocol}://${req.get('host')}/images/products/${
+                el.imageCover
+              }`,
+            ],
+            metadata: {
+              id: el._id.toString(),
+              customColor: el.color,
+              customFlavor: el.flavor,
+              customMessage: el.message,
+            },
           },
+          unit_amount: el.price * 100,
+          currency: process.env.LOCALE_CURRENCY,
         },
-        unit_amount: el.price * 100,
-        currency: process.env.LOCALE_CURRENCY,
-      },
-      quantity: el.qty,
-    })),
-  });
+        quantity: el.qty,
+      })),
+    });
 
-  // 3) Create session as response
-  res.status(200).json({
-    status: 'success',
-    session,
-  });
-  // } else {
-  //   res.redirect('/');
-  // }
+    // 3) Create session as response
+    res.status(200).json({
+      status: 'success',
+      session,
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
 //TODO: COMMENT OUT  AFTER DEPLOYMENT
 // exports.createOrderCheckout = catchAsync(async (req, res, next) => {
 //   // This is only TEMPORARY, because it's UNSECURE: everyone can make orders without paying
-//   const { tour, user, price } = req.query;
+//   const { product, user, price } = req.query;
 
-//   if (!tour && !user && !price) return next();
-//   await Order.create({ tour, user, price });
+//   if (!product && !user && !price) return next();
+//   await Order.create({ product, user, price });
 
 //   res.redirect(req.originalUrl.split('?')[0]);
 // });
@@ -79,9 +75,6 @@ const createOrderCheckout = async (session) => {
   const expandedData = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ['line_items.data.price.product'],
   });
-
-  // const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-  // console.log('lineItems', lineItems);
   const isPaid = true;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const totalAmount = session.amount_total / 100;
@@ -111,7 +104,6 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
-  console.log('event.data.object', event.data.object);
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed')
     createOrderCheckout(event.data.object);

@@ -1,18 +1,21 @@
-//jshint esversion:6
-// import * as PIXI from "./pixi.min.js";
-// import "./unsafe-eval.min.js";
-export const render3dImage = (
-  id_selector,
-  filepath_main,
-  filepath_map,
-  PIXI
-) => {
-  let cWidth = Math.trunc(
+/* eslint-disable new-cap */
+import * as PIXI from 'pixi.js';
+import { install } from '@pixi/unsafe-eval';
+
+const render3dImage = (idSelector, filepathMain, filepathMap) => {
+  // Apply the patch to PIXI
+  install(PIXI);
+
+  // Create the renderer with patch applied
+  // eslint-disable-next-line no-unused-vars
+  const renderer = new PIXI.Renderer();
+
+  const cWidth = Math.trunc(
     window.innerWidth < 768
       ? Math.max(window.innerWidth / 2.2, window.innerHeight / 2.2)
       : Math.min(window.innerWidth / 2.2, 600)
   );
-  let cHeight = cWidth;
+  const cHeight = cWidth;
 
   //for 3:2ratio
   // if (cHeight / cWidth < 0.75) {
@@ -20,22 +23,22 @@ export const render3dImage = (
   // } else if (cHeight / cWidth > 0.75) {
   //   cHeight = cWidth;
   // }
-  let app = new PIXI.Application({ width: cWidth, height: cHeight });
+  const app = new PIXI.Application({ width: cWidth, height: cHeight });
 
-  document.body.querySelector(id_selector).appendChild(app.view);
-  let img = new PIXI.Sprite.from(filepath_main);
-  img.width = (cHeight / img.height) * img.width;
+  document.body.querySelector(idSelector).appendChild(app.view);
+  const img = new PIXI.Sprite.from(filepathMain);
+  img.width *= cHeight / img.height;
   img.height = cHeight;
-  // img.x = cWidth / 2 - img.width / 2;
+
   app.stage.addChild(img);
 
-  let depthMap = new PIXI.Sprite.from(filepath_map);
-  depthMap.width = (cHeight / depthMap.height) * depthMap.width;
+  const depthMap = new PIXI.Sprite.from(filepathMap);
+  depthMap.width *= cHeight / depthMap.height;
   depthMap.height = cHeight;
-  // depthMap.x = cWidth / 2 - depthMap.width / 2;
+
   app.stage.addChild(depthMap);
 
-  let displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
+  const displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
   app.stage.filters = [displacementFilter];
 
   window.onmousemove = function (e) {
@@ -44,4 +47,4 @@ export const render3dImage = (
   };
 };
 
-// render3dImage(".image3d", "./image.jpg", "./image_depth.jpg");
+export default render3dImage;

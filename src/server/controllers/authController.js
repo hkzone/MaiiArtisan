@@ -5,13 +5,11 @@ const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
-// const { log } = require('console');
 
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (id) =>
+  jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-};
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
@@ -83,6 +81,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
+
   // 1)Getting token and check of it's there
   if (
     req.headers.authorization &&
@@ -93,7 +92,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
 
-  //   console.log(token);
   if (!token) {
     return next(
       new AppError("You're not logged in. Please log in to get access", 401)
@@ -101,7 +99,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
   // 2) Varification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  //console.log(decoded);
+
   // 3) Check if user still exists
   const freshUser = await User.findById(decoded.id);
   if (!freshUser) {
@@ -109,14 +107,15 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError('The user belonging to this token no longer exists', 401)
     );
   }
-  //Check if user changed password after the token was issued
+
+  // 4)Check if user changed password after the token was issued
   if (freshUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError('User recently changed password! Please log in again', 401)
     );
   }
 
-  // Grant user access to protected route
+  // 5) Grant user access to protected route
   req.user = freshUser;
   res.locals.user = freshUser;
   next();
@@ -166,9 +165,10 @@ exports.logout = (req, res) => {
   res.status(200).json({ status: 'success' });
 };
 
-exports.restrictTo = (...roles) => {
-  return (req, res, next) => {
-    // Roles ['admin','lead-guide']
+exports.restrictTo =
+  (...roles) =>
+  (req, res, next) => {
+    // Roles ['admin','sales']
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError('You do not have permition to perform this action', 403)
@@ -176,7 +176,6 @@ exports.restrictTo = (...roles) => {
     }
     next();
   };
-};
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email

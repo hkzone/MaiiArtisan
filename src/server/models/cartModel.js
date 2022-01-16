@@ -1,11 +1,13 @@
 class Cart {
   static addToCart(product = null, reqBody, cart) {
     const { weight, qty, color, flavor, date, option, message } = reqBody;
+
     if (!this.inCart(product._id, cart)) {
       const format = new Intl.NumberFormat(process.env.LOCALE_LANG, {
         style: 'currency',
         currency: process.env.LOCALE_CURRENCY,
       });
+
       const prod = {
         _id: product._id,
         name: product.name,
@@ -38,8 +40,6 @@ class Cart {
   }
 
   static updateCart(quantitiesAndIds = [], cart) {
-    console.log('quantitiesAndIds = ', quantitiesAndIds);
-    console.log('cart=', cart);
     let updated = false;
     quantitiesAndIds.forEach((obj) => {
       cart.items.forEach((item) => {

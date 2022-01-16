@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const AppError = require('../utils/appError');
 const cartController = require('./cartController');
 
@@ -70,6 +71,7 @@ const sendErrorProd = (err, req, res) => {
     }
   } else {
     //b) Rendered web-site
+    let msg;
     if (err.isOperational) {
       msg = err.message;
     } else {

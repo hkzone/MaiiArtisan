@@ -1,8 +1,8 @@
 const multer = require('multer');
 const sharp = require('sharp');
-const Product = require('./../models/productModel');
-const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
+const Product = require('../models/productModel');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 
 const multerStorage = multer.memoryStorage();
@@ -21,7 +21,6 @@ const upload = multer({
 });
 
 exports.uploadProductImages = upload.fields([
-  // = upload.single('imageCover');
   { name: 'imageCover', maxCount: 1 },
   { name: 'images', maxCount: 3 },
 ]);
@@ -60,50 +59,8 @@ exports.resizeProductImages = catchAsync(async (req, res, next) => {
   next();
 });
 
-//upload.array('images',5);
-
-exports.aliasTopProducts = (req, res, next) => {
-  req.query.limit = '5';
-  req.query.sort = '-ratingsAverage,price';
-  req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
-  next();
-};
-
 exports.getAllProducts = factory.getAll(Product);
-
-// exports.getProduct = factory.getOne(Product, { path: 'reviews' });
+exports.getProduct = factory.getOne(Product);
 exports.createProduct = factory.createOne(Product);
 exports.updateProduct = factory.updateOne(Product);
 exports.deleteProduct = factory.deleteOne(Product);
-
-exports.getProductStats = catchAsync(async (req, res, next) => {
-  const stats = await Product.aggregate([
-    {
-      $match: { ratingsAverage: { $gte: 4.5 } },
-    },
-    {
-      $group: {
-        _id: { $toUpper: '$difficulty' },
-        numProducts: { $sum: 1 },
-        numRatings: { $sum: '$ratingsQuantity' },
-        avgRating: { $avg: '$ratingsAverage' },
-        avgPrice: { $avg: '$price' },
-        minPrice: { $min: '$price' },
-        maxPrice: { $max: '$price' },
-      },
-    },
-    {
-      $sort: { avgPrice: 1 },
-    },
-    // {
-    //   $match: { _id: { $ne: 'EASY' } }
-    // }
-  ]);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      stats,
-    },
-  });
-});

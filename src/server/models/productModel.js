@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
-// const User = require('./userModel');
 const productSchema = new mongoose.Schema(
   {
     name: {
@@ -56,17 +55,6 @@ const productSchema = new mongoose.Schema(
       required: [true, 'A product must have a custom flavors option specified'],
       default: false,
     },
-    ratingsAverage: {
-      type: Number,
-      default: 4.5,
-      min: [1, 'A rating must be above 0'],
-      max: [5, 'A rating must be bellow or equal 5'],
-      set: (val) => Math.round(val * 10) / 10,
-    },
-    ratingsQuantity: {
-      type: Number,
-      default: 0,
-    },
     price: {
       type: Number,
       required: [true, 'A product price is required'],
@@ -118,21 +106,10 @@ const productSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-//productSchema.index({ price: 1 });
-productSchema.index({ price: 1, ratingsAverage: -1 });
+
+productSchema.index({ price: 1 });
 productSchema.index({ slug: 1 });
 productSchema.index({ name: 1 });
-
-// productSchema.virtual('durationWeeks').get(function () {
-//   return this.duration / 7;
-// });
-
-//Virtual populate
-productSchema.virtual('reviews', {
-  ref: 'Review',
-  foreignField: 'product',
-  localField: '_id',
-});
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
 productSchema.pre('save', function (next) {
@@ -140,50 +117,14 @@ productSchema.pre('save', function (next) {
   next();
 });
 
-// productSchema.pre('save', async function (next) {
-//   const guidesPromises = this.guides.map(async (id) => await User.findById(id));
-//   this.guides = await Promise.all(guidesPromises);
-//   next();
-// });
-
-// productSchema.pre('save', function(next) {
-//   console.log('Will save document...');
-//   next();
-// });
-
-// productSchema.post('save', function(doc, next) {
-//   console.log(doc);
-//   next();
-// });
-
 // QUERY MIDDLEWARE
-// productSchema.pre('find', function(next) {
 productSchema.pre(/^find/, function (next) {
   this.find({ secretProduct: { $ne: true } });
-
-  this.start = Date.now();
   next();
 });
 
-//FIXME: no need this kind?
-// productSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'guides',
-//     select: '-__v -passwordChangedAt',
-//   });
-//   next();
-// });
-
 // productSchema.post(/^find/, function (docs, next) {
 //   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
-//   next();
-// });
-
-// AGGREGATION MIDDLEWARE
-// productSchema.pre('aggregate', function (next) {
-//   this.pipeline().unshift({ $match: { secretProduct: { $ne: true } } });
-
-//   // console.log(this.pipeline());
 //   next();
 // });
 

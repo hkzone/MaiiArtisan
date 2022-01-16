@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('./userModel');
 
 const orderSchema = new mongoose.Schema({
   user: {
@@ -60,11 +59,12 @@ const orderSchema = new mongoose.Schema({
 });
 
 orderSchema.pre(/^find/, function (next) {
-  this.populate('orderItems.product').populate({
-    path: 'product',
-    select: 'name',
+  this.populate('product').populate({
+    path: 'orderItems.product',
+    select: ['name', 'images', 'imageCover'],
   });
-  this.populate('orderItems.user').populate({
+
+  this.populate('user').populate({
     path: 'user',
     select: 'name',
   });

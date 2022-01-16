@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import axios from 'axios';
 import { showAlert } from './alerts';
 
@@ -29,8 +30,9 @@ export const logout = async () => {
       method: 'GET',
       url: '/api/v1/users/logout',
     });
+
     if (res.data.status === 'success') {
-      location.reload(true);
+      location.assign('/');
     }
   } catch (err) {
     showAlert('error', 'Error logging out! Try again later');

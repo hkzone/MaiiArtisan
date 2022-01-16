@@ -23,7 +23,6 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
-// const reviewRouter = require('./routes/reviewRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const cartRouter = require('./routes/cartRoutes');
@@ -33,13 +32,15 @@ const orderController = require('./controllers/orderController');
 
 const app = express();
 
-//For HEROKU
+// For HEROKU
 app.enable('trust proxy');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// 1) GLOBAL MIDDLEWARES
+// ************************************************************************** //
+// ************************** 1) GLOBAL MIDDLEWARES ************************* //
+// ************************************************************************** //
 
 //Implement CORS
 app.use(cors());
@@ -51,6 +52,7 @@ app.use(express.static(path.join(__dirname, './public/')));
 
 // Set security HTTP headers
 app.use(helmet());
+
 //Development logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -88,20 +90,14 @@ app.use(cookieParser());
 
 //Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
+
 //Data sanitization against XSS
 app.use(xss());
 
 //prevent parameter pollution
 app.use(
   hpp({
-    whitelist: [
-      // 'duration',
-      // 'ratingsAverage',
-      // 'ratingsQuantity',
-      // 'maxGroupSize',
-      // 'difficulty',
-      'price',
-    ],
+    whitelist: ['price'],
   })
 );
 
@@ -113,11 +109,14 @@ app.use((req, res, next) => {
   next();
 });
 
-//for shopping cart
+// ************************************************************************** //
+// ************************** 2) For shopping cart ************************** //
+// ************************************************************************** //
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
+
 const store = new MongoDBStore({
   uri: DB,
   collection: process.env.DATABASE_SESSIONS,
@@ -135,11 +134,13 @@ app.use(
   })
 );
 
-//3) ROUTES
+// ************************************************************************** //
+// ******************************** 3) ROUTES ******************************* //
+// ************************************************************************** //
 app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
-// app.use("/api/v1/reviews", reviewRouter);
+
 app.use('/api/v1/orders', orderRouter);
 app.use('/cart', cartRouter);
 app.use('/contact', contactRouter);

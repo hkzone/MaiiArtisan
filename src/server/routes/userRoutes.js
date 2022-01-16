@@ -20,18 +20,21 @@ router.patch(
 
   authController.updatePassword
 );
+
 router.get(
   '/me',
 
   userController.getMe,
   userController.getUser
 );
+
 router.patch(
   '/updateMe',
   userController.uploadUserPhoto,
   userController.resizeUserPhoto,
   userController.updateMe
 );
+
 router.delete('/deleteMe', userController.deleteMe);
 
 // ALL ROUTES WILL BE RESTRICTED TP ADMIN AFTER THIS MIDDLEWARE

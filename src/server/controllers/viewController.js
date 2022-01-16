@@ -1,14 +1,11 @@
 const Product = require('../models/productModel');
 const User = require('../models/userModel');
-const Cart = require('../models/cartModel');
 const Config = require('../models/configModel');
 const Order = require('../models/orderModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Security = require('../utils/security');
 const cartController = require('./cartController');
-const orderController = require('./orderController');
-const axios = require('axios');
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
@@ -19,61 +16,42 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getIndex = catchAsync(async (req, res, next) => {
-  //1) Get Feaured Product data from collection
+  //1) Get Featured Product data from collection
   const products = await Product.find({
     isFeatured: true,
     isAvailable: true,
   }).limit(14);
-  console.log('isLoggedIn');
 
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  //2) Build template
-  //3) Render that template using data from step 1
-  //3) Render  template
-
+  // 2)  Build and render template using data from step 1)
   res.status(200).render('index', {
     products: products,
-    user: res.user,
+    // user: res.user,
     isFrontPage: true,
     cartQty,
   });
 });
 
 exports.getShop = catchAsync(async (req, res, next) => {
-  //1) Get Feaured Product data from collection
+  //1) Get Featured Product data from collection
   const products = await Product.find({ isAvailable: true });
-  console.log('isLoggedIn');
 
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  //2) Build template
-  //3) Render that template using data from step 1
-  //3) Render  template
-
+  // 2)  Build and render template using data from step 1)
   res.status(200).render('shop', {
     products: products,
-    user: res.user,
+    // user: res.user,
     isFrontPage: false,
     cartQty,
   });
 });
 
-// exports.getOverview = catchAsync(async (req, res, next) => {
-//   //1) Get Product data from collection
-//   const products = await Product.find();
-//   //2) Build template
-//   //3) Render that template using data from step 1
-//   res.status(200).render('overview', { title: 'All products', products });
-// });
-
 exports.getProduct = catchAsync(async (req, res, next) => {
   //1) Get the data for the requested product
   const product = await Product.findOne({ slug: req.params.slug });
-  /*.populate({
-    path: 'reviews',
-    fields: 'review rating user',
-  })*/
+
   const config = await Config.findOne({});
 
   if (!product) {
@@ -89,9 +67,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
 
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  //2) Build template
-
-  //3) Render that template using data from step 1)
+  // 2)  Build and render template using data from step 1)
 
   res.status(200).render('product', {
     title: `${product.name}`,
@@ -112,8 +88,13 @@ exports.getLoginForm = (req, res) => {
   // );
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  res.status(200).render('login', { title: 'Login', user: res.user, cartQty });
+  res.status(200).render('login', {
+    title: 'Login',
+    //  user: res.user,
+    cartQty,
+  });
 };
+
 exports.getSignupForm = (req, res) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
@@ -121,14 +102,13 @@ exports.getSignupForm = (req, res) => {
   //   'Content-Security-Policy',
   //   "script-src 'self' cdn.jsdelivr.net  blob: data: gap:"
   // );
-  // console.log(User.schema.path('address.region').enumValues);
   const region = User.schema.path('address.region').enumValues;
   const district = User.schema.path('address.dcDistrict').enumValues;
   res.status(200).render('signup', {
     title: 'Signup',
     region: region,
     district: district,
-    user: res.user,
+    // user: res.user,
     cartQty,
   });
 };
@@ -138,15 +118,11 @@ exports.getAccount = (req, res) => {
   res.status(200).render('account', { title: 'Your account', cartQty });
 };
 
-exports.getMyProducts = catchAsync(async (req, res, next) => {
+exports.getMyOrders = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  // 1) Find all orders
+  // 1) Find orders that belong to user
   const orders = await Order.find({ user: req.user.id });
-
-  // 2) Find products with the returned IDs
-  //const productIDs = orders.map((el) => el.product);
-  //const products = await Product.find({ _id: { $in: productIDs } });
 
   res.status(200).render('myOrders', {
     title: 'My Orders',
@@ -161,6 +137,8 @@ exports.getProducts = catchAsync(async (req, res, next) => {
   // 1) Find all products
   const allProducts = await Product.find({});
 
+  // 2)  Build and render template using data from step 1)
+
   res.status(200).render('products', {
     title: 'products',
     allProducts: allProducts,
@@ -172,7 +150,7 @@ exports.getOrders = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
   // 1) Find all orders
-  // const allOrders = await Order.find({}).populate('user');
+  const allOrders = await Order.find({}).populate('user');
 
   res.status(200).render('allOrders', {
     title: 'orders',
@@ -184,7 +162,7 @@ exports.getOrders = catchAsync(async (req, res, next) => {
 exports.getAdminSettings = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
-  // 1) Find all orders
+  // 1) Find all settings
   const settings = await Config.find({});
 
   res.status(200).render('adminSettings', {
@@ -193,18 +171,3 @@ exports.getAdminSettings = catchAsync(async (req, res, next) => {
     cartQty,
   });
 });
-
-// exports.updateUserData = catchAsync(async (req, res, next) => {
-//   const updatedUser = await User.findByIdAndUpdate(
-//     req.user.id,
-//     {
-//       name: req.body.name,
-//       email: req.body.email,
-//     },
-//     { new: true, runValidators: true }
-//   );
-
-//   res
-//     .status(200)
-//     .render('account', { title: 'Your account', user: updatedUser });
-// });

@@ -5,17 +5,6 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/users');
-//   },
-//   filename: (req, file, cb) => {
-//     // user-e34254253tfs32-34324234324.jpg
-//     const ext = file.mimetype.split('/')[1];
-//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-//   },
-// });
-
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -42,7 +31,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/images/users/${req.file.filename}`);
+    .toFile(`src/server/public/images/users/${req.file.filename}`);
 
   next();
 });
@@ -69,6 +58,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
         400
       )
     );
+
   //2) Update user document
   const filteredBody = filterObj(req.body, 'name', 'email');
   if (req.file) filteredBody.photo = req.file.filename;
@@ -76,7 +66,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
-  // console.log(updatedUser,filteredBody);
 
   res.status(200).json({
     status: 'success',
@@ -102,6 +91,7 @@ exports.createUser = (req, res) => {
     message: 'This route is not defined! Please use /signup instead.',
   });
 };
+
 //Do not update passwords with this
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
