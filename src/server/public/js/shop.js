@@ -34,6 +34,27 @@ export const Store = {
 export const shopHandler = () => {
   const productWrapper = document.querySelector('.product-wrapper');
   if (productWrapper) {
+    // ***************************** Carousel Slider **************************** //
+
+    $('#carousel-multiple').on('slide.bs.carousel', function (e) {
+      var $e = $(e.relatedTarget);
+      var idx = $e.index();
+      var itemsPerSlide = 5;
+      var totalItems = $('.carousel-item').length;
+
+      if (idx >= totalItems - (itemsPerSlide - 1)) {
+        var it = itemsPerSlide - (totalItems - idx);
+        for (var i = 0; i < it; i++) {
+          // append slides to end
+          if (e.direction == 'left') {
+            $('.carousel-item').eq(i).appendTo('.carousel-inner');
+          } else {
+            $('.carousel-item').eq(0).appendTo('.carousel-inner');
+          }
+        }
+      }
+    });
+
     // ****************************** IMAGE SLIDER ****************************** //
     const thumbnails = document.getElementsByClassName('product-thumbnail');
     const activeImages = document.getElementsByClassName('product-active');
@@ -84,7 +105,17 @@ export const shopHandler = () => {
       } else {
         input.val(0);
       }
+
+      //Change total price
+      let totalUnits = 1;
+      $(`input[type='number']`).each(function () {
+        totalUnits *= $(this).val() / parseInt($(this).data('increaseby'), 10);
+      });
+      $('.product-price span').text(
+        totalUnits * parseInt($('#price').val(), 10)
+      );
     });
+
     $('.input-number').focusin(function () {
       $(this).data('oldValue', $(this).val());
     });

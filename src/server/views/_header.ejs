@@ -27,7 +27,7 @@
 
     <!-- Nav Bar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="main__navbar">
-      <a class="navbar-brand" href="/">MAII Artisan Patisserie</a>
+      <a class="navbar-brand" href="/">Maii Artisan Patisserie</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -55,13 +55,21 @@
           </li>
            <li class="nav-item">
             <a class="nav-link" href="/shop">Shop</a>
-         
-          <li class="nav-item d-flex flex-column justify-content-center">
+          </li>
+          </ul>
+            <ul class="navbar-nav ml-auto">
+          <li class="nav-item d-flex flex-column justify-content-center cart">
             <span>
               <a class="nav-link" href="/cart">
-                <i class="fas fa-cart-arrow-down"></i> <sup><%= typeof cartQty!== undefined && cartQty>0 ?` ${cartQty} items`:' (0)' %></sup>
-              </a>
+                <!-- <i class="fas fa-cart-arrow-down"></i> -->
+                <svg viewBox="0 0 28 28">
+                  <path fill="none" d="M7.24,9.5H20.77A2,2,0,0,1,22.7,11l3.23,12h0A2,2,0,0,1,24,25.5H4A2,2,0,0,1,2.07,23L5.31,11h0A2,2,0,0,1,7.24,9.5Z"/>
+                  <path fill="none" d="M12.31,3.5h3.42a2,2,0,0,1,1.92,1.43L19,9.5H9l1.39-4.58h0A2,2,0,0,1,12.31,3.5Z"/>
+                  </svg>
+                   <span class="quantity"><%= typeof cartQty!== undefined && cartQty>0 ?` ${cartQty}`:' 0' %></span>
+                </a>              
             </span>
+            
            </li>
           <% if (user!==undefined){ %>
 

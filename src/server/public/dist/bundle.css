@@ -377,6 +377,19 @@ body .container-xl .carousel-indicators {
 .product-wrapper {
   margin-bottom: 4rem !important;
 }
+.product-wrapper p {
+  padding: 0.5rem 2.2rem;
+}
+.product-wrapper .product-price {
+  font-size: 1.5rem;
+  color: #c59f4e;
+}
+.product-wrapper .form-group {
+  padding: 0 2.2rem;
+}
+.product-wrapper .input-group-btn {
+  width: 2.2rem;
+}
 .product-wrapper .product-column {
   width: 100%;
   padding: 1rem;
@@ -448,6 +461,157 @@ body .container-xl .carousel-indicators {
 }
 .product-wrapper .product-column #product-slide-wrapper #product-slider::-webkit-scrollbar-thumb:hover {
   background-color: #4b545c;
+}
+
+/*
+    Carousell slider
+    code by Iatek LLC 2018 - CC 2.0 License - Attribution required
+    code customized by Azmind.com
+*/
+#carousel-multiple {
+  /* MD */
+  /* LG */
+}
+#carousel-multiple .carousel-inner {
+  width: 80%;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #carousel-multiple {
+    /* Show 4th slide on md if col-md-4*/
+  }
+  #carousel-multiple .carousel-inner .active.col-md-4.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -33.3333%;
+    /*change this with javascript in the future*/
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  #carousel-multiple {
+    /* Show 3rd slide on sm if col-sm-6*/
+  }
+  #carousel-multiple .carousel-inner .active.col-sm-6.carousel-item + .carousel-item + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -50%;
+    /*change this with javascript in the future*/
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+}
+@media (min-width: 576px) {
+  #carousel-multiple {
+    /* show 2 items */
+    /* left or forward direction */
+    /* farthest right hidden item must be also positioned for animations */
+    /* right or prev direction */
+  }
+  #carousel-multiple .carousel-item {
+    margin-right: 0;
+  }
+  #carousel-multiple .carousel-inner .active + .carousel-item {
+    display: block;
+  }
+  #carousel-multiple .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+#carousel-multiple .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
+    transition: none;
+  }
+  #carousel-multiple .carousel-inner .carousel-item-next {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+  }
+  #carousel-multiple .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+#carousel-multiple .carousel-item-next.carousel-item-left + .carousel-item,
+#carousel-multiple .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+  #carousel-multiple .carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+  #carousel-multiple .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+#carousel-multiple .carousel-item-prev.carousel-item-right + .carousel-item,
+#carousel-multiple .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
+}
+@media (min-width: 768px) {
+  #carousel-multiple {
+    /* show 3rd of 3 item slide */
+    /* left or forward direction */
+    /* right or prev direction */
+  }
+  #carousel-multiple .carousel-inner .active + .carousel-item + .carousel-item {
+    display: block;
+  }
+  #carousel-multiple .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+    transition: none;
+  }
+  #carousel-multiple .carousel-inner .carousel-item-next {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+  }
+  #carousel-multiple .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+  #carousel-multiple .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
+}
+@media (min-width: 991px) {
+  #carousel-multiple {
+    /* show 4th item */
+    /* Show 5th slide on lg if col-lg-3 */
+    /* left or forward direction */
+    /* right or prev direction //t - previous slide direction last item animation fix */
+  }
+  #carousel-multiple .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+    display: block;
+  }
+  #carousel-multiple .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+    transition: none;
+  }
+  #carousel-multiple .carousel-inner .active.col-lg-3.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -25%;
+    /*change this with javascript in the future*/
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+  #carousel-multiple .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+  #carousel-multiple .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
 }
 
 .user-view {
@@ -620,7 +784,6 @@ body .container-xl .carousel-indicators {
 .cart-wrapper .cart-footer .btn:hover, .cart-wrapper .cart-footer .btn:focus, .cart-wrapper .cart-footer .btn:active {
   transform: translateY(-2px);
 }
-
 @media only screen and (max-width: 575px) {
   .cart-wrapper {
     padding: 1rem 0;
@@ -862,6 +1025,31 @@ smart-list-box {
     margin: 0 0.5rem;
   }
 }
+#main__navbar .cart {
+  position: relative;
+}
+#main__navbar .cart a:hover svg {
+  stroke: rgba(255, 255, 255, 0.75);
+}
+#main__navbar .cart a:hover .quantity {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+#main__navbar .cart svg {
+  stroke: rgba(255, 255, 255, 0.5);
+  height: 24px;
+}
+#main__navbar .cart .quantity {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 46%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 100%;
+  font-size: 0.7rem;
+}
+
 /* Footer */
 #footer {
   text-align: center;

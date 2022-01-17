@@ -1,6 +1,6 @@
 <%- include("./_header") -%>
 <main class="main container-xl product-wrapper">
-<div class="row">
+<div class="row mt-5 mb-4">
       <!-------------- LEFT PANEL -------------->
       <div class="col-md-5">
         <div class="product-column">
@@ -21,16 +21,16 @@
         </div>
       </div>
       <!-------------- RIGHT PANEL -------------->
-      <div class="col-md-7">
+      <div class="col-md-7 pl-0 ml-0">
          
-            <h1><%=product.name%></h1>
+            <h2><%=product.name%></h2>
             <hr>
-            <h3>$<%=product.price%></h3>
-            <p><%=product.description%></p>
+            <span class="product-price">HK$<span><%=product.price%></span></span>
+            <p class="text-left"><%=product.description%></p>
             <form class="form product-form needs-validation" novalidate action="/cart" method="post">
               <div class="form-row">
                 <!-------------- WEIGHT -------------->
-                <div class="col-md-6 form-group">
+                <div class="col-md-6 form-group  pl-0 pr-0">
                   <label for="weight">Choose weight</label>
                   <div class="input-group">
                     <span class="input-group-btn">
@@ -49,7 +49,7 @@
                   </div>
                 
                 <!-- ------------QUANTITY -------------->
-                <div class="col-md-6 form-group">
+                <div class="col-md-6 form-group pl-0 pr-0">
                   <label for="qty">Quantity</label>
 
                   <div class="input-group">
@@ -70,11 +70,11 @@
                 </div>
               </div>
 
-              <div class="form-row">
+              <div class="form-row align-items-end">
                 <!-------------- CUSTOM COLOR -------------->
                 <% if(product.customColors) { %>
                 <div class="col-md-6 form-group">
-                  <label for="color">Custom color (optional)</label>
+                  <label for="color">Custom color <span class="text-muted">(optional)</span></label>
                   <select class="custom-select d-block w-100" name="color">
                     <option value="">Choose...</option>
                     <% color.forEach(el=>{ %>
@@ -89,8 +89,8 @@
                 
                   <!-------------- CUSTOM FLAVOR -------------->
                   <% if(product.customFlavors) { %>
-                  <div class="col-md-6 form-group"></div>
-                  <label for="flavor">Flavor (optional)</label>
+                  <div class="col-md-6 form-group">
+                  <label for="flavor">Flavor <span class="text-muted">(optional)</span></label>
                   <select class="custom-select d-block w-100" name="flavor">
                     <option value="">Choose...</option>
                     <% flavor.forEach(el=>{ %>
@@ -102,13 +102,13 @@
                   </div>
                 </div>
                  <% } %>
-              </div>
+              <!-- </div> -->
 
-              <div class="form-row">
+              <!-- <div class="form-row"> -->
               
                 <!-------------- OPTIONS -------------->
                 <div class="col-md-6 form-group">
-                  <label for="color">Special options (optional)</label>
+                  <label for="color">Special options <span class="text-muted">(optional)</span></label>
                   <select class="custom-select d-block w-100" name="option" >
                     <option value="">Choose...</option>
                     <% options.forEach(el=>{ %>
@@ -124,7 +124,7 @@
               <div class="form-row">
                 <!--------------  Inscription Text ------------ -->
                 <div class="col-md-12 form-group">
-                  <label for="message">Inscription Text (optional)</label>
+                  <label for="message">Inscription Text <span class="text-muted">(optional)</span></label>
                   <input type="text" class="form-control" name="message" placeholder="maximum <%=maxLength%> characters" maxlength= <%=maxLength%> >
                   <div class="invalid-feedback">
                     Please provide a valid text.
@@ -139,14 +139,43 @@
                     <div class="col-md-12 form-group d-flex justify-content-end">
                       <input type="hidden" name="product_id" value="<%= product._id %>">
                       <input type="hidden" name="nonce" value="<%= nonce %>">
-                      <button type="submit" class="btn btn-dark pr__button" name="button">Add to cart</button>
+                      <input type="hidden" id="price" value="<%=product.price%>">
+                      <button type="submit" class="btn btn-dark pr__button mt-3" name="button">Add to cart</button>
                     </div>
           
             </form>
-   
-     
+          </div>
+        </div>
       </div>
-   
-</div>
+      <h5 class="m-4 text-left">YOU MIGHT ALSO LIKE</h5>
+      <div id="carousel-multiple" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner row  mx-auto" role="listbox">
+               <% products.forEach((elem,i) => { %>
+                <div class=" <%= i===0?"carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active":"carousel-item col-12 col-sm-6 col-md-4 col-lg-3"%>">
+                  <div class="product-img">
+                    <img src="/images/products/<%=elem.imageCover%>" class="img-fluid mx-auto d-block rounded shadow-sm m-2" alt="img1">
+                  </div>
+                  <div class="product-title">
+                    <a href="/product/<%=elem.slug%>">
+                      <p class=" text-sm-center font-small flex-center"><%=elem.name%></p>
+                    </a>
+                  </div>
+                </div>
+              <% }) %>    
+            </div>
+            <a class="carousel-control-prev" href="#carousel-multiple" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-multiple" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+
+
+
 </main>
 <%- include("./_footer") -%>

@@ -1,0 +1,31 @@
+#main__navbar {
+  .cart {
+    position: relative;
+
+    a:hover {
+      svg {
+        stroke: rgba(255, 255, 255, 0.75);
+      }
+      .quantity {
+        color: rgba(255, 255, 255, 0.75) !important;
+      }
+    }
+
+    svg {
+      stroke: rgba(255, 255, 255, 0.5);
+      height: 24px;
+    }
+
+    .quantity {
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.5);
+      position: absolute;
+      top: 46%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      line-height: 100%;
+      font-size: 0.7rem;
+    }
+  }
+}

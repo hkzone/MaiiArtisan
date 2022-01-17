@@ -51,7 +51,10 @@ exports.getShop = catchAsync(async (req, res, next) => {
 exports.getProduct = catchAsync(async (req, res, next) => {
   //1) Get the data for the requested product
   const product = await Product.findOne({ slug: req.params.slug });
-
+  const products = await Product.find({
+    isFeatured: true,
+    isAvailable: true,
+  }).limit(7);
   const config = await Config.findOne({});
 
   if (!product) {
@@ -72,6 +75,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   res.status(200).render('product', {
     title: `${product.name}`,
     product: product,
+    products: products,
     nonce: Security.md5(req.sessionID + req.headers['user-agent']),
     maxLength: config.customMessageLength,
     color: config.customColors,

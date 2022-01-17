@@ -1,7 +1,8 @@
-<%- include("./_header") -%> <% if(cart && cart.items.length > 0) { %>
+<%- include("./_header") -%> 
 <main class="main container-xl">
   <div class="cart-wrapper">
   <h2>Cart</h2>
+  <% if(cart && cart.items.length > 0) { %>
     <form action="/cart/update" method="post" class='form cart__update'>
       <table class="cart-table table ">
         <thead>
@@ -85,9 +86,18 @@
       </div>
     </form>
     <% } else { %>
-    <p class="alert alert-info">Sorry, no products in your cart.</p>
-      </div>
+      <!-- <p class="alert alert-info">Sorry, no products in your cart.</p> -->
+      <div class="d-flex flex-column mt-5 align-items-center justify-content-center"><p class="text-muted">You have nothing in your shopping cart. </p>
+      <a href="/shop"
+          ><button type="button " class="btn btn-dark btn-lg mt-2">
+            Continue Shopping
+          </button></a
+        >
+       </div>
+     
+    <% } %>
+  </div>
 </main>
-<% } %> <%- include("./_footer") -%>
+ <%- include("./_footer") -%>
 
 
