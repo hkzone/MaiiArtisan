@@ -1,10 +1,20 @@
+/* eslint-disable no-restricted-globals */
 import axios from 'axios';
 import checkoutCart from './stripe.js';
 
 import { showAlert } from './alerts';
 
-const updateCart = async (quantitiesAndIds, nonce) => {
+const updateCart = async (nonce) => {
   try {
+    const quantitiesAndIds = $('.qty')
+      .map(function () {
+        return {
+          qty: parseInt($(this).val(), 10),
+          product_id: $(this).data('productid'),
+        };
+      })
+      .toArray();
+
     await axios({
       method: 'POST',
       url: '/cart/update',
@@ -22,7 +32,7 @@ const cartHandler = () => {
   // DOM ELEMENTS
   const cart = document.querySelector('.cart-wrapper');
   const cartUpdateForm = document.querySelector('.cart__update');
-  const chekoutBtn = document.querySelector('.chekoutBtn');
+  const chekoutBtn = document.querySelector('.chekout-btn');
 
   if (cart) {
     // ************** Sets then min and max dates for order delivery ************ //
@@ -46,24 +56,28 @@ const cartHandler = () => {
     });
 
     // ******************************* Update cart ****************************** //
-    cartUpdateForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const quantitiesAndIds = $('.qty')
-        .map(function () {
-          return {
-            qty: parseInt($(this).val(), 10),
-            product_id: $(this).data('productid'),
-          };
-        })
-        .toArray();
-      updateCart(quantitiesAndIds, $('.nonce').attr('value'));
-    });
+    if (cartUpdateForm) {
+      cartUpdateForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formButton = cartUpdateForm.querySelector(
+          'button[type="submit"]'
+        );
+        formButton.disabled = true;
+        const textPrevious = formButton.innerHTML;
+        formButton.innerHTML = 'Processing...';
+        await updateCart($('.nonce').attr('value'));
+        formButton.innerHTML = textPrevious;
+        formButton.disabled = false;
+      });
 
-    // ****************************** Checkout Cart ***************************** //
-    chekoutBtn.addEventListener('click', (e) => {
-      e.target.textContent = 'Processing...';
-      checkoutCart($('.nonce').attr('value'), $('#due-date').val());
-    });
+      // ****************************** Checkout Cart ***************************** //
+      chekoutBtn.addEventListener('click', async (e) => {
+        e.target.disabled = true;
+        e.target.textContent = 'Processing...';
+        await updateCart($('.nonce').attr('value'));
+        location.assign('/checkout');
+      });
+    }
   }
 };
 

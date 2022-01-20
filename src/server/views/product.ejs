@@ -32,16 +32,16 @@
                 <!-------------- WEIGHT -------------->
                 <div class="col-md-6 form-group  pl-0 pr-0">
                   <label for="weight">Choose weight</label>
-                  <div class="input-group">
+                  <div class="d-flex align-items-center custom-input-number">
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="weight">
-                        <span>-</span>
+                        <span>&minus;</span>
                       </button>
                     </span>
-                    <input type="number" name="weight" class="form-control input-number" data-increaseBy=<%=product.weight[0]%> value=<%=product.weight[0]%> min=<%=product.weight[0]%> max=<%=product.weight[product.weight.length-1]%> readonly required>                    
+                    <input type="number" name="weight" class="form-control input-number text-center" data-increaseBy=<%=product.weight[0]%> value=<%=product.weight[0]%> min=<%=product.weight[0]%> max=<%=product.weight[product.weight.length-1]%> readonly required>                    
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="weight">
-                        <span>+</span>
+                        <span>&plus;</span>
                       </button>
                     </span>
                     <div class="invalid-feedback">Please provide weight.</div>
@@ -52,16 +52,16 @@
                 <div class="col-md-6 form-group pl-0 pr-0">
                   <label for="qty">Quantity</label>
 
-                  <div class="input-group">
+                  <div class="d-flex align-items-center custom-input-number">
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="qty">
-                        <span>-</span>
+                        <span>&minus;</span>
                       </button>
                     </span>
-                    <input type="number" name="qty" class="form-control input-number" data-increaseby="1" value="1" min="1" max="10" readonly required>
+                    <input type="number" name="qty" class="form-control input-number text-center" data-increaseby="1" value="1" min="1" max="10" readonly required>
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="qty">
-                        <span>+</span>
+                        <span>&plus;</span>
                       </button>
                     </span>
                     <div class="invalid-feedback">Please provide quantity.</div>

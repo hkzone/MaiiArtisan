@@ -4,6 +4,8 @@ import '@babel/polyfill';
 import accountHandler from './account';
 import cartHandler from './cart';
 import adminHandler from './admin';
+import formHandler from './form';
+import checkoutHandler from './checkout';
 import { shopHandler } from './shop';
 import app from './app';
 
@@ -15,8 +17,10 @@ import '../../../../node_modules/smart-webcomponents/source/styles/smart.default
 //Call app function on DOMContentLoaded event
 window.addEventListener('DOMContentLoaded', () => {
   app();
+  formHandler();
   accountHandler();
   cartHandler();
   adminHandler();
   shopHandler();
+  checkoutHandler();
 });

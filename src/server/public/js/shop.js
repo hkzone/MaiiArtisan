@@ -35,18 +35,18 @@ export const shopHandler = () => {
   const productWrapper = document.querySelector('.product-wrapper');
   if (productWrapper) {
     // ***************************** Carousel Slider **************************** //
-
-    $('#carousel-multiple').on('slide.bs.carousel', function (e) {
-      var $e = $(e.relatedTarget);
-      var idx = $e.index();
-      var itemsPerSlide = 5;
-      var totalItems = $('.carousel-item').length;
+    $('#carousel-multiple').on('slide.bs.carousel', (e) => {
+      const $e = $(e.relatedTarget);
+      const idx = $e.index();
+      const itemsPerSlide = 5;
+      const totalItems = $('.carousel-item').length;
 
       if (idx >= totalItems - (itemsPerSlide - 1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i = 0; i < it; i++) {
+        const it = itemsPerSlide - (totalItems - idx);
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < it; i++) {
           // append slides to end
-          if (e.direction == 'left') {
+          if (e.direction === 'left') {
             $('.carousel-item').eq(i).appendTo('.carousel-inner');
           } else {
             $('.carousel-item').eq(0).appendTo('.carousel-inner');
@@ -75,72 +75,6 @@ export const shopHandler = () => {
     });
     buttonRight.addEventListener('click', () => {
       document.getElementById('product-slider').scrollLeft += 180;
-    });
-
-    // ************************* Handle + and - for q-ty ************************ //
-    $('.btn-number').click(function (e) {
-      e.preventDefault();
-      const fieldName = $(this).data('field');
-      const type = $(this).data('type');
-      const input = $(`input[name='${fieldName}']`);
-      const incrementDecrement = parseInt(input.data('increaseby'), 10);
-      const currentVal = parseInt(input.val(), 10);
-
-      if (!currentVal.isNaN) {
-        if (type === 'minus') {
-          if (currentVal > input.attr('min')) {
-            input.val(currentVal - incrementDecrement).change();
-          }
-          if (parseInt(input.val(), 10) === input.attr('min')) {
-            $(this).attr('disabled', true);
-          }
-        } else if (type === 'plus') {
-          if (currentVal < input.attr('max')) {
-            input.val(currentVal + incrementDecrement).change();
-          }
-          if (parseInt(input.val(), 10) === input.attr('max')) {
-            $(this).attr('disabled', true);
-          }
-        }
-      } else {
-        input.val(0);
-      }
-
-      //Change total price
-      let totalUnits = 1;
-      $(`input[type='number']`).each(function () {
-        totalUnits *= $(this).val() / parseInt($(this).data('increaseby'), 10);
-      });
-      $('.product-price span').text(
-        totalUnits * parseInt($('#price').val(), 10)
-      );
-    });
-
-    $('.input-number').focusin(function () {
-      $(this).data('oldValue', $(this).val());
-    });
-
-    // ********************* Handle + and - for weight,size ********************* //
-    $('.input-number').change(function () {
-      const minValue = parseInt($(this).attr('min'), 10);
-      const maxValue = parseInt($(this).attr('max'), 10);
-      const valueCurrent = parseInt($(this).val(), 10);
-      const name = $(this).attr('name');
-
-      if (valueCurrent >= minValue) {
-        $(`.btn-number[data-type='minus'][data-field='${name}']`).removeAttr(
-          'disabled'
-        );
-      } else {
-        $(this).val($(this).data('oldValue'));
-      }
-      if (valueCurrent <= maxValue) {
-        $(`.btn-number[data-type='plus'][data-field='${name}']`).removeAttr(
-          'disabled'
-        );
-      } else {
-        $(this).val($(this).data('oldValue'));
-      }
     });
   }
 };

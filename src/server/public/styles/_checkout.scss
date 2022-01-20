@@ -1,0 +1,86 @@
+.checkout-wrapper {
+  section {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid $border-color-secondary;
+
+    &.muted {
+      color: $font-color-secondary;
+    }
+
+    &.non-active {
+      * {
+        pointer-events: none;
+      }
+      > div {
+        display: none;
+      }
+      > div:nth-of-type(1) {
+        display: block;
+        color: $font-color-secondary;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &.active {
+      > div {
+        display: block;
+      }
+
+      > div:nth-of-type(1) {
+        margin-bottom: 1.2rem;
+      }
+    }
+  }
+
+  .checkout-signin {
+    padding: 0;
+    min-height: auto;
+    background: inherit;
+  }
+
+  .modal {
+    .modal-close-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 0.2rem 0.5rem;
+    }
+  }
+
+  #signinModal {
+    .modal-dialog {
+      max-width: 20rem;
+      position: relative;
+    }
+  }
+
+  #signupModal {
+    .modal-dialog {
+      min-width: 100vw;
+      position: relative;
+    }
+    .modal-close-btn {
+      color: #fff;
+    }
+  }
+
+  .cart-item-totals {
+    padding-left: 0;
+    padding-right: 0;
+    > span {
+      color: $secondary-font-color;
+    }
+    a span {
+      font-size: 0.75rem !important;
+    }
+  }
+  .info * span {
+    color: $secondary-font-color;
+  }
+}

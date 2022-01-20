@@ -32,24 +32,24 @@ const accountHandler = () => {
         button.innerText = 'Processing...';
         button.disabled = true;
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const passwordConfirm =
-          document.getElementById('passwordConfirm').value;
-        const unit = document.getElementById('unit').value;
-        const floorNo = document.getElementById('floorNo').value;
-        const blockNo = document.getElementById('blockNo').value;
-        const buildingName = document.getElementById('buildingName').value;
-        const estateOrVillageName = document.getElementById(
-          'estateOrVillageName'
+        const name = signupForm.querySelector('#signup-name').value;
+        const email = signupForm.querySelector('#signup-email').value;
+        const password = signupForm.querySelector('#signup-password').value;
+        const passwordConfirm = signupForm.querySelector(
+          '#signup-passwordConfirm'
         ).value;
-        const buildingNo = document.getElementById('buildingNo').value;
-        const streetName = document.getElementById('streetName').value;
-        const district = document.getElementById('district').value;
-        const region = document.getElementById('region').value;
-        const phoneNumber = document.getElementById('phoneNumber').value;
-
+        const unit = signupForm.querySelector('#unit').value;
+        const floorNo = signupForm.querySelector('#floorNo').value;
+        const blockNo = signupForm.querySelector('#blockNo').value;
+        const buildingName = signupForm.querySelector('#buildingName').value;
+        const estateOrVillageName = signupForm.querySelector(
+          '#estateOrVillageName'
+        ).value;
+        const buildingNo = signupForm.querySelector('#buildingNo').value;
+        const streetName = signupForm.querySelector('#streetName').value;
+        const district = signupForm.querySelector('#district').value;
+        const region = signupForm.querySelector('#region').value;
+        const phoneNumber = signupForm.querySelector('#phoneNumber').value;
         await signup(
           name,
           email,

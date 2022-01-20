@@ -1,39 +1,73 @@
 <%- include("./_header") -%> 
 <main class="main container-xl">
-  <div class="cart-wrapper">
+  <div class="cart-wrapper p-5">
   <h2>Cart</h2>
   <% if(cart && cart.items.length > 0) { %>
-    <form action="/cart/update" method="post" class='form cart__update'>
-      <table class="cart-table table ">
+    <form class="form cart__update needs-validation" novalidate action="/cart/update" method="post" >
+      <table class="cart-table table">
         <thead>
           <tr>
-            <th scope="col">Picture</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
+            <th scope="col">Item</th>
             <th scope="col">Quantity</th>
-            <th scope="col">Remove</th>
+            <th scope="col">Price</th>           
           </tr>
         </thead>
         <tbody>
           <% cart.items.forEach(function(product) { %>
           <tr>
-            <td class="product-thumb">
+            <td class=" d-flex flex-row align-items-center pl-0 cart-item">
+              <a class="btn  btn-default" href="/cart/remove/<%= product._id%>/<%= nonce %>">
+                x
+              </a>
               <img
                 src="/images/products/<%= product.imageCover %>"
                 alt=""
-                class="img-thumbnail img-responsive"
+                class="img-responsive ml-1 product-thumb rounded shadow-sm"
               />
+              <div class="d-flex flex-column ml-3 text-left">
+                <h5><%= product.name %></h5>
+                <p class="text-muted font-weight-normal font-italic"><span>Weight: </span><%= product.weight%>
+                <% if(product.color){ %> 
+                  <br><span>Color: </span><%= product.color%>
+                <% } %> 
+                    <% if(product.flavor){ %> 
+                  <br><span>Flavor: </span><%= product.flavor%>
+                <% } %> 
+                    <% if(product.option){ %> 
+                  <br><span>Option: </span><%= product.option%>
+                <% } %> 
+                    <% if(product.message){ %> 
+                  <br><span>Message: </span><%= product.message%>
+                <% } %> 
+                </p>
+              </div>
             </td>
-            <td><%= product.name %></td>
-            <td><%= product.price %></td>
-            <td>
+          
+            <td class="td-qty">
+              <div class="d-flex align-items-center justify-content-center custom-input-number">
+                 
+                      <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="qty<%= product._id%>">
+                        <span>&minus;</span>
+                      </button>
+                    
               <input
-                class="qty"
-                type="text"
-                name="qty[]"
+                class="qty form-control input-number"
+                type="number"
+                name="qty<%= product._id%>"
                 value="<%= product.qty %>"
                 data-productId =<%= product._id%>
+                data-increaseBy="1"
+                 min="1" max="10" required
               />
+                
+                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="qty<%= product._id%>">
+                        <span>&plus;</span>
+                      </button>
+                    
+                    
+                    </div>
+                    <div class="invalid-feedback">Please provide weight.</div>
+                  
               <input
                 type="hidden"
                 class="product_id"
@@ -41,11 +75,8 @@
                 value="<%= product._id%>"
               />
             </td>
-             <td>
-              <a href="/cart/remove/<%= product._id%>/<%= nonce %>">
-                <i class="fas fa-minus"></i>
-              </a>
-            </td>
+            <td><%= product.price *parseInt(product.weight,10)/product.weightUnit %></td>
+            
           </tr>
 
           <% }); %>
@@ -57,20 +88,6 @@
         </tbody>
       </table>
 
-
-      <form class="form product-form needs-validation" novalidate >
-      <div class="form-row">
-                <!-------------- DATE -------------->
-                <div class="col-md-6 form-group">
-                  <label for="date">Choose your date </label>
-                  <input type="date" name="date" id="due-date" class="form-control" required>
-                  <span class="validity"></span>
-                  <div class="invalid-feedback">
-                    Please select a valid date.
-                  </div>
-                </div>
-                </div>
-      </form>
       <div class="clearfix cart-footer">
         <input class ='nonce' type="hidden" name="nonce" value="<%= nonce %>" />
         <button type="submit" class="btn btn-default pull-left">
@@ -79,7 +96,7 @@
         <a href="/cart/empty/<%= nonce %>" class="btn btn-default pull-left"
           ><i class="fas fa-trash"></i> Empty cart</a
         >
-        <button type="button" class="btn btn-default pull-right chekoutBtn"
+        <button type="button" class="btn btn-default pull-right chekout-btn"
           >Checkout <i class="fas fa-shopping-cart"></i></i
         ></a>
          </button>

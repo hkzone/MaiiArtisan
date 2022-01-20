@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import contactUs from './contactUs';
 import render3dImage from './3dimage.js';
 import { showAlert } from './alerts';
@@ -31,47 +30,6 @@ const app = () => {
       './../images/image_depth.jpg'
     );
   }
-
-  // ************************************************************************** //
-  // ******************* Validate bootstrap from dynamically ****************** //
-  // ************************************************************************** //
-  // fetch all the forms we want to apply custom style
-  const inputs = document.getElementsByClassName('form-control');
-
-  // loop over each input and watch blur event
-  const validation = Array.prototype.filter.call(inputs, (input) => {
-    input.addEventListener(
-      'blur',
-      () => {
-        // reset
-        input.classList.remove('is-invalid');
-        input.classList.remove('is-valid');
-
-        if (input.checkValidity() === false) {
-          input.classList.add('is-invalid');
-        } else {
-          input.classList.add('is-valid');
-        }
-      },
-      false
-    );
-  });
-
-  // ************************************************************************** //
-  // ************** Validate bootstrap forms on the submit event ************** //
-  // ************************************************************************** //
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.getElementsByClassName('needs-validation');
-  // Loop over them and prevent submission
-  const validation2 = Array.prototype.filter.call(forms, (form) => {
-    form.addEventListener('submit', (event) => {
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-      form.classList.add('was-validated');
-    });
-  });
 
   // ************************************************************************** //
   // ********************* Handle Contact Us functionality ******************** //

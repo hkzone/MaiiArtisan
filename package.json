@@ -4,7 +4,7 @@
   "main": "./src/server/app.js",
   "scripts": {
     "start": "node ./src/server/server.js",
-    "dev": "nodemon ./src/server/server.js",
+    "dev": "nodemon ./src/server/server.js --ignore public/",
     "start:prod": "NODE_ENV=production nodemon ./src/server/server.js",
     "debug": "ndb ./src/server/server.js",
     "watch:js": "parcel watch ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url .",

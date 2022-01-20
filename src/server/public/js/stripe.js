@@ -5,7 +5,7 @@ const stripe = Stripe(
   'pk_test_51J69McLJWUFHJnVSrgJ6QIdRoxJTLxAE5YSAUztis2OCSRNWrqqWyp6BuLYPnTpq3Wn0xyHhxEO8NLakiGkk0mSA00yKoWcotW'
 );
 
-const checkoutCart = async (nonce, dueDate) => {
+const checkoutCart = async (nonce, dueDate, shippingAddress) => {
   try {
     // 1) Get checkout session from API
 
@@ -15,6 +15,7 @@ const checkoutCart = async (nonce, dueDate) => {
       data: {
         nonce,
         dueDate,
+        shippingAddress,
       },
     });
 

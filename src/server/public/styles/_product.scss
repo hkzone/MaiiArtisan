@@ -108,6 +108,13 @@
   }
 }
 
+// ********************** Custom style of input number ********************** //
+.btn-number {
+  span {
+    font-size: 1.2rem;
+  }
+}
+
 /*
     Carousell slider
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
@@ -116,6 +123,12 @@
 #carousel-multiple {
   .carousel-inner {
     width: 80%;
+
+    p {
+      line-height: 2rem;
+      font-size: $small-font-size;
+      padding: 0;
+    }
   }
 
   @media (min-width: 768px) and (max-width: 991px) {

@@ -3,6 +3,11 @@
 .cart-wrapper {
   padding: 2rem;
 
+  .btn-number {
+    width: 1.2rem;
+    padding: 0;
+  }
+
   .cart-table {
     tbody tr {
       td {
@@ -10,18 +15,39 @@
       }
     }
 
+    .cart-item {
+      p {
+        font-size: 0.7rem;
+        span {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
     .product-thumb {
-      max-width: 5rem;
+      max-width: 6.25rem; //100px
+    }
+
+    .td-qty {
+      max-width: 6rem;
     }
 
     .qty {
-      width: 2em;
-      border: none;
-      margin: 0 2em;
+      width: 4em;
+      padding: 2px 5px;
       height: 100%;
       line-height: 2;
       text-align: center;
       background: transparent;
+      border-radius: 4px;
+      border: 1px solid $border-color-secondary;
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
     }
   }
 

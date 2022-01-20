@@ -175,3 +175,21 @@ exports.getAdminSettings = catchAsync(async (req, res, next) => {
     cartQty,
   });
 });
+
+exports.getCheckout = catchAsync(async (req, res) => {
+  const cartQty = cartController.checkQtyInCart(req, res);
+  const region = User.schema.path('address.region').enumValues;
+  const district = User.schema.path('address.dcDistrict').enumValues;
+
+  const sess = req.session;
+  const cart = typeof sess.cart !== 'undefined' ? sess.cart : false;
+  res.render('checkout', {
+    pageTitle: 'Checkout',
+    cart: cart,
+    region: region,
+    district: district,
+    nonce: Security.md5(req.sessionID + req.headers['user-agent']),
+    // user: res.user,
+    cartQty,
+  });
+});

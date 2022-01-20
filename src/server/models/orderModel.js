@@ -24,10 +24,10 @@ const orderSchema = new mongoose.Schema({
       customRequest: { type: String, default: '' },
     },
   ],
-  // shippingAddress: {
-  //   address: { type: String, required: true },
-  //   phoneNo: { type: String, required: true },
-  // },
+  shippingAddress: {
+    address: { type: String, required: true },
+    //   phoneNo: { type: String, required: true },
+  },
   // paymentMethod: { type: String, required: true },
 
   totalAmount: {

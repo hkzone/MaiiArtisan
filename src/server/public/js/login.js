@@ -16,7 +16,8 @@ export const login = async (email, password) => {
     if (res.data.status === 'success') {
       showAlert('success', 'Logged in successfully!');
       window.setTimeout(() => {
-        location.assign('/me');
+        if (location.pathname === '/checkout') location.reload();
+        else location.assign('/me');
       }, 1500);
     }
   } catch (err) {
@@ -32,7 +33,8 @@ export const logout = async () => {
     });
 
     if (res.data.status === 'success') {
-      location.assign('/');
+      if (location.pathname === '/checkout') location.reload();
+      else location.assign('/');
     }
   } catch (err) {
     showAlert('error', 'Error logging out! Try again later');
@@ -80,7 +82,8 @@ export const signup = async (
     if (res.data.status === 'success') {
       showAlert('success', 'Logged in successfully!');
       window.setTimeout(() => {
-        location.assign('/');
+        if (location.pathname === '/checkout') location.reload();
+        else location.assign('/');
       }, 1500);
     }
   } catch (err) {
