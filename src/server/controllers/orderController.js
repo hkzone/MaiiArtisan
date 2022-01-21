@@ -40,6 +40,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
               customColor: el.color,
               customFlavor: el.flavor,
               customMessage: el.message,
+              shippingAddress: el.shippingAddress,
             },
           },
           unit_amount: el.price * 100,
@@ -85,6 +86,7 @@ const createOrderCheckout = async (session) => {
     customColor: el.price.product.metadata.customColor,
     customFlavor: el.price.product.metadata.customFlavor,
     customMessage: el.price.product.metadata.customMessage,
+    shippingAddress: el.price.product.metadata.shippingAddress,
   }));
 
   await Order.create({
