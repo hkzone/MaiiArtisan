@@ -22,6 +22,7 @@ const orderSchema = new mongoose.Schema({
       customFlavor: { type: String, default: '' },
       customMessage: { type: String, default: '' },
       customRequest: { type: String, default: '' },
+      unitAmount: { type: Number, required: true },
     },
   ],
   shippingAddress: {

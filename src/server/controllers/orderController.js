@@ -94,6 +94,7 @@ const createOrderCheckout = async (session) => {
     customFlavor: el.price.product.metadata.customFlavor,
     customMessage: el.price.product.metadata.customMessage,
     weight: el.price.product.metadata.weight,
+    unitAmount: el.price.product.metadata.unit_amount,
   }));
 
   console.log(orderItems, shippingAddress);
