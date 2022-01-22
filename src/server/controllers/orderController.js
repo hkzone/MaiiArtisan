@@ -93,6 +93,8 @@ const createOrderCheckout = async (session) => {
     weight: el.price.product.metadata.weight,
   }));
 
+  console.log(orderItems);
+
   await Order.create({
     user,
     orderItems,
