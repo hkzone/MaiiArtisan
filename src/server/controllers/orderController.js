@@ -103,7 +103,7 @@ const createOrderCheckout = async (session) => {
     totalAmount,
     dueDate,
     isPaid,
-    shippingAddress,
+    shippingAddress: { address: shippingAddress },
   });
 };
 

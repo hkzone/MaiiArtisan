@@ -34,9 +34,11 @@ const checkoutHandler = () => {
         e.preventDefault();
         checkoutForm.querySelector('button[type="submit"]').innerHTML =
           'Processing...';
-        checkoutCart($('.nonce').attr('value'), $('#due-date').val(), {
-          address: $('input[name="customRadio"]:checked').val(),
-        });
+        checkoutCart(
+          $('.nonce').attr('value'),
+          $('#due-date').val(),
+          $('input[name="customRadio"]:checked').val()
+        );
       });
 
     // ********************************* LOGOUT ********************************* //

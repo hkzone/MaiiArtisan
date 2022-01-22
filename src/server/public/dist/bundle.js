@@ -9965,9 +9965,7 @@ var checkoutHandler = function checkoutHandler() {
     if (checkoutForm) checkoutForm.addEventListener('submit', function (e) {
       e.preventDefault();
       checkoutForm.querySelector('button[type="submit"]').innerHTML = 'Processing...';
-      (0, _stripe.default)($('.nonce').attr('value'), $('#due-date').val(), {
-        address: $('input[name="customRadio"]:checked').val()
-      });
+      (0, _stripe.default)($('.nonce').attr('value'), $('#due-date').val(), $('input[name="customRadio"]:checked').val());
     }); // ********************************* LOGOUT ********************************* //
 
     var logoutBtn = document.querySelector('.logout-btn');
