@@ -854,60 +854,41 @@ body .container-xl .carousel-indicators {
 }
 
 /* MY ORDERS */
-.table-my-orders * div {
-  padding: 0 !important;
+.myorders-container > div {
+  margin-bottom: 1.1rem;
 }
-.table-my-orders #img-wrap {
-  position: relative;
-  padding: 0 !important;
-  width: 6.25rem;
-  height: 6.25rem;
+.myorders-container .card-header > div {
+  font-size: 0.75rem;
 }
-.table-my-orders #img-wrap img {
-  object-fit: cover;
-  width: 6.25rem;
-  height: 6.25rem;
-  clip-path: inset(0 0% 0 50%);
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  transition: all 0.3s ease-out;
+.myorders-container .card-header > div :not(:last-child) {
+  margin-right: 0.5rem;
 }
-.table-my-orders #img-wrap img:nth-of-type(2) {
-  clip-path: inset(0% 50% 0% 0%);
+.myorders-container .card-header > div span:nth-of-type(1) {
+  color: #8c8c8c;
+  text-transform: uppercase;
 }
-.table-my-orders #img-wrap img:nth-of-type(2):hover {
-  clip-path: inset(0% 0% 0 0%);
-  z-index: 10;
+.myorders-container .card-header .see-more {
+  cursor: pointer;
 }
-.table-my-orders #img-wrap img:hover {
-  clip-path: inset(0 0% 0 0%);
-  z-index: 10;
+.myorders-container .cart-wrapper {
+  padding: 1.25rem;
 }
-.table-my-orders .panel-collapse {
-  padding: 1rem 0 0.5rem;
+.myorders-container .cart-wrapper table {
+  margin-bottom: 0;
 }
-.table-my-orders .panel-collapse p {
-  margin: 0;
-  padding: 0;
-  font-size: 0.9rem;
+.myorders-container .cart-wrapper .cart-item-totals {
+  padding-right: 0.75rem;
 }
-@media only screen and (max-width: 767px) {
-  .table-my-orders .table td,
-.table-my-orders .table th {
-    vertical-align: top !important;
-  }
+.myorders-container .card-footer {
+  background: transparent !important;
+  font-size: 0.75rem;
 }
-@media only screen and (max-width: 575px) {
-  .table-my-orders #img-wrap {
-    width: 4rem;
-    height: 4rem;
-  }
-  .table-my-orders #img-wrap img {
-    width: 4rem;
-    height: 4rem;
-  }
+.myorders-container .card-footer :not(:last-child) {
+  margin-right: 0.5rem;
+}
+.myorders-container .card-footer span:nth-of-type(1) {
+  color: #8c8c8c;
+  text-transform: uppercase;
 }
 
 .orders-container .dropdown-toggle:hover {

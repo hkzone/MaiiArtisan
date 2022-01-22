@@ -12,99 +12,95 @@
          <div class="account-products-container"></div>
         <h2 class="heading-secondary ma-bt-md">My Orders</h2>
         <% if(orders.length > 0) { %>
-        <div class="col-lg-12 ">
+        <div class="col-lg-12 myorders-container">
       <% orders.forEach(function(order,index) { %>
-      <div class="card text-center">
-        <div class="card-header">
-          <div>
+      <div class="card text-left">
+        <div class="card-header d-flex justify-content-between">
+          <div class="d-flex flex-column">
             <span>Order Placed</span>
             <span><%= order.createdAt.toISOString().split('T')[0]%></span>
           </div>
-          <div>
+          <div class="d-flex flex-column">
             <span>Total</span>
             <span><%= order.totalAmount %></span>
           </div>
-          <div>
+          <div class="d-flex flex-column">
             <span>Ship To</span>
-            <span><%= order.totalAmount %></span>
+            <span><%= order.shippingAddress %></span>
+          </div>
+          <div class="d-flex flex-column">
+            <span>Order #<%= order._id%></span>
+            <span class="see-more text-right" data-toggle="collapse" href="#collapse<%=order._id%>">Order Details</span>
           </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div id="collapse<%= order._id%>" class="card-body  checkout-wrapper cart-wrapper panel-collapse collapse">
+
+          <table   class="cart-table table">
+          <tbody>
+             <% order.orderItems.forEach(function(product) { %>
+            <tr>
+              <td class=" d-flex flex-row align-items-center pl-0 pr-0 cart-item">
+                <img src="/images/products/<%= product.product.imageCover %>" alt="" class="img-responsive ml-1 product-thumb rounded shadow-sm" />
+                <div class="d-flex flex-column ml-3 text-left">
+                  <h5><%= product.product.name %></h5>
+                  <p class="text-muted font-weight-normal font-italic"><span>Weight: </span><%= product.weight%>
+                    <% if(product.customColor){ %>
+                    <br><span>Color: </span><%= product.customColor%>
+                    <% } %>
+                    <% if(product.customFlavor){ %>
+                    <br><span>Flavor: </span><%= product.customFlavor%>
+                    <% } %>
+                    <% if(product.customRequest){ %>
+                    <br><span>Option: </span><%= product.customRequest%>
+                    <% } %>
+                    <% if(product.customMessage){ %>
+                    <br><span>Message: </span><%= product.customMessage%>
+                    <% } %>
+                  </p>
+                </div>
+              </td>
+
+              <td class="cart-item-totals text-right">
+                <span class="d-block">HK$<%= product.price *parseInt(product.weight,10)/product.weightUnit %></span>
+                <div class=" custom-input-number">
+                     
+                <input class="qty input-number" type="number" name="qty<%= product._id%>" value="<%= product.qty %>" readonly/>
+                      
+                  </div>
+  
+              </td>
+
+
+            </tr>
+
+            <% }); %>
+            <tr class="info">
+              <td colspan="5" class="text-right">
+                Total: <span><%= order.totalAmount %></span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+
+          
         </div>
-        <div class="card-footer text-muted">
-          2 days ago
+        <div class="card-footer d-inline-flex justify-content-between">
+          <div class=" ">
+            <span>Delivery</span>
+            <span><%= order.dueDate.toISOString().split('T')[0]%></span>
+          </div>
+          <div class=" ">
+            <span>Status</span>
+            <span><%= order.isDelivered?"Delivered":"Processing"%></span>
+          </div>
         </div>
       </div>
-      <% } %>
+      <% }); %>
 
 
-          <!-- Orders table -->
-          <div class="table-responsive ">
-            <table class="table table-sm table-hover table-borderless table-my-orders">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col" >
-                    Product
-                  </th>
-                  <th scope="col" class="optional-show">
-                    Quantity
-                  </th>
-                  <th scope="col" >
-                    Total
-                  </th>
-                  <th scope="col" >
-                    Date
-                  </th>
-                  <th scope="col" >
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <% orders.forEach(function(order,index) { %>
-                <tr>
-                  <th scope="row" class="align-middle row">
-                      <div id="img-wrap" class=" align-middle  d-inline-block col-lg-3">
-                        <% for(let i=0; i<order.orderItems.length && i<2; i++) { %>
-                        <img src="/images/products/<%= order.orderItems[i].product.imageCover %>" alt="product image"  class="img-fluid rounded shadow-sm">
-                        <% } %>
-                      </div>
-                      <div class="d-inline-flex col-lg-9">
-                        <a class="text-left" data-toggle="collapse" href="#<%=`collapse${index}`%>"><%= order.orderItems.map((el) =>` ${el.product.name}`)  %></a>    
-                      </div>
-                  </th>
-                  <td class="align-middle optional-show"><%= order.orderItems.map((el) =>el.qty).reduce((a, b) => a + b, 0)  %></td>
-                  <td class="align-middle"><%= order.totalAmount %></td>
-                  <td class="align-middle"><%= order.createdAt.toISOString().split('T')[0]%></td>
-                  <td class="align-middle"><i class="fas fa-dollar-sign <%= order.isPaid?'text-success':'text-danger'%>" title="<%= order.isPaid?'Paid':'Unpaid'%>"></i>
-                    <i class="fas fa-truck <%= order.isDelivered?'text-success':'text-danger'%>" title="<%= order.isDelivered?'Delivered':'Not delivered'%>" </i>
-                  </td>
-                  </tr>
-                  <tr id="<%=`collapse${index}`%>" class="panel-collapse collapse">
-                     <td colspan="999">
-                            <table class="table table-sm">
-                              <tbody>
-                                <% order.orderItems.forEach(function(el) { %>
-                                <tr>
-                                  <td class="w-100 text-left">
-                                    <h5><%= el.product.name %></h5>     
-                                    <p class="text-muted font-weight-normal font-italic"><%= el.customColor?`Color: ${el.customColor} `:''%></p>
-                                    <p class="text-muted font-weight-normal font-italic"><%=el.customFlavor?`Flavor: ${el.customFlavor} `:''%> </p>
-                                    <p class="text-muted font-weight-normal font-italic"><%=el.customMessage?`Message: ${el.customMessage} `:''%></p>
-                                    <p class="text-muted font-weight-normal font-italic"><%=`Q-ty: ${el.qty} `%></p>
-                                  </td>
-                                </tr>
-                                <% }); %>
-                        </tbody></table></td>
-                  </tr>
-                  <% }); %>
-              </tbody>
-            </table>
-          </div>
-          <!-- End  Order Table-->
+
           
         </div>
         <% } else { %>

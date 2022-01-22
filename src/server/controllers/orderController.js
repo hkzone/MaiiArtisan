@@ -41,9 +41,12 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
               customFlavor: el.flavor,
               customMessage: el.message,
               shippingAddress: el.shippingAddress,
+              weight: el.weight,
             },
           },
-          unit_amount: el.price * 100,
+          unit_amount:
+            (el.price * 100 * parseInt(el.weight, 10)) /
+            parseInt(el.weightUnit, 10),
           currency: process.env.LOCALE_CURRENCY,
         },
         quantity: el.qty,
@@ -87,6 +90,7 @@ const createOrderCheckout = async (session) => {
     customFlavor: el.price.product.metadata.customFlavor,
     customMessage: el.price.product.metadata.customMessage,
     shippingAddress: el.price.product.metadata.shippingAddress,
+    weight: el.price.product.metadata.weight,
   }));
 
   await Order.create({
