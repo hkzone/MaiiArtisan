@@ -8,7 +8,6 @@ const stripe = Stripe(
 const checkoutCart = async (nonce, dueDate, shippingAddress) => {
   try {
     // 1) Get checkout session from API
-    console.log(shippingAddress);
 
     const session = await axios({
       method: 'POST',

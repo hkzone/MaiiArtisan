@@ -10,6 +10,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Check if there's a valid session
   if (Security.isValidNonce(req.body.nonce, req)) {
     const cart = req.session.cart ? req.session.cart : null;
+    console.log(req.body._id, req.body.shippingAddress);
 
     // 2) Create checkout session
     const session = await stripe.checkout.sessions.create({
@@ -18,11 +19,12 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       success_url: `${req.protocol}://${req.get('host')}/my-orders?alert=order`,
       cancel_url: `${req.protocol}://${req.get('host')}/`,
       customer_email: req.user.email,
-      client_reference_id: req.params.Id,
+      //FIXME:not working id
+      client_reference_id: req.params._id,
       mode: 'payment',
       metadata: {
         dueDate: req.body.dueDate,
-        address: req.body.shippingAddress,
+        shippingAddress: req.body.shippingAddress,
       },
       line_items: cart.items.map((el) => ({
         price_data: {
