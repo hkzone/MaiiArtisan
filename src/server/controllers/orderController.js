@@ -20,7 +20,10 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       customer_email: req.user.email,
       client_reference_id: req.params.Id,
       mode: 'payment',
-      metadata: { dueDate: req.body.dueDate, address: req.body.address },
+      metadata: {
+        dueDate: req.body.dueDate,
+        address: req.body.shippingAddress,
+      },
       line_items: cart.items.map((el) => ({
         price_data: {
           product_data: {
@@ -40,7 +43,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
               customColor: el.color,
               customFlavor: el.flavor,
               customMessage: el.message,
-              shippingAddress: el.shippingAddress,
               weight: el.weight,
             },
           },
