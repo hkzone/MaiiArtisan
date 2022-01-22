@@ -91,7 +91,6 @@ const createOrderCheckout = async (session) => {
     customColor: el.price.product.metadata.customColor,
     customFlavor: el.price.product.metadata.customFlavor,
     customMessage: el.price.product.metadata.customMessage,
-    shippingAddress: el.price.product.metadata.shippingAddress,
     weight: el.price.product.metadata.weight,
   }));
 
