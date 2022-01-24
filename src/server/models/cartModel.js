@@ -2,31 +2,31 @@ class Cart {
   static addToCart(product = null, reqBody, cart) {
     const { weight, qty, color, flavor, date, option, message } = reqBody;
 
-    if (!this.inCart(product._id, cart)) {
-      const format = new Intl.NumberFormat(process.env.LOCALE_LANG, {
-        style: 'currency',
-        currency: process.env.LOCALE_CURRENCY,
-      });
+    //TODO:if in cart and same kind increase quantity
+    // if (!this.inCart(product._id, cart)) {
+    const format = new Intl.NumberFormat(process.env.LOCALE_LANG, {
+      style: 'currency',
+      currency: process.env.LOCALE_CURRENCY,
+    });
 
-      const prod = {
-        _id: product._id,
-        name: product.name,
-        price: product.price,
-        qty: qty,
-        color: color,
-        flavor: flavor,
-        date: date,
-        option: option,
-        message: message,
-        weight: weight,
-        imageCover: product.imageCover,
-        weightUnit: product.weight[0],
-        formattedPrice: format.format(product.price),
-      };
-      cart.items.push(prod);
-      this.calculateTotals(cart);
-    }
-    //TODO:if in cart increase quantity
+    const prod = {
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      qty: qty,
+      color: color,
+      flavor: flavor,
+      date: date,
+      option: option,
+      message: message,
+      weight: weight,
+      imageCover: product.imageCover,
+      weightUnit: product.weight[0],
+      formattedPrice: format.format(product.price),
+    };
+    cart.items.push(prod);
+    this.calculateTotals(cart);
+    // }
   }
 
   static removeFromCart(id = 0, cart) {

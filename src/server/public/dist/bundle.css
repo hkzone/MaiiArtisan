@@ -925,7 +925,10 @@ body .container-xl .carousel-indicators {
   padding: 0 !important;
 }
 .orders-container table {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+}
+.orders-container table thead {
+  text-transform: uppercase;
 }
 .orders-container table .panel-collapse > td {
   border-top-width: 0px;
@@ -1097,8 +1100,8 @@ smart-list-box {
 }
 
 .nav__user-img {
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 1.75rem;
+  width: 1.75rem;
   border-radius: 50%;
   margin-right: 0rem;
 }

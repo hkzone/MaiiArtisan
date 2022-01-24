@@ -15,9 +15,11 @@
   }
 
   table {
-    font-size: 0.8rem;
-    thead th {
+    font-size: $xs-font-size;
+    thead {
+      text-transform: uppercase;
     }
+
     .panel-collapse {
       > td {
         border-top-width: 0px;
