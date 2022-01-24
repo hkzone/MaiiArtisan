@@ -15,13 +15,8 @@ const adminHandler = () => {
   const editOrdersTable = document.querySelector('.admin-orders-table');
   const filterOrders = document.querySelector('#filter-orders');
 
-  // ************************************************************************** //
-  // ******************** Display and Change Admin Settings ******************* //
-  // ************************************************************************** //
-  if (adminSettings) {
-    const form = document.querySelector('form');
-    const submitButton = form.querySelector('[type = "submit"]');
-
+  // ******* Handle add and delete functionality for smart-list elements ****** //
+  const smartItemsHandler = (form) => {
     // "Click" EVENT LISTENER
     form.addEventListener('click', (event) => {
       //click on delete item button
@@ -45,10 +40,21 @@ const adminHandler = () => {
             'smart-list-box'
           );
         const input = event.target.parentElement.querySelector('smart-input');
-        listbox.insert(0, input.value);
+        listbox.insert(listbox.items.length, input.value);
+        console.log('inserting');
         input.value = '';
       }
     });
+  };
+
+  // ************************************************************************** //
+  // ******************** Display and Change Admin Settings ******************* //
+  // ************************************************************************** //
+  if (adminSettings) {
+    const form = document.querySelector('form');
+    const submitButton = form.querySelector('[type = "submit"]');
+
+    smartItemsHandler(form);
 
     // SUBMIT EVENT LISTENER (save settings)
 
@@ -75,6 +81,8 @@ const adminHandler = () => {
   // *********************** EDIT PRODUCTS FUNCTIONALITY ********************** //
   // ************************************************************************** //
   if (productsTable) {
+    const form = document.querySelector('form');
+    smartItemsHandler(form);
     // ******************************* File upload ****************************** //
     const inputs = document.querySelectorAll('.inputfile');
     inputs.forEach((input) => {
@@ -119,6 +127,15 @@ const adminHandler = () => {
             $(`.photo-images${index}`).attr('src', `/images/products/${el}`);
             $(`.photo-images${index}`).css('display', 'block');
           });
+        } else if (key === 'weight' || key === 'ingredients') {
+          const listbox = document.querySelector(`#listbox-custom-${key}`);
+          if (listbox.items.length > 0) listbox.clearItems();
+
+          product[key].forEach((el) => {
+            listbox.insert(listbox.items.length, el);
+          });
+          $(`[name='${key}']`).attr('data-field', product[key]);
+          $(`[name='${key}']`).addClass('listbox');
         } else {
           $(`[name='${key}']`).val(product[key]);
           $(`[name='${key}']`).attr('data-field', product[key]);
@@ -137,13 +154,17 @@ const adminHandler = () => {
       e.target.textContent = 'Processing...';
 
       const form = new FormData();
-      $('input, .txtArea')
+      $('input, .txtArea smart-list-box')
         .not(':input[type=button], :input[type=submit], :input[type=reset]')
         .each(function () {
           const keyValue = $(this).attr('name');
           let value;
           if ($(this).is(':checkbox')) {
             value = $(this).is(':checked');
+          } else if ($(this).hasClass('listbox')) {
+            value = document
+              .querySelector(`#listbox-custom-${keyValue}`)
+              .items.map((el) => el.value);
           } else value = $(this).val();
 
           if (value.toString() !== $(this).attr('data-field')) {
@@ -154,9 +175,16 @@ const adminHandler = () => {
                   form.append(`${keyValue}`, $(this).get(0).files[i]);
                 }
               }
-            } else form.append(`${keyValue}`, value);
+            } else if ($(this).hasClass('listbox')) {
+              value.forEach((el) => form.append(`${keyValue}`, el));
+            } else {
+              form.append(`${keyValue}`, value);
+            }
           }
         });
+
+      // .querySelector('#listbox-custom-flavor')
+      //   .items.map((el) => el.value)
 
       updateProduct($(`input[name='_id']`).val(), form);
     });

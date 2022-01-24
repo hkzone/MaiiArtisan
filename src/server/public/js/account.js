@@ -104,6 +104,12 @@ const accountHandler = () => {
       document.getElementById('password').value = '';
       document.getElementById('password-confirm').value = '';
     });
+
+  // **************************** My orders popover *************************** //
+  $('[data-toggle=popover]').popover();
+  $('.popover-dismiss').popover({
+    trigger: 'focus',
+  });
 };
 
 export default accountHandler;

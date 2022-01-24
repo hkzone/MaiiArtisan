@@ -5,11 +5,7 @@
   }
   .card-header {
     > div {
-      font-size: 0.75rem;
-
-      & :not(:last-child) {
-        margin-right: 0.5rem;
-      }
+      font-size: $xs-font-size;
 
       span:nth-of-type(1) {
         color: $argent-gray;
@@ -17,7 +13,7 @@
       }
     }
 
-    .see-more {
+    a {
       cursor: pointer;
     }
   }
@@ -30,13 +26,13 @@
     }
 
     .cart-item-totals {
-      padding-right: 0.75rem;
+      padding-right: $xs-font-size;
     }
   }
 
   .card-footer {
     background: transparent !important;
-    font-size: 0.75rem;
+    font-size: $xs-font-size;
 
     & :not(:last-child) {
       margin-right: 0.5rem;

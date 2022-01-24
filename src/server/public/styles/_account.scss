@@ -62,15 +62,44 @@
 .account-products-container {
   padding: 1rem 0.5rem 1rem;
   overflow: auto;
+  font-size: $xs-font-size;
 
   .no-hover td,
   th {
     background-color: $background !important;
   }
 
+  > th {
+    text-transform: uppercase;
+  }
+
   img {
     object-fit: cover;
     aspect-ratio: 1 / 1;
+  }
+
+  .table-custom-options {
+    margin: 0;
+
+    td {
+      padding: 0;
+      position: relative;
+      min-width: 1rem;
+      line-height: 1.5rem;
+    }
+    .text-success {
+      position: absolute;
+      top: -8%;
+      left: 0%;
+    }
+
+    td:nth-of-type(2n) {
+      font-size: 1.25rem;
+    }
+  }
+
+  svg {
+    pointer-events: none;
   }
 }
 

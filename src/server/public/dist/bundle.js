@@ -9144,7 +9144,12 @@ var accountHandler = function accountHandler() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }());
+  }()); // **************************** My orders popover *************************** //
+
+  $('[data-toggle=popover]').popover();
+  $('.popover-dismiss').popover({
+    trigger: 'focus'
+  });
 };
 
 var _default = accountHandler;
@@ -9645,14 +9650,10 @@ var adminHandler = function adminHandler() {
   var btnProductUpdateSubmit = document.querySelector('#btnProductUpdateSubmit');
   var adminSettings = document.querySelector('.admin-settings-container');
   var editOrdersTable = document.querySelector('.admin-orders-table');
-  var filterOrders = document.querySelector('#filter-orders'); // ************************************************************************** //
-  // ******************** Display and Change Admin Settings ******************* //
-  // ************************************************************************** //
+  var filterOrders = document.querySelector('#filter-orders'); // ******* Handle add and delete functionality for smart-list elements ****** //
 
-  if (adminSettings) {
-    var form = document.querySelector('form');
-    var submitButton = form.querySelector('[type = "submit"]'); // "Click" EVENT LISTENER
-
+  var smartItemsHandler = function smartItemsHandler(form) {
+    // "Click" EVENT LISTENER
     form.addEventListener('click', function (event) {
       //click on delete item button
       if (event.target.classList.contains('delete-item')) {
@@ -9667,11 +9668,21 @@ var adminHandler = function adminHandler() {
 
         var input = event.target.parentElement.querySelector('smart-input');
 
-        _listbox.insert(0, input.value);
+        _listbox.insert(_listbox.items.length, input.value);
 
+        console.log('inserting');
         input.value = '';
       }
-    }); // SUBMIT EVENT LISTENER (save settings)
+    });
+  }; // ************************************************************************** //
+  // ******************** Display and Change Admin Settings ******************* //
+  // ************************************************************************** //
+
+
+  if (adminSettings) {
+    var form = document.querySelector('form');
+    var submitButton = form.querySelector('[type = "submit"]');
+    smartItemsHandler(form); // SUBMIT EVENT LISTENER (save settings)
 
     submitButton.addEventListener('click', function (event) {
       event.preventDefault();
@@ -9695,7 +9706,10 @@ var adminHandler = function adminHandler() {
 
 
   if (productsTable) {
-    // ******************************* File upload ****************************** //
+    var _form = document.querySelector('form');
+
+    smartItemsHandler(_form); // ******************************* File upload ****************************** //
+
     var inputs = document.querySelectorAll('.inputfile');
     inputs.forEach(function (input) {
       var label = input.nextElementSibling;
@@ -9731,6 +9745,14 @@ var adminHandler = function adminHandler() {
             $(".photo-images".concat(index)).attr('src', "/images/products/".concat(el));
             $(".photo-images".concat(index)).css('display', 'block');
           });
+        } else if (key === 'weight' || key === 'ingredients') {
+          var listbox = document.querySelector("#listbox-custom-".concat(key));
+          if (listbox.items.length > 0) listbox.clearItems();
+          product[key].forEach(function (el) {
+            listbox.insert(listbox.items.length, el);
+          });
+          $("[name='".concat(key, "']")).attr('data-field', product[key]);
+          $("[name='".concat(key, "']")).addClass('listbox');
         } else {
           $("[name='".concat(key, "']")).val(product[key]);
           $("[name='".concat(key, "']")).attr('data-field', product[key]);
@@ -9746,12 +9768,16 @@ var adminHandler = function adminHandler() {
   if (btnProductUpdateSubmit) btnProductUpdateSubmit.addEventListener('click', function (e) {
     e.target.textContent = 'Processing...';
     var form = new FormData();
-    $('input, .txtArea').not(':input[type=button], :input[type=submit], :input[type=reset]').each(function () {
+    $('input, .txtArea smart-list-box').not(':input[type=button], :input[type=submit], :input[type=reset]').each(function () {
       var keyValue = $(this).attr('name');
       var value;
 
       if ($(this).is(':checkbox')) {
         value = $(this).is(':checked');
+      } else if ($(this).hasClass('listbox')) {
+        value = document.querySelector("#listbox-custom-".concat(keyValue)).items.map(function (el) {
+          return el.value;
+        });
       } else value = $(this).val();
 
       if (value.toString() !== $(this).attr('data-field')) {
@@ -9762,9 +9788,17 @@ var adminHandler = function adminHandler() {
               form.append("".concat(keyValue), $(this).get(0).files[i]);
             }
           }
-        } else form.append("".concat(keyValue), value);
+        } else if ($(this).hasClass('listbox')) {
+          value.forEach(function (el) {
+            return form.append("".concat(keyValue), el);
+          });
+        } else {
+          form.append("".concat(keyValue), value);
+        }
       }
-    });
+    }); // .querySelector('#listbox-custom-flavor')
+    //   .items.map((el) => el.value)
+
     (0, _adminApiCalls.updateProduct)($("input[name='_id']").val(), form);
   }); // ************************************************************************** //
   // ********************************** Orders ******************************** //

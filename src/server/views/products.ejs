@@ -1,6 +1,6 @@
 <%- include("./_header") -%>
 <%//let keys=Object.keys(allProducts[0].toJSON())%>
-<% const productSchema={ _id:{ visible:false, boolean:false, textarea:false },name:{ visible:true, boolean:false, textarea:false },ingredients:{ visible:true, boolean:false, textarea:false },weight:{ visible:true, boolean:false, textarea:false },price:{ number:true,visible:true, boolean:false, textarea:false},summary:{ visible:true, boolean:false, textarea:true },description:{ visible:true, boolean:false, textarea:true},imageCover:{ visible:true, boolean:false, textarea:false, isImage:true },images:{ visible:true, boolean:false, textarea:false, isImages:true }, orderByWeight:{ visible:true, boolean:true, textarea:false },customColors:{ visible:true, boolean:true, textarea:false },customFlavors:{ visible:true, boolean:true, textarea:false } ,   isFeatured:{ visible:true, boolean:true, textarea:false }}  %>
+<% const productSchema={ _id:{ visible:false, boolean:false, listbox:false, textarea:false }, name:{ visible:true, boolean:false, listbox:false, textarea:false}, price:{ number:true,visible:true, boolean:false, listbox:false, textarea:false},ingredients:{ visible:true, boolean:false, listbox:true, textarea:false },weight:{ visible:true, boolean:false, listbox:true, textarea:false },summary:{ visible:true, boolean:false, listbox:false, textarea:true },description:{ visible:true, boolean:false, listbox:false, textarea:true},imageCover:{ visible:true, boolean:false, listbox:false, textarea:false, isImage:true },images:{ visible:true, boolean:false, listbox:false, textarea:false, isImages:true }, orderByWeight:{ visible:true, boolean:true, listbox:false, textarea:false },customColors:{ visible:true, boolean:true, listbox:false, textarea:false },customFlavors:{ visible:true, boolean:true, listbox:false, textarea:false } ,   isFeatured:{ visible:true, boolean:true, listbox:false, textarea:false },isAvailable:{ visible:true, boolean:true, listbox:false, textarea:false }}  %>
 
 
 <main class="main account-container">
@@ -33,13 +33,7 @@
                       Price
                     </th>
                     <th scope="col" class="optional-show">
-                      Discounted price
-                    </th>
-                    <th scope="col" class="optional-show">
-                      Ingredients
-                    </th>
-                    <th scope="col" class="optional-show">
-                      Featured
+                      Options
                     </th>
                     <th scope="col">
                       Edit
@@ -62,10 +56,59 @@
                       </div>
                     </td>
                     <td class="align-middle"><%= product.price  %></td>
-                    <td class="align-middle optional-show"><%= product.priceDiscount  %></td>
-                    <td class="align-middle optional-show"><%= product.ingredients.join(", ")%></td>
-                    <td class="align-middle optional-show"><i class="fas  <%= product.isFeatured===true?'fa-check-circle text-success':'fa-times-circle text-danger'%>"> </i></td>
-                    <td class="align-middle"><i class="fas fa-edit text-danger editProductBtn m-3" data-field="<%=JSON.stringify(product)%>" </i></td>
+                      <td class=" align-middle optional-show">
+                        <table class="table table-sm table-borderless table-custom-options">
+                          <tbody>
+                            <tr>
+                              <td class="align-middle">Color:</td>
+                              <td class="align-middle">
+                                <% if(product.customColors===true){%>
+                                  <span class="text-success">&#9745;</span>
+                                  <% }else { %> 
+                                     <span class="text-danger">&times;</span>
+                                    <% } %> 
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle">Flavor:</td>
+                              <td class="align-middle">
+                                <% if(product.customFlavors===true) { %>
+                                    <span class="text-success">&#9745;</span>
+                                  <% } else  {  %>
+                                    <span class="text-danger">&times;</span>
+                                  <% }%>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle">Featured:</td>
+                              <td class="align-middle">
+                                <% if(product.isFeatured===true) {%>
+                                    <span class="text-success">&#9745;</span>
+                                     <% }else { %> 
+                                     <span class="text-danger">&times;</span> 
+                                    <% } %> 
+                                    </div>
+                              </td>
+                            </tr>
+                             <tr>
+                              <td class="align-middle">Available:</td>
+                              <td class="align-middle">
+                                <% if(product.isAvailable===true) {%>
+                                    <span class="text-success">&#9745;</span>
+                                     <% }else { %> 
+                                     <span class="text-danger">&times;</span> 
+                                    <% } %> 
+                                    </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    <td class="align-middle">
+                      <a  role="button" class="btn editProductBtn p-0"  data-field="<%=JSON.stringify(product)%>" >
+                         <i class="fas fa-edit text-danger  m-3"></i>
+                      </a>
+                     </td>
                   </tr>
 
                   <tr class="align-middle collapse no-hover" id="<%=`collapse${index}`%>">
@@ -76,7 +119,7 @@
                             <tr>
                               <th class="border-top-0">Description</th>
                               <th class="border-top-0 optional-show">Weights(grams)</th>
-                              <th class="border-top-0 optional-show">Custom</th>
+                              <th class="border-top-0 optional-show">Ingredients</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -87,11 +130,8 @@
                                 </p>
                               </td>
                               <td class="align-middle optional-show"><%= product.weight.join(", ") %></td>
-                              <td class="align-middle optional-show"><span>Color: <i class="fas <%= product.customColors===true?'fa-check-circle text-success':'fa-times-circle text-danger'%>"></i> </span>
-                                <span>Flavor: <i class="fas  <%= product.customFlavors===true?'fa-check-circle text-success':'fa-times-circle text-danger'%>"> </i></span>
-                              </td>
+                              <td class="align-middle optional-show"><%= product.ingredients.join(", ")%></td>
                             </tr>
-
                           </tbody>
                         </table>
                       </div>
@@ -123,6 +163,10 @@
                   <div class='form-row align-items-center'>
 
                     <% Object.entries(productSchema).map(([key, value], idx) =>  { %>
+                      <% if (idx%3===0){ %>
+                        </div>
+                         <div class='form-row align-items-center'>
+                           <% } %> 
                     <% if (value['boolean']===true) { %>
                     <div class="form-check align-items-center justify-content-center col-md-4 col-sm-12">
                       <input class="form-check-input" type="<%= value['visible']===false?'hidden':'checkbox' %>" name="<%= key %>">
@@ -130,27 +174,27 @@
                     </div>
 
                     <% } else if (value['textarea']===true) { %>
-                    <div class="form-group col-md-4 col-sm-12">
+                    <div class="form-group col-md-4 col-sm-12 align-self-start">
                       <label class="form-label" for="<%= key %>"><%= key %></label>
-                      <textarea class="form-control txtArea" " rows="4" name="<%= key %>"></textarea>
+                      <textarea class="form-control txtArea" " rows="8" name="<%= key %>"></textarea>
                     </div>
 
                     <% } else if (value['isImage']===true) { %>
-                    <div class="form-group custom-file col-md-4 col-sm-12 d-flex flex-wrap flex-column justify-content-center">
-                      <span class="w-100 mb-3"><%= key %></span>
+                    <div class="form-group custom-file col-md-4 col-sm-12 d-flex flex-wrap flex-column justify-content-center align-self-start">
+                      <span class="w-100 mb-4"><%= key %></span>
                       <div>
                       <img src="" alt="product image" class="rounded shadow-sm <%= key %> " />
                       </div>
                       <div>
                       <input class="inputfile" id="photo-<%= key %>" type="file" accept="image/*"  data-multiple-caption="count files selected" name="<%= key %>" />
-                      <label class="form-label" for="photo-<%= key %>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+                      <label class="form-label  mt-4" for="photo-<%= key %>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
                       </div>
                       <!-- <label class="" for="<%= key %>">Choose new photo</label> -->
                     </div>
 
                     <% } else if (value['isImages']===true) { %>
-                    <div class="form-group custom-file col-md-4 col-sm-12 d-flex flex-wrap flex-column justify-content-center">
-                      <span class="w-100 mb-3"><%= key %></span>
+                    <div class="form-group custom-file col-md-4 col-sm-12 d-flex flex-wrap flex-column justify-content-center align-self-start">
+                      <span class="w-100 mb-4"><%= key %></span>
                       <div class="d-flex justify-content-center">
                       <img src="" alt="product image"  class="rounded mr-1 edit-images shadow-sm photo-<%= key %>0 "  style="display: none;"/>
                       <img src="" alt="product image"  class="rounded mr-1 edit-images shadow-sm photo-<%= key %>1 "  style="display: none;"/>
@@ -158,18 +202,40 @@
                       </div>
                       <div>
                         <input class="inputfile" id="photo-<%= key %>" type="file" accept="image/*" data-multiple-caption="count files selected" name="<%= key %>" multiple />
-                      <label class="form-label" for="photo-<%= key %>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose files&hellip;</span></label>
+                      <label class="form-label mt-4" for="photo-<%= key %>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose files&hellip;</span></label>
                       </div>
                    
                       
                       <!-- <label class="" for="<%= key %>">Choose new photo</label> -->
+
+
+                     <template id="template">
+                      <div class="template-container">
+                          <div class="primary-action">{{label}}</div>
+                          <div class="secondary-action"><smart-button class="material flat delete-item" ><i class="fa fa-minus" aria-hidden="true"></i></smart-button></i></div>
+                      </div>
+                    </template>
                     </div>
+                     <% } else if (value['listbox']===true) { %>
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label><%= key %></label>
+                        <smart-list-box id="listbox-custom-<%= key %>" selection-mode="one" editable item-template="template" name="<%= key %>" >
+                    
+                        </smart-list-box>
+                        <div class="add-input-container pl-3">
+                              <smart-input class="underlined text-left " placeholder="Add item"></smart-input> 
+                              <smart-button class="material flat add-item"><i class="fa fa-plus" aria-hidden="true"></i></smart-button>
+                            </div>  
+                            <div class="invalid-feedback">Please enter a value</div>
+                      </div>
 
                     <% } else { %>
 
-                    <div class="form-group col-md-4 col-sm-12">
-                      <label class="form-label" type=" for=" <%= key %>"><%= key %></label>
-                      <input class="form-control" type="text" <%= value['visible']===false?'readonly':''%> name="<%= key %>">
+                    <div class="form-group col-md-4 col-sm-12 align-self-start" >
+                      
+
+                       <label class="form-label" type=" for=" <%= key %>"><%= key %></label>
+                      <input class="form-control" type="text" <%= value['visible']===false?'disabled':''%> name="<%= key %>"> 
                     </div>
                     <% }  %>
 

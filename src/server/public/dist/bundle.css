@@ -681,14 +681,38 @@ body .container-xl .carousel-indicators {
 .account-products-container {
   padding: 1rem 0.5rem 1rem;
   overflow: auto;
+  font-size: 0.75rem;
 }
 .account-products-container .no-hover td,
 .account-products-container th {
   background-color: #fff !important;
 }
+.account-products-container > th {
+  text-transform: uppercase;
+}
 .account-products-container img {
   object-fit: cover;
   aspect-ratio: 1/1;
+}
+.account-products-container .table-custom-options {
+  margin: 0;
+}
+.account-products-container .table-custom-options td {
+  padding: 0;
+  position: relative;
+  min-width: 1rem;
+  line-height: 1.5rem;
+}
+.account-products-container .table-custom-options .text-success {
+  position: absolute;
+  top: -8%;
+  left: 0%;
+}
+.account-products-container .table-custom-options td:nth-of-type(2n) {
+  font-size: 1.25rem;
+}
+.account-products-container svg {
+  pointer-events: none;
 }
 
 .modal .form-check {
@@ -860,14 +884,11 @@ body .container-xl .carousel-indicators {
 .myorders-container .card-header > div {
   font-size: 0.75rem;
 }
-.myorders-container .card-header > div :not(:last-child) {
-  margin-right: 0.5rem;
-}
 .myorders-container .card-header > div span:nth-of-type(1) {
   color: #8c8c8c;
   text-transform: uppercase;
 }
-.myorders-container .card-header .see-more {
+.myorders-container .card-header a {
   cursor: pointer;
 }
 .myorders-container .cart-wrapper {

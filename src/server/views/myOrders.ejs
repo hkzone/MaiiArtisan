@@ -22,15 +22,20 @@
           </div>
           <div class="d-flex flex-column">
             <span>Total</span>
-            <span><%= order.totalAmount %></span>
+            <span><%= order.totalAmount %> HKD</span>
           </div>
           <div class="d-flex flex-column">
             <span>Ship To</span>
-            <span><%= order.shippingAddress.address %></span>
+            <span>
+              <a tabindex="0" class="" role="" data-placement="bottom" data-toggle="popover" data-trigger="focus"  data-content="<%= order.shippingAddress.address %>"><%= order.shippingAddress.address.substring(0,12) %>...</a>
+            </span>
           </div>
           <div class="d-flex flex-column">
-            <span>Order #<%= order._id%></span>
-            <span class="see-more text-right" data-toggle="collapse" href="#collapse<%=order._id%>">Order Details</span>
+            <span>Order # <span class="text-lowercase"><%= order._id%></span></span>
+            <span class="text-right">
+              <a  data-toggle="collapse" href="#collapse<%=order._id%>">Order Details</a>
+            </span>
+           
           </div>
         </div>
         <div id="collapse<%= order._id%>" class="card-body  checkout-wrapper cart-wrapper panel-collapse collapse">
@@ -61,7 +66,7 @@
               </td>
 
               <td class="cart-item-totals text-right">
-                <span class="d-block">HK$<%= product.price *parseInt(product.weight,10)/product.weightUnit %></span>
+                <span class="d-block">HK$<%= product.unitAmount/100 %></span>
                 <div class=" custom-input-number">
                      
                 <input class="qty input-number" type="number" name="qty<%= product._id%>" value="<%= product.qty %>" readonly/>
