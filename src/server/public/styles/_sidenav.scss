@@ -1,7 +1,8 @@
 .user-view__menu {
   padding: 2rem 0;
-  background: $background-color;
-  height: 100%;
+  // background: $background-color;
+  // height: 100%;
+  color: $secondary-font-color;
 
   .menu__heading {
     margin: 0.75rem 1.25rem;
@@ -9,7 +10,7 @@
     text-align: left;
     font-size: 1rem;
     text-transform: uppercase;
-    border-bottom: 1px solid $font-color;
+    border-bottom: 1px solid darken($secondary-font-color, 10%);
   }
 
   .list-group {
@@ -32,7 +33,7 @@
         svg {
           height: 1.5rem;
           width: 1.5rem;
-          fill: $font-color;
+          fill: darken($secondary-font-color, 10%);
           margin-right: 2rem;
           margin-left: 0rem;
         }

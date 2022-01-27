@@ -1,13 +1,49 @@
 import { login, logout, signup } from './login';
 import updateSettings from './updateSettings';
 
-const accountHandler = () => {
+export const updateAddress = (form) => {
+  const _id = form.querySelector('#_id');
+  const contactPerson = form.querySelector('#contactPerson').value;
+  const unit = form.querySelector('#unit').value;
+  const floorNo = form.querySelector('#floorNo').value;
+  const blockNo = form.querySelector('#blockNo').value;
+  const buildingName = form.querySelector('#buildingName').value;
+  const estateOrVillageName = form.querySelector('#estateOrVillageName').value;
+  const buildingNoFrom = form.querySelector('#buildingNoFrom').value;
+  const streetName = form.querySelector('#streetName').value;
+  const dcDistrict = form.querySelector('#dcDistrict').value;
+  const region = form.querySelector('#region').value;
+  const contactPhoneNo = form.querySelector('#contactPhoneNo').value;
+  const address = {
+    contactPerson,
+    unit,
+    floorNo,
+    blockNo,
+    buildingName,
+    estateOrVillageName,
+    buildingNoFrom,
+    streetName,
+    dcDistrict,
+    region,
+    contactPhoneNo,
+  };
+
+  //if we edit existing address add id
+  if (_id && _id.value) address._id = _id.value;
+
+  console.log(address);
+
+  updateSettings({ address: address }, 'address', form.dataset.type);
+};
+
+export const accountHandler = () => {
   // DOM ELEMENTS
   const loginForm = document.querySelector('.form-signin');
   const logOutBtn = document.querySelector('.nav__el--logout');
   const signupForm = document.querySelector('.signup-form');
   const userDataForm = document.querySelector('.form-user-data');
   const userPasswordForm = document.querySelector('.form-user-password');
+  const addressBook = document.querySelector('.address-book');
 
   // ********************************** LOGIN ********************************* //
   if (loginForm)
@@ -45,9 +81,9 @@ const accountHandler = () => {
         const estateOrVillageName = signupForm.querySelector(
           '#estateOrVillageName'
         ).value;
-        const buildingNo = signupForm.querySelector('#buildingNo').value;
+        const buildingNo = signupForm.querySelector('#buildingNoFrom').value;
         const streetName = signupForm.querySelector('#streetName').value;
-        const district = signupForm.querySelector('#district').value;
+        const district = signupForm.querySelector('#dcDistrict').value;
         const region = signupForm.querySelector('#region').value;
         const phoneNumber = signupForm.querySelector('#phoneNumber').value;
         await signup(
@@ -88,7 +124,7 @@ const accountHandler = () => {
   if (userPasswordForm)
     userPasswordForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      document.querySelector('.btn--save-password').textContent = 'Updating...';
+      document.querySelector('.btn-save-password').textContent = 'Updating...';
 
       const passwordCurrent = document.getElementById('password-current').value;
       const password = document.getElementById('password').value;
@@ -105,11 +141,55 @@ const accountHandler = () => {
       document.getElementById('password-confirm').value = '';
     });
 
+  // *********************** Update/Delete/Add Addresses ********************** //
+  if (addressBook) {
+    const userAddressForm = document.querySelector('.form-user-address');
+    addressBook.addEventListener('click', (e) => {
+      //edit address button
+      if (e.target.classList.contains('edit-address')) {
+        const address = JSON.parse(e.target.dataset.address);
+        const keys = Object.keys(address).map((key) => key);
+        //empty the form
+        $('.form-user-address input').val('');
+
+        $('.form-user-address').css('display', 'block');
+
+        //load in the values
+        keys.forEach((key) => {
+          $(`[id='${key}']`).val(address[key]);
+        });
+
+        userAddressForm.dataset.type = 'patch';
+
+        userAddressForm.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+      //Delete address button
+      if (e.target.classList.contains('delete-address')) {
+        updateSettings({ _id: e.target.dataset.id }, 'address', 'delete');
+      }
+
+      //add address button
+      if (e.target.classList.contains('add-address-button')) {
+        $('.form-user-address input').val('');
+        $('.form-user-address').css('display', 'block');
+        userAddressForm.scrollIntoView({
+          behavior: 'smooth',
+        });
+        userAddressForm.dataset.type = 'post';
+      }
+    });
+
+    //Update the address
+    userAddressForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      updateAddress(userAddressForm);
+    });
+  }
   // **************************** My orders popover *************************** //
   $('[data-toggle=popover]').popover();
   $('.popover-dismiss').popover({
     trigger: 'focus',
   });
 };
-
-export default accountHandler;

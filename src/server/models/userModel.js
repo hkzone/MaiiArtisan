@@ -82,6 +82,14 @@ const userSchema = new mongoose.Schema({
       unit: {
         type: String,
       },
+      contactPerson: {
+        type: String,
+        required: [true, 'Address must have a contact person'],
+      },
+      contactPhoneNo: {
+        type: Number,
+        required: [true, 'Address must have a contact phone no'],
+      },
     },
   ],
   photo: { type: String, default: 'default.jpg' },
@@ -117,6 +125,14 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.pre('validate', async function (next) {
+  if (this.isNew) {
+    this.address[0].contactPerson = this.name;
+    this.address[0].contactPhoneNo = this.phoneNumber;
+  }
+  next();
+});
+
 userSchema.pre('save', async function (next) {
   //Only run this function if password was actually changed
   if (!this.isModified('password')) return next();
@@ -126,6 +142,7 @@ userSchema.pre('save', async function (next) {
   this.passwordConfirm = undefined;
   next();
 });
+
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password') || this.isNew) return next();
 
@@ -143,7 +160,6 @@ userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
-  console.log(await bcrypt.compare(candidatePassword, userPassword));
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 

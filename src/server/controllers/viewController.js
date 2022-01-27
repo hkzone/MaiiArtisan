@@ -119,7 +119,14 @@ exports.getSignupForm = (req, res) => {
 
 exports.getAccount = (req, res) => {
   const cartQty = cartController.checkQtyInCart(req, res);
-  res.status(200).render('account', { title: 'Your account', cartQty });
+  const region = User.schema.path('address.region').enumValues;
+  const district = User.schema.path('address.dcDistrict').enumValues;
+  res.status(200).render('account', {
+    title: 'Your account',
+    cartQty,
+    region,
+    district,
+  });
 };
 
 exports.getMyOrders = catchAsync(async (req, res, next) => {

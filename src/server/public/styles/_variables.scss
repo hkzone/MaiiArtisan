@@ -36,8 +36,11 @@ $font-color: #212529;
 $font-color-dark: #53354a;
 $font-grey: #333333;
 $font-color-secondary: #6d6d64;
-
+$font-color-btn: #343a40;
 $argent-gray: #8c8c8c; //Argent Gray
+$link-color: #2200cc;
+$link-hover: #c7511f;
+
 $font-color-dark-secondary: #212931;
 $font-color-light: #909498;
 
@@ -54,4 +57,84 @@ $font-color-light: #909498;
     rgba(232, 69, 69, 0.9500191131498471) 38%,
     rgba(144, 55, 73, 1) 94%
   );
+}
+
+@mixin customTable {
+  border: 1px solid $secondary-font-color;
+  border-radius: 0.25rem;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  font-size: $xs-font-size;
+
+  thead th {
+    border-bottom: 0px;
+    border-top: 0px;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 0.75rem 1.25rem;
+    color: $argent-gray;
+  }
+
+  td,
+  th {
+    border-top: 1px solid $secondary-font-color;
+  }
+
+  .no-hover {
+    td,
+    th {
+      pointer-events: none;
+    }
+  }
+
+  .inner-table {
+    thead th {
+      text-transform: capitalize;
+      padding: 0.5rem 1.25rem;
+    }
+
+    thead th,
+    td {
+      border: 0px;
+    }
+  }
+}
+
+@mixin customButton {
+  height: 5rem;
+  width: 12.5rem;
+  cursor: pointer;
+  border: 1px solid $border-color;
+  box-shadow: 0 1px 0 $border-color;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+
+  &:hover {
+    @include easeOut();
+    transform: translateY(-2px);
+
+    span:nth-of-type(2n) {
+      color: darken($secondary-font-color, 10) !important;
+    }
+  }
+
+  span {
+    color: $border-color;
+    pointer-events: none;
+
+    &:nth-of-type(1) {
+      font-size: 3.5rem;
+      line-height: 3rem;
+      padding: 1rem 0 1rem 1rem;
+    }
+    &:nth-of-type(2n) {
+      padding: 1rem;
+      line-height: 1.2rem;
+
+      font-size: $small-font-size;
+      color: $font-color-btn;
+    }
+  }
 }

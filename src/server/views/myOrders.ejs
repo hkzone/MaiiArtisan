@@ -27,13 +27,13 @@
           <div class="d-flex flex-column">
             <span>Ship To</span>
             <span>
-              <a tabindex="0" class="" role="" data-placement="bottom" data-toggle="popover" data-trigger="focus"  data-content="<%= order.shippingAddress.address %>"><%= order.shippingAddress.address.substring(0,12) %>...</a>
+              <a tabindex="0" class="underline" role="" data-placement="bottom" data-toggle="popover" data-trigger="focus"  data-content="<%= order.shippingAddress.address %>"><%= order.shippingAddress.address.substring(0,12) %>...</a>
             </span>
           </div>
           <div class="d-flex flex-column">
             <span>Order # <span class="text-lowercase"><%= order._id%></span></span>
             <span class="text-right">
-              <a  data-toggle="collapse" href="#collapse<%=order._id%>">Order Details</a>
+              <a  data-toggle="collapse" href="#collapse<%=order._id%>" class="underline">Order Details</a>
             </span>
            
           </div>

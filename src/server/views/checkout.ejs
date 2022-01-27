@@ -66,13 +66,85 @@
                <div class=" align-items-center logout-btn">
                    <a href="">Not you? Click here to change user</a>
               </div>
+              
             </section>
-      <section class="active date-section rounded shadow-sm">
+      <section class="active address-section rounded shadow-sm">
           <div>
-              <h4>2. Select Date</h4>
+              <h4>2. Select address</h4>
           </div>
           <div>
-              <form class="form needs-validation form-date" novalidate>
+             <form class="form needs-validation form-address" novalidate>
+               <%user.address.forEach((el,idx) =>{ %>
+                <%const addr = `${el.unit?`${el.unit}, `:''}${el.floorNo?`${el.floorNo}, `:''}${el.blockNo?`${el.blockNo}, `:''}${el.buildingName?`${el.buildingName}, `:''}${el.estateOrVillageName?`${el.estateOrVillageName}, `:''}${el.buildingNoFrom?`${el.buildingNoFrom} `:''}${el.streetName?`${el.streetName}, `:''}${el.dcDistrict?`${el.dcDistrict}, `:''}${el.region?`${el.region} `:''}  `;%>
+               <div class="form-check pl-0">
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="customRadio" id="addressRadios<%=idx%>" value=" <%= addr %>" required>
+                    <label class="custom-control-label" for="addressRadios<%=idx%>">
+                      <%=el.contactPerson%> <br/>
+                      <%= addr %><br/>
+                      tel:  <%=el.contactPhoneNo%>
+                      </label>
+                  </div>
+                <%})%>
+                <div>
+                  <input class="d-none" type="radio" name="customRadio" value="" required>
+                  <div class="invalid-feedback">Please choose an address</div>
+                </div>
+              </div>
+
+              <input class ='nonce' type="hidden" name="nonce" value="<%= nonce %>" />
+              <div class="  mt-2 d-flex ">
+                <div class=" add-address-button  d-flex align-items-center" data-toggle="modal" data-target="#addressModal">
+                  <span>&plus;</span>
+                  <span class="add-address-button-text text-left">Add a new shipping address</span>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-outline-dark mt-4 w-100">
+                Continue
+              </button> 
+            </form>    
+          </div>
+         
+      </section>
+       <!-- Modal address -->
+            <div class="modal fade " id="addressModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="modal-body d-flex flex-column  text-center ">
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="heading-secondary ma-bt-md mb-4">Add address</h4>
+                            <form class="form form-user-address needs-validation" novalidate>
+                               <div class="form-row">
+                                <div class="form-group col-md-12">
+                                  <label for="contactPerson">Contact Person:</label>
+                                  <input class="form-control" type="text" id="contactPerson"required/>
+                                  <div class="invalid-feedback">Please enter contact name</div>
+                                </div>
+                              </div>
+                              <%- include("./_address") -%>
+                              <div class="form-row">
+                                <div class="form-group col-md-12">
+                                  <label for="contactPhoneNo">Contact Phone Number</label>
+                                  <input type="text" class="form-control" id="contactPhoneNo" required>
+                                  <div class="invalid-feedback">Phone Number is required.</div>
+                                </div>
+                              </div>
+
+                              <div class="d-flex mt-4 justify-content-end"> <button type="submit" class="btn btn-dark submit-form">Add address</button></div>
+                            </form>
+                        </div>                   
+                    </div>
+                </div>
+            </div>
+      <section class="date-section non-active rounded shadow-sm">
+          <div>
+              <h4>3. Select date</h4>
+          </div>
+          
+          <div>
+            <form class="form needs-validation form-date" novalidate>
                 <div class="form-group">
                     <!-------------- DATE -------------->
                         <label for="due-date">Choose your date </label>
@@ -80,48 +152,13 @@
                         <div class="invalid-feedback">Please select a valid date.</div>
                 </div>
                 <div class="text-right">
-                  <button type="submit" class="btn btn-dark date-btn mt-4 w-100">Continue
+                  <button type="submit" class="btn btn-dark date-btn mt-4 w-100">Proceed to checkout</button>  
                 </div>
-                  
-                </button>  
                 </form>
-                
-          </div>
-      </section>
-      <section class="address-section non-active rounded shadow-sm">
-          <div>
-              <h4>3. Select address</h4>
-          </div>
-          
-          <div>
-             <form class="form needs-validation form-address" novalidate>
-               <%user.address.forEach((el,idx) =>{ %>
-                <%const addr = `${el.unit?`${el.unit}, `:''}${el.floorNo?`${el.floorNo}, `:''}${el.blockNo?`${el.blockNo}, `:''}${el.buildingName?`${el.buildingName}, `:''}${el.estateOrVillageName?`${el.estateOrVillageName}, `:''}${el.buildingNoFrom?`${el.buildingNoFrom} `:''}${el.streetName?`${el.streetName}, `:''}${el.dcDistrict?`${el.dcDistrict}, `:''}${el.region?`${el.region} `:''}  `;%>
-               <div class="form-check pl-0">
-              <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" name="customRadio" id="addressRadios<%=idx%>" value=" <%= addr %>" required>
-                  <label class="custom-control-label" for="addressRadios<%=idx%>">
-                    <%= addr %>
-                    </label>
-                </div>
-              <%})%>
-              <div>
-                <input class="d-none" type="radio" name="customRadio" value="" required>
-                <div class="invalid-feedback">Please choose an address</div>
-              </div>
-            </div>
-
-            <input class ='nonce' type="hidden" name="nonce" value="<%= nonce %>" />
-            <div class="text-right">
-              <button type="submit" class="btn btn-dark mt-4 w-100">
-              Checkout 
-            </button> 
-            </div>
             
-
-          </form>
           </div>
     </section>
+    
 
 
     </div>

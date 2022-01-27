@@ -1,5 +1,6 @@
 import checkoutCart from './stripe.js';
 import { logout } from './login';
+import { updateAddress } from './account';
 
 const checkoutHandler = () => {
   const checkoutWrapper = document.querySelector('.checkout-wrapper');
@@ -14,21 +15,21 @@ const checkoutHandler = () => {
       }
     });
 
-    const formDate = document.querySelector('.form-date');
+    const formAddress = document.querySelector('.form-address');
     const dateSection = document.querySelector('.date-section');
-    const addressSection = document.querySelector('.address-section ');
+    const addressSection = document.querySelector('.address-section');
 
-    if (formDate) {
-      formDate.addEventListener('submit', (e) => {
+    if (formAddress) {
+      formAddress.addEventListener('submit', (e) => {
         e.preventDefault();
-        dateSection.classList.remove('active');
-        dateSection.classList.add('non-active');
-        addressSection.classList.remove('non-active');
-        addressSection.classList.add('active');
+        addressSection.classList.remove('active');
+        addressSection.classList.add('non-active');
+        dateSection.classList.remove('non-active');
+        dateSection.classList.add('active');
       });
     }
     // ****************************** Checkout Cart ***************************** //
-    const checkoutForm = document.querySelector('.form-address');
+    const checkoutForm = document.querySelector('.form-date');
     if (checkoutForm)
       checkoutForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -44,6 +45,17 @@ const checkoutHandler = () => {
     // ********************************* LOGOUT ********************************* //
     const logoutBtn = document.querySelector('.logout-btn');
     if (logoutBtn) logoutBtn.addEventListener('click', logout);
+
+    // ***************************** Add new address **************************** //
+    const addAddressForm = document.querySelector('.form-user-address');
+    if (addAddressForm) {
+      addAddressForm.dataset.type = 'post';
+      addAddressForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('ok');
+        updateAddress(addAddressForm);
+      });
+    }
   }
 };
 

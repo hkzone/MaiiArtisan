@@ -35,6 +35,12 @@ router.patch(
   userController.updateMe
 );
 
+router
+  .route('/updateMyAddress')
+  .post(userController.addMyAddress)
+  .patch(userController.updateMyAddress)
+  .delete(userController.deleteMyAddress);
+
 router.delete('/deleteMe', userController.deleteMe);
 
 // ALL ROUTES WILL BE RESTRICTED TP ADMIN AFTER THIS MIDDLEWARE

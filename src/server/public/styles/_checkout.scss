@@ -38,6 +38,10 @@
     }
   }
 
+  .login-txt span {
+    font-size: $normal-font-size;
+  }
+
   .checkout-signin {
     padding: 0;
     min-height: auto;
@@ -80,7 +84,16 @@
       font-size: 0.75rem !important;
     }
   }
+
   .info * span {
     color: $secondary-font-color;
+  }
+
+  .add-address-button {
+    @include customButton();
+  }
+
+  .custom-control-label {
+    font-size: $xs-font-size;
   }
 }

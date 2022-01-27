@@ -106,7 +106,7 @@ const adminHandler = () => {
     // ***************** Display Modal with product information ***************** //
     productsTable.addEventListener('click', (e) => {
       //check if edit button was clicked
-      const editProductBtn = e.target.classList.contains('editProductBtn');
+      const editProductBtn = e.target.classList.contains('edit-product-btn');
       if (!editProductBtn) {
         return;
       }

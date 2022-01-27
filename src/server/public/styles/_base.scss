@@ -3,6 +3,18 @@ body {
   font-family: $body-font;
   text-align: center;
 
+  a {
+    color: $link-color;
+    text-decoration: none !important;
+
+    &:hover {
+      color: $link-hover;
+    }
+    &.underline:hover {
+      text-decoration: underline !important;
+    }
+  }
+
   main {
     margin-bottom: 2rem;
   }
@@ -11,6 +23,7 @@ body {
     padding-top: 2px;
     padding-bottom: 2px;
   }
+
   .container-xl {
     padding: 0;
     margin: 0 auto;
@@ -32,18 +45,9 @@ body {
       margin: 0 auto -0.2rem;
     }
 
-    .cart-wrapper,
-    .table-my-orders .user-view__form-container,
-    .account-products-container,
-    .signup-container {
-      a {
-        color: $gray-dark !important;
-        text-decoration: none !important;
-
-        &:hover {
-          color: lighten($gray-dark, 10%) !important;
-        }
-      }
+    .small-btn {
+      padding: 0.15rem 0.5rem;
+      min-width: 5rem;
     }
     .responsive-img {
       width: 100%;
@@ -58,6 +62,12 @@ body {
     .carousel-indicators {
       filter: invert(100%);
     }
+  }
+
+  smart-list-item[selected] .smart-content,
+  smart-list-item[focus] .smart-content,
+  smart-list-box:focus smart-list-item[focus][selected] .smart-content {
+    color: darken($secondary-font-color, 10);
   }
 }
 

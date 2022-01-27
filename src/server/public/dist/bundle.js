@@ -8974,41 +8974,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // type is either 'password' or 'data'
 var updateSettings = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data, type) {
-    var url, res;
+    var method,
+        url,
+        res,
+        _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            url = type === 'password' ? '/api/v1/users/updateMyPassword' : '/api/v1/users/updateMe';
-            _context.next = 4;
+            method = _args.length > 2 && _args[2] !== undefined ? _args[2] : 'PATCH';
+            _context.prev = 1;
+            if (type === 'password') url = '/api/v1/users/updateMyPassword';else if (type === 'data') url = '/api/v1/users/updateMe';else if (type === 'address') url = '/api/v1/users/updateMyAddress';
+            _context.next = 5;
             return (0, _axios.default)({
-              method: 'PATCH',
+              method: method,
               url: url,
               data: data
             });
 
-          case 4:
+          case 5:
             res = _context.sent;
 
             if (res.data.status === 'success') {
               (0, _alerts.showAlert)('success', "".concat(type.toUpperCase(), " updated successfully!"));
+              window.setTimeout(function () {
+                location.reload(true);
+              }, 2000);
             }
 
-            _context.next = 11;
+            _context.next = 12;
             break;
 
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](0);
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](1);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 11:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[1, 9]]);
   }));
 
   return function updateSettings(_x, _x2) {
@@ -9024,7 +9031,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.accountHandler = exports.updateAddress = void 0;
 
 var _login = require("./login");
 
@@ -9036,13 +9043,51 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var updateAddress = function updateAddress(form) {
+  var _id = form.querySelector('#_id');
+
+  var contactPerson = form.querySelector('#contactPerson').value;
+  var unit = form.querySelector('#unit').value;
+  var floorNo = form.querySelector('#floorNo').value;
+  var blockNo = form.querySelector('#blockNo').value;
+  var buildingName = form.querySelector('#buildingName').value;
+  var estateOrVillageName = form.querySelector('#estateOrVillageName').value;
+  var buildingNoFrom = form.querySelector('#buildingNoFrom').value;
+  var streetName = form.querySelector('#streetName').value;
+  var dcDistrict = form.querySelector('#dcDistrict').value;
+  var region = form.querySelector('#region').value;
+  var contactPhoneNo = form.querySelector('#contactPhoneNo').value;
+  var address = {
+    contactPerson: contactPerson,
+    unit: unit,
+    floorNo: floorNo,
+    blockNo: blockNo,
+    buildingName: buildingName,
+    estateOrVillageName: estateOrVillageName,
+    buildingNoFrom: buildingNoFrom,
+    streetName: streetName,
+    dcDistrict: dcDistrict,
+    region: region,
+    contactPhoneNo: contactPhoneNo
+  }; //if we edit existing address add id
+
+  if (_id && _id.value) address._id = _id.value;
+  console.log(address);
+  (0, _updateSettings.default)({
+    address: address
+  }, 'address', form.dataset.type);
+};
+
+exports.updateAddress = updateAddress;
+
 var accountHandler = function accountHandler() {
   // DOM ELEMENTS
   var loginForm = document.querySelector('.form-signin');
   var logOutBtn = document.querySelector('.nav__el--logout');
   var signupForm = document.querySelector('.signup-form');
   var userDataForm = document.querySelector('.form-user-data');
-  var userPasswordForm = document.querySelector('.form-user-password'); // ********************************** LOGIN ********************************* //
+  var userPasswordForm = document.querySelector('.form-user-password');
+  var addressBook = document.querySelector('.address-book'); // ********************************** LOGIN ********************************* //
 
   if (loginForm) loginForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -9074,9 +9119,9 @@ var accountHandler = function accountHandler() {
               blockNo = signupForm.querySelector('#blockNo').value;
               buildingName = signupForm.querySelector('#buildingName').value;
               estateOrVillageName = signupForm.querySelector('#estateOrVillageName').value;
-              buildingNo = signupForm.querySelector('#buildingNo').value;
+              buildingNo = signupForm.querySelector('#buildingNoFrom').value;
               streetName = signupForm.querySelector('#streetName').value;
-              district = signupForm.querySelector('#district').value;
+              district = signupForm.querySelector('#dcDistrict').value;
               region = signupForm.querySelector('#region').value;
               phoneNumber = signupForm.querySelector('#phoneNumber').value;
               _context.next = 21;
@@ -9116,7 +9161,7 @@ var accountHandler = function accountHandler() {
           switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              document.querySelector('.btn--save-password').textContent = 'Updating...';
+              document.querySelector('.btn-save-password').textContent = 'Updating...';
               passwordCurrent = document.getElementById('password-current').value;
               password = document.getElementById('password').value;
               passwordConfirm = document.getElementById('password-confirm').value;
@@ -9144,7 +9189,71 @@ var accountHandler = function accountHandler() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }()); // **************************** My orders popover *************************** //
+  }()); // *********************** Update/Delete/Add Addresses ********************** //
+
+  if (addressBook) {
+    var userAddressForm = document.querySelector('.form-user-address');
+    addressBook.addEventListener('click', function (e) {
+      //edit address button
+      if (e.target.classList.contains('edit-address')) {
+        var address = JSON.parse(e.target.dataset.address);
+        var keys = Object.keys(address).map(function (key) {
+          return key;
+        }); //empty the form
+
+        $('.form-user-address input').val('');
+        $('.form-user-address').css('display', 'block'); //load in the values
+
+        keys.forEach(function (key) {
+          $("[id='".concat(key, "']")).val(address[key]);
+        });
+        userAddressForm.dataset.type = 'patch';
+        userAddressForm.scrollIntoView({
+          behavior: 'smooth'
+        });
+      } //Delete address button
+
+
+      if (e.target.classList.contains('delete-address')) {
+        (0, _updateSettings.default)({
+          _id: e.target.dataset.id
+        }, 'address', 'delete');
+      } //add address button
+
+
+      if (e.target.classList.contains('add-address-button')) {
+        $('.form-user-address input').val('');
+        $('.form-user-address').css('display', 'block');
+        userAddressForm.scrollIntoView({
+          behavior: 'smooth'
+        });
+        userAddressForm.dataset.type = 'post';
+      }
+    }); //Update the address
+
+    userAddressForm.addEventListener('submit', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                e.preventDefault();
+                updateAddress(userAddressForm);
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      return function (_x3) {
+        return _ref3.apply(this, arguments);
+      };
+    }());
+  } // **************************** My orders popover *************************** //
+
 
   $('[data-toggle=popover]').popover();
   $('.popover-dismiss').popover({
@@ -9152,8 +9261,7 @@ var accountHandler = function accountHandler() {
   });
 };
 
-var _default = accountHandler;
-exports.default = _default;
+exports.accountHandler = accountHandler;
 },{"./login":"login.js","./updateSettings":"updateSettings.js"}],"stripe.js":[function(require,module,exports) {
 "use strict";
 
@@ -9723,7 +9831,7 @@ var adminHandler = function adminHandler() {
 
     productsTable.addEventListener('click', function (e) {
       //check if edit button was clicked
-      var editProductBtn = e.target.classList.contains('editProductBtn');
+      var editProductBtn = e.target.classList.contains('edit-product-btn');
 
       if (!editProductBtn) {
         return;
@@ -9963,7 +10071,13 @@ var _stripe = _interopRequireDefault(require("./stripe.js"));
 
 var _login = require("./login");
 
+var _account = require("./account");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var checkoutHandler = function checkoutHandler() {
   var checkoutWrapper = document.querySelector('.checkout-wrapper');
@@ -9978,22 +10092,22 @@ var checkoutHandler = function checkoutHandler() {
         e.target.classList.add('active');
       }
     });
-    var formDate = document.querySelector('.form-date');
+    var formAddress = document.querySelector('.form-address');
     var dateSection = document.querySelector('.date-section');
-    var addressSection = document.querySelector('.address-section ');
+    var addressSection = document.querySelector('.address-section');
 
-    if (formDate) {
-      formDate.addEventListener('submit', function (e) {
+    if (formAddress) {
+      formAddress.addEventListener('submit', function (e) {
         e.preventDefault();
-        dateSection.classList.remove('active');
-        dateSection.classList.add('non-active');
-        addressSection.classList.remove('non-active');
-        addressSection.classList.add('active');
+        addressSection.classList.remove('active');
+        addressSection.classList.add('non-active');
+        dateSection.classList.remove('non-active');
+        dateSection.classList.add('active');
       });
     } // ****************************** Checkout Cart ***************************** //
 
 
-    var checkoutForm = document.querySelector('.form-address');
+    var checkoutForm = document.querySelector('.form-date');
     if (checkoutForm) checkoutForm.addEventListener('submit', function (e) {
       e.preventDefault();
       checkoutForm.querySelector('button[type="submit"]').innerHTML = 'Processing...';
@@ -10001,13 +10115,41 @@ var checkoutHandler = function checkoutHandler() {
     }); // ********************************* LOGOUT ********************************* //
 
     var logoutBtn = document.querySelector('.logout-btn');
-    if (logoutBtn) logoutBtn.addEventListener('click', _login.logout);
+    if (logoutBtn) logoutBtn.addEventListener('click', _login.logout); // ***************************** Add new address **************************** //
+
+    var addAddressForm = document.querySelector('.form-user-address');
+
+    if (addAddressForm) {
+      addAddressForm.dataset.type = 'post';
+      addAddressForm.addEventListener('submit', /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  e.preventDefault();
+                  console.log('ok');
+                  (0, _account.updateAddress)(addAddressForm);
+
+                case 3:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    }
   }
 };
 
 var _default = checkoutHandler;
 exports.default = _default;
-},{"./stripe.js":"stripe.js","./login":"login.js"}],"shop.js":[function(require,module,exports) {
+},{"./stripe.js":"stripe.js","./login":"login.js","./account":"account.js"}],"shop.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60044,7 +60186,7 @@ require("core-js/modules/web.dom.iterable.js");
 
 require("regenerator-runtime/runtime.js");
 
-var _account = _interopRequireDefault(require("./account"));
+var _account = require("./account");
 
 var _cart = _interopRequireDefault(require("./cart"));
 
@@ -60072,7 +60214,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 window.addEventListener('DOMContentLoaded', function () {
   (0, _app.default)();
   (0, _form.default)();
-  (0, _account.default)();
+  (0, _account.accountHandler)();
   (0, _cart.default)();
   (0, _admin.default)();
   (0, _shop.shopHandler)();
@@ -60106,7 +60248,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59970" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63251" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

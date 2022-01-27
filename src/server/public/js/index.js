@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unpublished-import */
 import '@babel/polyfill';
 
-import accountHandler from './account';
+import { accountHandler } from './account';
 import cartHandler from './cart';
 import adminHandler from './admin';
 import formHandler from './form';

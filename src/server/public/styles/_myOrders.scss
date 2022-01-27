@@ -3,44 +3,53 @@
   > div {
     margin-bottom: 1.1rem;
   }
-  .card-header {
-    > div {
+
+  .card {
+    border: 1px solid $secondary-font-color;
+
+    .card-header {
+      border-bottom: 1px solid $secondary-font-color;
+
+      > div {
+        font-size: $xs-font-size;
+
+        span:nth-of-type(1) {
+          color: $argent-gray;
+          text-transform: uppercase;
+        }
+      }
+
+      a {
+        cursor: pointer;
+      }
+    }
+
+    .cart-wrapper {
+      padding: 1.25rem;
+      border-bottom: 1px solid $secondary-font-color;
+
+      table {
+        margin-bottom: 0;
+      }
+
+      .cart-item-totals {
+        padding-right: $xs-font-size;
+      }
+    }
+
+    .card-footer {
+      border-top: 0px;
+      background: transparent !important;
       font-size: $xs-font-size;
+
+      & :not(:last-child) {
+        margin-right: 0.5rem;
+      }
 
       span:nth-of-type(1) {
         color: $argent-gray;
         text-transform: uppercase;
       }
-    }
-
-    a {
-      cursor: pointer;
-    }
-  }
-
-  .cart-wrapper {
-    padding: 1.25rem;
-
-    table {
-      margin-bottom: 0;
-    }
-
-    .cart-item-totals {
-      padding-right: $xs-font-size;
-    }
-  }
-
-  .card-footer {
-    background: transparent !important;
-    font-size: $xs-font-size;
-
-    & :not(:last-child) {
-      margin-right: 0.5rem;
-    }
-
-    span:nth-of-type(1) {
-      color: $argent-gray;
-      text-transform: uppercase;
     }
   }
 }

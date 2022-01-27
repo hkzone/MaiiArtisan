@@ -67,7 +67,7 @@
           <!-- Orders table -->
           <div class="table-responsive admin-orders-table">
 
-            <table class="table table-sm  table-my-orders edit-orders">
+            <table class="table table-sm table-hover edit-orders">
               <thead class="">
                 <tr>
                   <th scope="col" >
@@ -97,16 +97,14 @@
               <tbody>
                 <% orders.forEach(function(order,index) { %>
                 <tr>
-                  <th scope="row" class="align-middle">
-                      <div class="d-inline-flex col-lg-9">
-                        <a class="text-left" data-toggle="collapse" href="#<%=`collapse${index}`%>"><%= order.orderItems.map((el) =>` ${el.product.name}`)  %></a>    
-                      </div>
+                  <th scope="row"  class="align-middle" data-toggle="collapse" href="#<%=`collapse${index}`%>" role="button">
+                    <%= order.orderItems.map((el) =>` ${el.product.name}`)  %>   
                   </th>
-                  <td class="align-middle optional-show"><%= order.orderItems.map((el) =>el.qty).reduce((a, b) => a + b, 0)  %></td>
-                  <td class="align-middle"><%= order.totalAmount %></td>
-                  <td class="align-middle"><%= order.dueDate.toISOString().split('T')[0]%></td>
-                   <td class="align-middle"><%= order.user.name%></td>
-                   <td class="align-middle text-center">
+                  <td data-toggle="collapse" href="#<%=`collapse${index}`%>" role='button' class="align-middle optional-show"><%= order.orderItems.map((el) =>el.qty).reduce((a, b) => a + b, 0)  %></td>
+                  <td data-toggle="collapse" href="#<%=`collapse${index}`%>" role='button' class="align-middle"><%= order.totalAmount %></td>
+                  <td data-toggle="collapse" href="#<%=`collapse${index}`%>" role='button' class="align-middle"><%= order.dueDate.toISOString().split('T')[0]%></td>
+                   <td data-toggle="collapse" href="#<%=`collapse${index}`%>" role='button' class="align-middle"><%= order.user.name%></td>
+                   <td data-toggle="collapse" href="#<%=`collapse${index}`%>" role='button' class="align-middle text-center">
                      <% if (order.isPaid) { %><span>paid</span><% } %>
                      <% if (order.isReady) { %><span>ready</span><% } %>
                      <% if (order.isDelivered) { %><span>delivered</span><% } %>
@@ -122,9 +120,10 @@
                     </div>
                    </td>
                   </tr>
-                  <tr id="<%=`collapse${index}`%>" class="panel-collapse collapse">
-                     <td colspan="999" class="p-0">
-                            <table class="table table-sm text-left">
+                  <tr id="<%=`collapse${index}`%>" class="panel-collapse collapse no-hover
+no-hover">
+                     <td colspan="999" class="p-0 ">
+                            <table class="table table-sm  text-left inner-table">
                               <thead class=" ">
                                 <tr>
                                   <th scope="col" >Product</th>
@@ -138,8 +137,8 @@
                               <tbody>
                                 <% order.orderItems.forEach(function(el) { %>
                                   <tr>
-                                    <td class="text-left"><%=el.product.name%></td>
-                                    <td class="text-left"><%= el.qty %></td>
+                                    <td class="text-left"><%=el.product.name%> <%=el.weight%>gr.</td>
+                                    <td class="text-center"><%= el.qty %></td>
                                     <td class="text-left"><%= el.customColor?`${el.customColor} `:''%></td>
                                     <td class="text-left"><%=el.customFlavor?`${el.customFlavor} `:''%></td>
                                     <td class="text-left"><%=el.customRequest?`${el.customRequest} `:''%></td>

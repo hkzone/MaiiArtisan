@@ -60,11 +60,71 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
 
   //2) Update user document
+
   const filteredBody = filterObj(req.body, 'name', 'email');
   if (req.file) filteredBody.photo = req.file.filename;
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
     runValidators: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
+exports.updateMyAddress = catchAsync(async (req, res, next) => {
+  //1) Update user document
+
+  const { address } = req.body;
+
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    { $set: { 'address.$[el]': address } },
+    {
+      arrayFilters: [{ 'el._id': address._id }],
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
+exports.addMyAddress = catchAsync(async (req, res, next) => {
+  //2) Update user document
+
+  const { address } = req.body;
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    { $push: { address: address } },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
+exports.deleteMyAddress = catchAsync(async (req, res, next) => {
+  //2) Update user document
+
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+    $pull: { address: { _id: req.body._id } },
   });
 
   res.status(200).json({

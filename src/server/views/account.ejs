@@ -55,7 +55,7 @@
       <div class="line">&nbsp;</div>
       <div class="user-view__form-container">
         <h2 class="heading-secondary ma-bt-md">Password change</h2>
-        <form class="form form-user-settings needs-validation" novalidate>
+        <form class="form form-user-password needs-validation" novalidate>
           <div class="form-row form__group">
             <label class="form__label" for="password-current"
               >Current password</label
@@ -102,11 +102,61 @@
             Password must be at least 8 characters
           </div>
           </div>
-         <div class="d-flex  justify-content-end"> <button class="btn btn-dark submit-form">Save password</button></div>
+         <div class="d-flex  justify-content-end"> <button class="btn btn-dark submit-form btn-save-password">Save password</button></div>
            
           
         </form>
       </div>
+       <div class="user-view__form-container">
+        <h2 class="heading-secondary ma-bt-md mb-4">Addresses</h2>
+        <div class="row address-book mb-5 ">
+          <%user.address.forEach((el,idx) =>{ %>
+           <div class="d-flex flex-column col-sm-6 mb-4 justify-content-between">
+              <%const addr = `${el.unit?`${el.unit}, `:''}${el.floorNo?`${el.floorNo}, `:''}${el.blockNo?`${el.blockNo}, `:''}${el.buildingName?`${el.buildingName}, `:''}${el.estateOrVillageName?`${el.estateOrVillageName}, `:''}${el.buildingNoFrom?`${el.buildingNoFrom} `:''}${el.streetName?`${el.streetName}, `:''}${el.dcDistrict?`${el.dcDistrict}, `:''}${el.region?`${el.region} `:''}  `;%>
+              <p class="text-muted pt-20"  id="address<%=idx%>">
+                <%=el.contactPerson%> <br/>
+                <%= addr %><br/>
+                tel:  <%=el.contactPhoneNo%>
+              </p>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-dark mr-3 small-btn edit-address" data-address="<%=JSON.stringify(el)%>" >edit</button>
+                <button class="btn btn-outline-dark small-btn delete-address" data-id="<%= el._id%>" >delete</button>
+              </div>
+            </div>
+          <%})%>
+          <div class="p-0 col-sm-6 mb-4 d-flex justify-content-center align-items-center">
+          <div class=" add-address-button  d-flex align-items-center">
+            <span>&plus;</span>
+            <span class="add-address-button-text text-left">Add a new shipping address</span>
+          </div>
+        </div>
+        </div>
+        <form class="form form-user-address needs-validation" novalidate>
+          <input type="text" class="d-none" id="_id"/>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="contactPerson">Contact Person:</label>
+                <input class="form-control" type="text" id="contactPerson"required/>
+                <div class="invalid-feedback">Please enter contact name</div>
+            </div>
+          </div>
+          <%- include("./_address") -%>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="contactPhoneNo">Contact Phone Number</label>
+                <input type="text" class="form-control" id="contactPhoneNo" required>
+                <div class="invalid-feedback">Phone Number is required.</div>
+              </div>
+            </div>
+          <div class="d-flex  justify-content-end"> <button class="btn btn-dark submit-form">Update address</button></div>
+        </form>
+
+
+
+
+
+
+      
     </div>
   </div>
 </main>

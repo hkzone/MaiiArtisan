@@ -14,25 +14,12 @@
     }
   }
 
-  table {
-    font-size: $xs-font-size;
-    thead {
-      text-transform: uppercase;
-    }
-
-    .panel-collapse {
-      > td {
-        border-top-width: 0px;
-      }
-    }
-
-    table {
-      background-color: $background-color;
-    }
+  .edit-orders {
+    @include customTable();
 
     span {
       padding: 2px 6px;
-      background-color: green;
+      background-color: $secondary-font-color;
       border-radius: 0.25rem;
       color: #fff;
     }
