@@ -59,16 +59,21 @@
           </ul>
           <ul class="navbar-nav ml-auto align-items-center">
           <li class="nav-item d-flex flex-column justify-content-center cart">
-            <span>
-              <a class="nav-link" href="/cart">
+            
+              <a class="nav-link  d-flex align-items-center" href="/cart">
                 <!-- <i class="fas fa-cart-arrow-down"></i> -->
+                <span class="position-relative">
                 <svg viewBox="0 0 28 28">
                   <path fill="none" d="M7.24,9.5H20.77A2,2,0,0,1,22.7,11l3.23,12h0A2,2,0,0,1,24,25.5H4A2,2,0,0,1,2.07,23L5.31,11h0A2,2,0,0,1,7.24,9.5Z"/>
                   <path fill="none" d="M12.31,3.5h3.42a2,2,0,0,1,1.92,1.43L19,9.5H9l1.39-4.58h0A2,2,0,0,1,12.31,3.5Z"/>
                   </svg>
                    <span class="quantity"><%= typeof cartQty!== undefined && cartQty>0 ?` ${cartQty}`:' 0' %></span>
-                </a>              
-            </span>
+                </span>
+                   <span class="d-lg-none ml-2">Cart</span>
+                </a>  
+
+   
+            
             
            </li>
           <% if (user!==undefined){ %>
@@ -79,7 +84,7 @@
             <li class="nav-item nav__el" ></a>
               <a class="nav-link" href="/me">
               <img class="nav__user-img" src="/images/users/<%=user.photo%>" alt="Photo of <%=user.name%>"/>
-             <!-- <%-user.name.split(' ')[0]-%> -->
+             <%-user.name.split(' ')[0]-%>
             </a>
             </li>
          <%  }else{   %>
