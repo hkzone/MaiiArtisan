@@ -41,7 +41,7 @@ const render3dImage = (idSelector, filepathMain, filepathMap) => {
   const displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
   app.stage.filters = [displacementFilter];
 
-  window.onmousemove = function (e) {
+  window.onmousemove = (e) => {
     displacementFilter.scale.x = (cWidth - e.clientX) / 70;
     displacementFilter.scale.y = (cHeight - e.clientY) / 50;
   };

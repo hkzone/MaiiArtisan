@@ -147,7 +147,7 @@ app.use('/contact', contactRouter);
 app.use('/settings', settingsRouter);
 
 app.get('/favicon.ico', (req, res) => {
-  res.sendFile('/src/server/favicon.ico');
+  res.sendFile('/favicon.ico');
 });
 
 app.all('*', (req, res, next) => {

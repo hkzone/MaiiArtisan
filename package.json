@@ -1,16 +1,15 @@
 {
-  "name": "backery",
+  "name": "maii_artisan_patisserie",
   "version": "1.0.0",
   "main": "./src/server/app.js",
   "scripts": {
     "start": "node ./src/server/server.js",
     "dev": "nodemon ./src/server/server.js --ignore public/",
     "start:prod": "NODE_ENV=production nodemon ./src/server/server.js",
-    "debug": "ndb ./src/server/server.js",
     "watch:js": "parcel watch ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url .",
     "build:js": "parcel build ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url ."
   },
-  "author": "",
+  "author": "Vitaliy Vlasyuk",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
@@ -64,5 +63,5 @@
     "prettier": "^2.5.1",
     "sass": "^1.45.1"
   },
-  "description": ""
+  "description": "Maii Artisan Patisserie is a full stack web application for a bakery/cake shop"
 }
