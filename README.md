@@ -63,10 +63,6 @@ Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. 
 
 ![print-pdf](./demo/signup.gif)
 
-#### Signin :
-
-![print-pdf](./demo/pdf.gif)
-
 #### Add to cart:
 
 ![add-new-trip](./demo/add.gif)
