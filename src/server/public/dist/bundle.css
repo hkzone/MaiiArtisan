@@ -865,6 +865,13 @@ body smart-list-box:focus smart-list-item[focus][selected] .smart-content {
   width: 1.2rem;
   padding: 0;
 }
+.cart-wrapper .product-price {
+  font-size: 1.1rem;
+}
+.cart-wrapper .product-price div,
+.cart-wrapper .product-price span {
+  color: #c59f4e;
+}
 .cart-wrapper .cart-table tbody tr td {
   vertical-align: middle;
 }

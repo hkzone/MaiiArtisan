@@ -5,6 +5,7 @@ const Order = require('../models/orderModel');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 const Security = require('../utils/security');
+const cartController = require('../controllers/cartController');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Check if there's a valid session
@@ -31,9 +32,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           product_data: {
             name: el.name,
             description: `${el.color ? `Color:   ${el.color}, ` : ''} ${
-              el.flavor ? ` Flavor: ${el.flavor}, ` : ''
-            }${el.option ? ` Option: ${el.option}, ` : ''} ${
-              el.message ? `Message: ${el.message}, ` : ''
+              el.flavor ? ` Flavor: "${el.flavor}" ` : ''
+            }${el.option ? ` Options: "${el.option}" ` : ''} ${
+              el.message ? `Inscription Text: "${el.message}" ` : ''
             }`,
             images: [
               `${req.protocol}://${req.get('host')}/images/products/${
@@ -97,8 +98,6 @@ const createOrderCheckout = async (session) => {
     unitAmount: el.price.unit_amount,
   }));
 
-  console.log(orderItems, shippingAddress);
-
   await Order.create({
     user,
     orderItems,
@@ -124,8 +123,10 @@ exports.webhookCheckout = (req, res, next) => {
   }
 
   // Handle the checkout.session.completed event
-  if (event.type === 'checkout.session.completed')
+  if (event.type === 'checkout.session.completed') {
     createOrderCheckout(event.data.object);
+    cartController.emptyCart();
+  }
 
   res.status(200).json({ received: true });
 };

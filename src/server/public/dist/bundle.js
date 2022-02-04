@@ -9994,12 +9994,13 @@ var formHandler = function formHandler() {
   // ************* Custom input of type number with + and - button ************ //
   // ************************************************************************** //
 
-  if ($('.btn-number')) {
+  if ($('.btn-number').length) {
     $('.btn-number').click(function (e) {
       e.preventDefault();
       var fieldName = $(this).data('field');
       var type = $(this).data('type');
-      var input = $("input[name='".concat(fieldName, "']"));
+      var id = $(this).data('id');
+      var input = $("input[name='".concat(fieldName, "'].").concat(id));
       var incrementDecrement = parseInt(input.data('increaseby'), 10);
       var currentVal = parseInt(input.val(), 10);
 
@@ -10023,14 +10024,25 @@ var formHandler = function formHandler() {
         }
       } else {
         input.val(0);
-      } //Change total price
+      } // *************************** Change total price *************************** //
+      // for order a product page
 
 
-      var totalUnits = 1;
-      $("input[type='number']").each(function () {
-        totalUnits *= $(this).val() / parseInt($(this).data('increaseby'), 10);
-      });
-      $('.product-price span').text(totalUnits * parseInt($('#price').val(), 10));
+      if ($('.product-wrapper').length) {
+        var totalUnits = 1;
+        $("input[type='number']").each(function () {
+          totalUnits *= $(this).val() / parseInt($(this).data('increaseby'), 10);
+        });
+        $(".product-price span").text(totalUnits * parseInt($('#price').val(), 10));
+      }
+
+      if ($('.cart-wrapper').length) {
+        var total = 0;
+        $("input[type='number'].qty").each(function () {
+          total += $(this).val() * parseInt($(this).data('price'), 10);
+        });
+        $(".product-price span").text(total);
+      }
     });
     $('.input-number').focusin(function () {
       $(this).data('oldValue', $(this).val());
@@ -10128,10 +10140,9 @@ var checkoutHandler = function checkoutHandler() {
               switch (_context.prev = _context.next) {
                 case 0:
                   e.preventDefault();
-                  console.log('ok');
                   (0, _account.updateAddress)(addAddressForm);
 
-                case 3:
+                case 2:
                 case "end":
                   return _context.stop();
               }
@@ -60248,7 +60259,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52488" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

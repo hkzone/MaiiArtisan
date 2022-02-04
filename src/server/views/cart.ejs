@@ -42,25 +42,29 @@
                 </p>
               </div>
             </td>
+
+            <% const randomId = Math.floor(Math.random() * Date.now())%>
           
             <td class="td-qty">
               <div class="d-flex align-items-center justify-content-center custom-input-number">
                  
-                      <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="qty<%= product._id%>">
+                      <button type="button" class="btn btn-default btn-number" data-id=<%=randomId%> data-type="minus" data-field="qty<%= product._id%>">
                         <span>&minus;</span>
                       </button>
                     
               <input
-                class="qty form-control input-number"
+                class="qty form-control input-number <%=randomId%>"
                 type="number"
                 name="qty<%= product._id%>"
                 value="<%= product.qty %>"
                 data-productId =<%= product._id%>
+                data-id=<%=randomId%>
+                data-price=<%= product.price *parseInt(product.weight,10)/product.weightUnit%>
                 data-increaseBy="1"
                  min="1" max="10" required
               />
                 
-                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="qty<%= product._id%>">
+                      <button type="button" class="btn btn-default btn-number" data-id=<%=randomId%> data-type="plus" data-field="qty<%= product._id%>">
                         <span>&plus;</span>
                       </button>
                     
@@ -81,8 +85,9 @@
 
           <% }); %>
           <tr class="info">
-            <td colspan="5" class="text-right">
-              Total: <%= cart.formattedTotals %>
+            <td colspan="5" class="text-right product-price">
+               Total: <div class="d-inline m-0 p-0">HK$</div><span> <%= cart.totals %></span>
+             
             </td>
           </tr>
         </tbody>

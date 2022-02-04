@@ -8,6 +8,15 @@
     padding: 0;
   }
 
+  .product-price {
+    font-size: $normal-font-size;
+
+    div,
+    span {
+      color: #c59f4e;
+    }
+  }
+
   .cart-table {
     tbody tr {
       td {

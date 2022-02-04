@@ -44,12 +44,13 @@ const formHandler = () => {
   // ************************************************************************** //
   // ************* Custom input of type number with + and - button ************ //
   // ************************************************************************** //
-  if ($('.btn-number')) {
+  if ($('.btn-number').length) {
     $('.btn-number').click(function (e) {
       e.preventDefault();
       const fieldName = $(this).data('field');
       const type = $(this).data('type');
-      const input = $(`input[name='${fieldName}']`);
+      const id = $(this).data('id');
+      const input = $(`input[name='${fieldName}'].${id}`);
       const incrementDecrement = parseInt(input.data('increaseby'), 10);
       const currentVal = parseInt(input.val(), 10);
 
@@ -73,14 +74,28 @@ const formHandler = () => {
         input.val(0);
       }
 
-      //Change total price
-      let totalUnits = 1;
-      $(`input[type='number']`).each(function () {
-        totalUnits *= $(this).val() / parseInt($(this).data('increaseby'), 10);
-      });
-      $('.product-price span').text(
-        totalUnits * parseInt($('#price').val(), 10)
-      );
+      // *************************** Change total price *************************** //
+
+      // for order a product page
+      if ($('.product-wrapper').length) {
+        let totalUnits = 1;
+        $(`input[type='number']`).each(function () {
+          totalUnits *=
+            $(this).val() / parseInt($(this).data('increaseby'), 10);
+        });
+
+        $(`.product-price span`).text(
+          totalUnits * parseInt($('#price').val(), 10)
+        );
+      }
+
+      if ($('.cart-wrapper').length) {
+        let total = 0;
+        $(`input[type='number'].qty`).each(function () {
+          total += $(this).val() * parseInt($(this).data('price'), 10);
+        });
+        $(`.product-price span`).text(total);
+      }
     });
 
     $('.input-number').focusin(function () {

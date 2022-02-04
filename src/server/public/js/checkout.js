@@ -52,7 +52,6 @@ const checkoutHandler = () => {
       addAddressForm.dataset.type = 'post';
       addAddressForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        console.log('ok');
         updateAddress(addAddressForm);
       });
     }
