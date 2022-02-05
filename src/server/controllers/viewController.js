@@ -133,7 +133,9 @@ exports.getMyOrders = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
   // 1) Find orders that belong to user
-  const orders = await Order.find({ user: req.user.id });
+  const orders = await Order.find({ user: req.user.id }).sort({
+    createdAt: -1,
+  });
 
   res.status(200).render('myOrders', {
     title: 'My Orders',
