@@ -58,6 +58,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       })),
     });
 
+    //empty cart items
+    Cart.emptyCart(req);
+
     // 3) Create session as response
     res.status(200).json({
       status: 'success',
@@ -125,7 +128,6 @@ exports.webhookCheckout = (req, res, next) => {
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     createOrderCheckout(event.data.object);
-    Cart.emptyCart(req);
   }
 
   res.status(200).json({ received: true });
