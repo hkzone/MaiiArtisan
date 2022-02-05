@@ -5,7 +5,7 @@ const Order = require('../models/orderModel');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 const Security = require('../utils/security');
-const cartController = require('../controllers/cartController');
+const Cart = require('../models/cartModel');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Check if there's a valid session
@@ -125,7 +125,7 @@ exports.webhookCheckout = (req, res, next) => {
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     createOrderCheckout(event.data.object);
-    cartController.emptyCart();
+    Cart.emptyCart(req);
   }
 
   res.status(200).json({ received: true });
