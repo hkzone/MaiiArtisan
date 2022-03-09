@@ -7,7 +7,8 @@
     "dev": "nodemon ./src/server/server.js --ignore public/",
     "start:prod": "NODE_ENV=production nodemon ./src/server/server.js",
     "watch:js": "parcel watch ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url .",
-    "build:js": "parcel build ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url ."
+    "build:js": "parcel build ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url .",
+    "heroku-postbuild": "parcel build ./src/server/public/js/index.js  --out-dir ./src/server/public/dist/ --out-file bundle.js --public-url ."
   },
   "author": "Vitaliy Vlasyuk",
   "license": "ISC",

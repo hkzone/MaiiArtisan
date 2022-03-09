@@ -32,7 +32,7 @@ Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. 
 
 - Shopping Cart
   - Add, remove, adjust quantity, select custom options for the items
-  - Shopping cart information is saved as session data in a DB and retrived by cookie on subsequent visits
+  - Shopping cart information is saved as session data in a DB and retrieved by cookie on subsequent visits
 - Checkout
   - Choose a day and address for delivery, add a new shipping address
   - Checkout with Stripe payment proccessor
@@ -107,7 +107,6 @@ Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. 
 - [Pixi](https://pixijs.com/)
 - [Smart Html Elements](https://www.htmlelements.com/)
 - [Heroku](https://www.heroku.com/)
-- [Parcel](https://parceljs.org/)
 
 ## Getting Started
 
