@@ -24,6 +24,21 @@
 
 For live demo please visit 👉 https://patisserie-artisanale.herokuapp.com/
 
+You may login to the site with credentials as bellow:
+
+```
+- Login : loulou@example.com
+- Password: test1234
+```
+
+Use card details as bellow for testing:
+
+```
+- Card No. : 4242 4242 4242 4242
+- Expiry date: 02 / 25
+- CVV: 222
+```
+
 ## Description
 
 Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. Is has backend RESTful API and server-side rendering for a website.
