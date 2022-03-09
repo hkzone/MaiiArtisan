@@ -78,7 +78,7 @@ app.post(
 app.use((req, res, next) => {
   res.setHeader(
     'Content-Security-Policy',
-    "script-src 'self' api.mapbox.com js.stripe.com use.fontawesome.com cdnjs.cloudflare.com cdn.jsdelivr.net code.jquery.com  unsafe-eval blob: data: gap:"
+    "script-src 'self' js.stripe.com use.fontawesome.com cdnjs.cloudflare.com cdn.jsdelivr.net code.jquery.com  unsafe-eval blob: data: gap:"
   );
   next();
 });
