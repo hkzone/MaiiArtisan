@@ -1,4 +1,6 @@
 .orders-container {
+  padding-bottom: 2rem;
+
   .dropdown-toggle {
     &:hover {
       transform: translateY(-1px);
@@ -22,6 +24,7 @@
       background-color: $secondary-font-color;
       border-radius: 0.25rem;
       color: #fff;
+      line-height: 1.5rem;
     }
   }
 }

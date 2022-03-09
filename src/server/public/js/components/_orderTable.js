@@ -1,5 +1,5 @@
 const orderTable = (orders) =>
-  `<table class="table table-sm ">
+  `<table class="table table-sm table-hover edit-orders">
               <thead class="thead-light ">
                 <tr>
                   <th scope="col" class=" text-left" >
@@ -26,32 +26,36 @@ const orderTable = (orders) =>
                   </th>
                 </tr>
               </thead>
-              <tbody>${orders.map(
-                (order, index) =>
-                  `                <tr>
-                  <th scope="row" class= "text-left">
-                      
-                        <a class="" data-toggle="collapse" href="#collapse${index}">${order.orderItems.map(
-                    (el) => el.product.name
-                  )}</a>    
+              <tbody>${orders
+                .map(
+                  (order, index) =>
+                    `                <tr>
+                  <th scope="row" class= "align-middle"
+                        data-toggle="collapse" href="#collapse${index}"  role="button">${order.orderItems.map(
+                      (el) => el.product.name
+                    )}  
                  
                   </th>
-                  <td class="align-middle optional-show">${order.orderItems
-                    .map((el) => el.qty)
-                    .reduce((a, b) => a + b, 0)}</td>
-                  <td class="align-middle">${order.totalAmount}</td>
-                  <td class="align-middle">${
-                    new Date(order.dueDate).toISOString().split('T')[0]
-                  }</td>
-                   <td class="align-middle">${order.user.name}</td>
-                   <td class="align-middle text-center">
+                 <td data-toggle="collapse" href="#collapse${index}" role='button' class="align-middle optional-show">${order.orderItems
+                      .map((el) => el.qty)
+                      .reduce((a, b) => a + b, 0)}</td>
+                  <td data-toggle="collapse" href="#collapse${index}" role='button' class="align-middle">${
+                      order.totalAmount
+                    }</td>
+                  <td data-toggle="collapse" href="#collapse${index}" role='button' class="align-middle">${
+                      new Date(order.dueDate).toISOString().split('T')[0]
+                    }</td>
+                   <td data-toggle="collapse" href="#collapse${index}" role='button' class="align-middle">${
+                      order.user.name
+                    }</td>
+                   <td data-toggle="collapse" href="#collapse${index}" role='button' class="align-middle text-center">
                      ${order.isPaid ? '<span>paid</span>' : ''}
                      ${order.isReady ? '<span>ready</span>' : ''}
                      ${order.isDelivered ? '<span>delivered</span>' : ''}
                   </td>
                    <td>
                     <div class="dropdown ">
-                      <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="btn dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       </a>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item edit-order-status-ready" data-field="${
@@ -65,8 +69,8 @@ const orderTable = (orders) =>
                    </td>
                   </tr>
                   <tr id="collapse${index}" class="panel-collapse collapse">
-                     <td colspan="999">
-                            <table class="table table-sm text-left">
+                     <td colspan="999" class="p-0">
+                            <table class="table table-sm text-left inner-table">
                               <thead class=" ">
                                 <tr>
                                   <th scope="col" >Product</th>
@@ -101,7 +105,8 @@ const orderTable = (orders) =>
                   </tr>
                 </tr>
                 `
-              )}</tbody>
+                )
+                .join('')}</tbody>
             </table>
         `;
 

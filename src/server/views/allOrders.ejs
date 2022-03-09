@@ -6,8 +6,8 @@
       <div class="col-md-3"><%- include("./_nav") -%></div>
       <!-- End  Side Nav-->
 
-      <div class="col-md-9 user-view__content">
-        <div class="account-products-container"></div>
+      <div class="col-md-9">
+        <div class="account-products-container">
         <h2 class="heading-secondary ma-bt-md">All Orders</h2>
         <% if(orders.length > 0) { %>
         <div class="col-lg-12">
@@ -124,9 +124,9 @@
 no-hover">
                      <td colspan="999" class="p-0 ">
                             <table class="table table-sm  text-left inner-table">
-                              <thead class=" ">
+                              <thead class="text-left ">
                                 <tr>
-                                  <th scope="col" >Product</th>
+                                  <th scope="col  pl-0" >Product</th>
                                   <th scope="col" class="optional-show">Quantity</th>
                                   <th scope="col" >Color</th>
                                   <th scope="col" >Flavor</th>
@@ -138,7 +138,7 @@ no-hover">
                                 <% order.orderItems.forEach(function(el) { %>
                                   <tr>
                                     <td class="text-left"><%=el.product.name%> <%=el.weight%>gr.</td>
-                                    <td class="text-center"><%= el.qty %></td>
+                                    <td class="text-left"><%= el.qty %></td>
                                     <td class="text-left"><%= el.customColor?`${el.customColor} `:''%></td>
                                     <td class="text-left"><%=el.customFlavor?`${el.customFlavor} `:''%></td>
                                     <td class="text-left"><%=el.customRequest?`${el.customRequest} `:''%></td>

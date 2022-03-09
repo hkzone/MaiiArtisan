@@ -15,7 +15,7 @@
    <a href="#technologies-used">Technologies Used</a> •
    <a href="#getting-started">Getting Started</a> •
   <a href="#deployment">Deployment</a> •
-   <a href="#testing">Testing</a> •
+    <a href="#restful-api">RESTful API</a> •
    <a href="#error-handling">Error Handling</a>
 
 </p>
@@ -34,7 +34,7 @@ Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. 
   - Add, remove, adjust quantity, select custom options for the items
   - Shopping cart information is saved as session data in a DB and retrived by cookie on subsequent visits
 - Checkout
-  - Choose day and address for delivery, add new address
+  - Choose a day and address for delivery, add a new shipping address
   - Checkout with Stripe payment proccessor
 - Front page
   - Fully resposive and modern design
@@ -44,7 +44,7 @@ Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. 
   - Add/edit Shipping addresses
   - Display placed orders with detailed information about ordered Items and order status.
 - Admin Account
-  - Display all orders with ability to filter them
+  - Display all orders with ability to filter them, change order status.
   - Display all products, edit products
   - Edit settings for custom options available for users during ordering (custom flavors,custom colors,special request options, inscription Text length)
 - Security
@@ -61,35 +61,31 @@ Maii Artisan Patisserie is a full stack web application for a bakery/cake shop. 
 
 #### Signup:
 
-![print-pdf](./demo/signup.gif)
+![signup](./demo/signup.gif)
 
-#### Add to cart:
+#### Add to Cart & Checkout:
 
-![add-new-trip](./demo/add.gif)
-
-#### Checkout :
-
-![edit-trips](./demo/edit.gif)
+![order](./demo/order.gif)
 
 #### Signin & User Profile - Edit settings :
 
-![print-pdf](./demo/settings.gif)
+![settings](./demo/settings.gif)
 
 #### User Profile - View my orders :
 
-![print-pdf](./demo/pdf.gif)
+![myorders](./demo/myorders.gif)
 
 #### Admin Profile - View & edit products :
 
-![print-pdf](./demo/pdf.gif)
+![edit-products](./demo/edit-products.gif)
 
-#### Admin Profile - View & procces orders :
+#### Admin Profile - View & process orders :
 
-![print-pdf](./demo/pdf.gif)
+![all-orders](./demo/all-orders.gif)
 
 #### Admin Profile - Edit settings :
 
-![print-pdf](./demo/pdf.gif)
+![admin-settings](./demo/admin-settings.gif)
 
 ## Technologies Used
 
@@ -218,20 +214,31 @@ $ git push heroku master
 
 ---
 
-## Testing
+## RESTful API
 
-Testing is done with [Jest](https://github.com/facebook/jest). This project has a Testing Units that can be found at `__test__` folder in the root directory.
-To run tests you can use the following NPM command:
+This web application uses the RESTful API with advanced features: filtering, sorting, pagination, etc.
+
+### API Documentation
+
+Check [Maii Artisan Patisserie API Documentation
+](https://documenter.getpostman.com/view/16017496/UVsFx7r8) for more info.
+
+### API Usage
+
+Before using the API, you need to set the variables in Postman depending on your environment (development or production). Simply add:
 
 ```
-$ npm run test
+- {{URL}} with your hostname as a value (Eg. http://127.0.0.1:3000 or http://www.myhost.com)
+- {{password}} with your user password as a value.
 ```
+
+### API Example:
+
+Products list: https://patisserie-artisanale.herokuapp.com/api/v1/products
 
 ---
 
 ## Error handling
 
-- User will be informed about uncomplete data for the search.
-- There will be notification with description for all errors returned by APIs.
-- If no images are found for user-entered city by Pixabay, image of country will be used instead.
-- There will be notification for any other errors.
+- Error handling is implemented for development and production mode with a notification about an error.
+- User will be informed about uncomplete data.

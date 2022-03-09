@@ -70,7 +70,7 @@ export const getOrders = async (data = '') => {
     });
 
     if (res.data.status === 'success') {
-      const adminOrderTable = document.querySelector('.admin-orders-table');
+      const adminOrderTable = document.querySelector('.edit-orders');
 
       adminOrderTable.innerHTML = orderTable(res.data.data.data);
     }

@@ -163,7 +163,9 @@ exports.getOrders = catchAsync(async (req, res, next) => {
   const cartQty = cartController.checkQtyInCart(req, res);
 
   // 1) Find all orders
-  const allOrders = await Order.find({}).populate('user');
+  const allOrders = await Order.find({}).populate('user').sort({
+    dueDate: -1,
+  });
 
   res.status(200).render('allOrders', {
     title: 'orders',
