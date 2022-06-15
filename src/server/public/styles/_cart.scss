@@ -79,7 +79,7 @@
 
 @media only screen and (max-width: 575px) {
   .cart-wrapper {
-    padding: 1rem 0;
+    padding: 1rem 0.4rem !important;
 
     th {
       font-size: 0.8rem;
@@ -88,6 +88,14 @@
     .table td,
     .table th {
       padding: 0.4rem 0;
+    }
+
+    .cart-item {
+      width: 100%;
+      display: flex;
+      img {
+        width: 4rem;
+      }
     }
   }
 }
