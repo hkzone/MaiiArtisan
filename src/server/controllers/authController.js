@@ -124,11 +124,10 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // Only for rendered pages, no errors!
 exports.isLoggedIn = async (req, res, next) => {
+  //FIXME: added as hack
+  res.locals.user = null;
   if (req.cookies.jwt) {
     try {
-      //FIXME: added as hack
-      // res.locals.user = undefined;
-
       // 1) verify token
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,
