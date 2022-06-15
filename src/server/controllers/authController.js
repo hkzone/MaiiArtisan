@@ -127,7 +127,7 @@ exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {
       //FIXME: added as hack
-      res.locals.user = undefined;
+      // res.locals.user = undefined;
 
       // 1) verify token
       const decoded = await promisify(jwt.verify)(
