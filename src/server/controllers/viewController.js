@@ -42,7 +42,7 @@ exports.getShop = catchAsync(async (req, res, next) => {
   // 2)  Build and render template using data from step 1)
   res.status(200).render('shop', {
     products: products,
-    user: res.user,
+    // user: res.user,
     isFrontPage: false,
     cartQty,
   });
