@@ -27,7 +27,7 @@ exports.getIndex = catchAsync(async (req, res, next) => {
   // 2)  Build and render template using data from step 1)
   res.status(200).render('index', {
     products: products,
-    user: res.user,
+    // user: res.user,
     isFrontPage: true,
     cartQty,
   });
@@ -112,7 +112,7 @@ exports.getSignupForm = (req, res) => {
     title: 'Signup',
     region: region,
     district: district,
-    user: res.user,
+    // user: res.user,
     cartQty,
   });
 };
@@ -200,7 +200,7 @@ exports.getCheckout = catchAsync(async (req, res) => {
     region: region,
     district: district,
     nonce: Security.md5(req.sessionID + req.headers['user-agent']),
-    user: res.user,
+    // user: res.user,
     cartQty,
   });
 });
