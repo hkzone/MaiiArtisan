@@ -33,7 +33,7 @@ const orderController = require('./controllers/orderController');
 const app = express();
 
 // For HEROKU
-app.enable('trust proxy');
+// app.enable('trust proxy');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
